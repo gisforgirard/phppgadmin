@@ -896,4 +896,4 @@
 	$lang['strftstabdicts'] = 'Dictionaires';
 	$lang['strftstabparsers'] = 'Analyseurs syntaxique';
 	$lang['strftscantparsercopy'] = 'Vous ne pouvez spécifier en même temps un modèle et un analyseur lors de la création d\'une configuration FTS.';
-?>
+

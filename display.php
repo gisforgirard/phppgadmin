@@ -21,9 +21,11 @@
 
 	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
 
-	/**
-	 * Show confirmation of edit and perform actual update
-	 */
+/**
+ * Show confirmation of edit and perform actual update
+ * @param $confirm
+ * @param string $msg
+ */
 	function doEditRow($confirm, $msg = '') {
 		global $data, $misc, $conf;
 		global $lang;
@@ -177,11 +179,12 @@
 				doEditRow(true, $lang['strrowupdatedbad']);
 		}
 
-	}	
+	}
 
-	/**
-	 * Show confirmation of drop and perform actual drop
-	 */
+/**
+ * Show confirmation of drop and perform actual drop
+ * @param $confirm
+ */
 	function doDelRow($confirm) {
 		global $data, $misc;
 		global $lang;
@@ -421,9 +424,10 @@
 		exit;
 	}
 
-	/** 
-	 * Displays requested data
-	 */
+/**
+ * Displays requested data
+ * @param string $msg
+ */
 	function doBrowse($msg = '') {
 		global $data, $conf, $misc, $lang, $plugin_manager;
 
@@ -537,7 +541,7 @@
 			}
 		}
 		//$query = isset($_REQUEST['query'])? $_REQUEST['query'] : "select * from {$_REQUEST['schema']}.{$_REQUEST['table']};";
-		echo htmlspecialchars($query);
+		echo $query;
 		echo '</textarea><br><input type="submit"/></form>';
 
 		if (is_object($rs) && $rs->recordCount() > 0) {
@@ -593,10 +597,8 @@
 			$plugin_manager->do_hook('actionbuttons', $actions);
 
 			foreach (array_keys($actions['actionbuttons']) as $action) {
-				$actions['actionbuttons'][$action]['attr']['href']['urlvars'] = array_merge(
-					$actions['actionbuttons'][$action]['attr']['href']['urlvars'],
-					$_gets
-				);
+				$actions['actionbuttons'][$action]['attr']['href']['urlvars'][] =
+					$_gets;
 			}
 
 			$edit_params = isset($actions['actionbuttons']['edit'])?
@@ -636,18 +638,14 @@
 
 						if (isset($actions['actionbuttons']['edit'])) {
 							$actions['actionbuttons']['edit'] = $edit_params;
-							$actions['actionbuttons']['edit']['attr']['href']['urlvars'] = array_merge(
-								$actions['actionbuttons']['edit']['attr']['href']['urlvars'],
-								$keys_array
-							);
+							$actions['actionbuttons']['edit']['attr']['href']['urlvars'][] =
+								$keys_array;
 						}
 
 						if (isset($actions['actionbuttons']['delete'])) {
 							$actions['actionbuttons']['delete'] = $delete_params;
-							$actions['actionbuttons']['delete']['attr']['href']['urlvars'] = array_merge(
-								$actions['actionbuttons']['delete']['attr']['href']['urlvars'],
-								$keys_array
-							);
+							$actions['actionbuttons']['delete']['attr']['href']['urlvars'][] =
+								$keys_array;
 						}
 
 						foreach ($actions['actionbuttons'] as $action) {
@@ -876,4 +874,4 @@
 	}
 
 	$misc->printFooter();
-?>
+

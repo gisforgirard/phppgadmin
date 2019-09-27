@@ -10,11 +10,11 @@ include_once('./classes/database/Postgres81.php');
 
 class Postgres80 extends Postgres81 {
 
-	var $major_version = 8.0;
+	public $major_version = 8.0;
 	// Map of database encoding names to HTTP encoding names.  If a
 	// database encoding does not appear in this list, then its HTTP
 	// encoding name is the same as its database encoding name.
-	var $codemap = array(
+	public $codemap = array(
 		'ALT' => 'CP866',
 		'EUC_CN' => 'GB2312',
 		'EUC_JP' => 'EUC-JP',
@@ -50,24 +50,25 @@ class Postgres80 extends Postgres81 {
 	 * Constructor
 	 * @param $conn The database connection
 	 */
-	function __construct($conn) {
-		parent::__construct($conn);
+	public function __construct($conn) {
+		Postgres81::__construct($conn);
 	}
 
 	// Help functions
 
-	function getHelpPages() {
+	public function getHelpPages() {
 		include_once('./help/PostgresDoc80.php');
 		return $this->help_page;
 	}
 
 	// Database functions
 
-	/**
-	 * Return all database available on the server
-	 * @return A list of databases, sorted alphabetically
-	 */
-	function getDatabases($currentdatabase = NULL) {
+    /**
+     * Return all database available on the server
+     * @param null $currentdatabase
+     * @return A list of databases, sorted alphabetically
+     */
+	public function getDatabases($currentdatabase = NULL) {
 		global $conf, $misc;
 
 		$server_info = $misc->getServerInfo();
@@ -105,11 +106,11 @@ class Postgres80 extends Postgres81 {
 
 	// Schema functions
 
-	/**
-	 * Return all schemas in the current database.
-	 * @return All schemas, sorted alphabetically
-	 */
-	function getSchemas() {
+    /**
+     * Return all schemas in the current database.
+     * @return A schemas, sorted alphabetically
+     */
+	public function getSchemas() {
 		global $conf;
 
 		if (!$conf['show_system']) {
@@ -127,12 +128,12 @@ class Postgres80 extends Postgres81 {
 		return $this->selectSet($sql);
 	}
 
-	/**
-	 * Return all information relating to a schema
-	 * @param $schema The name of the schema
-	 * @return Schema information
-	 */
-	function getSchemaByName($schema) {
+    /**
+     * Return all information relating to a schema
+     * @param $schema The name of the schema
+     * @return A information
+     */
+	public function getSchemaByName($schema) {
 		$this->clean($schema);
 		$sql = "
 			SELECT nspname, nspowner, u.usename AS ownername, nspacl,
@@ -145,21 +146,17 @@ class Postgres80 extends Postgres81 {
 
 	// Table functions
 
-	/**
-	 * Protected method which alter a table
-	 * SHOULDN'T BE CALLED OUTSIDE OF A TRANSACTION
-	 * @param $tblrs The table recordSet returned by getTable()
-	 * @param $name The new name for the table
-	 * @param $owner The new owner for the table
-	 * @param $schema The new schema for the table
-	 * @param $comment The comment on the table
-	 * @param $tablespace The new tablespace for the table ('' means leave as is)
-	 * @return 0 success
-	 * @return -3 rename error
-	 * @return -4 comment error
-	 * @return -5 owner error
-	 * @return -6 tablespace error
-	 */
+    /**
+     * Protected method which alter a table
+     * SHOULDN'T BE CALLED OUTSIDE OF A TRANSACTION
+     * @param $tblrs The table recordSet returned by getTable()
+     * @param $name The new name for the table
+     * @param $owner The new owner for the table
+     * @param $schema The new schema for the table
+     * @param $comment The comment on the table
+     * @param $tablespace The new tablespace for the table ('' means leave as is)
+     * @return int 0 success
+     */
 	protected
 	function _alterTable($tblrs, $name, $owner, $schema, $comment, $tablespace) {
 
@@ -189,18 +186,16 @@ class Postgres80 extends Postgres81 {
 
 	// View functions
 
-	/**
-	 * Protected method which alter a view
-	 * SHOULDN'T BE CALLED OUTSIDE OF A TRANSACTION
-	 * @param $vwrs The view recordSet returned by getView()
-	 * @param $name The new name for the view
-	 * @param $owner The new owner for the view
-	 * @param $comment The comment on the view
-	 * @return 0 success
-	 * @return -3 rename error
-	 * @return -4 comment error
-	 * @return -5 owner error
-	 */
+    /**
+     * Protected method which alter a view
+     * SHOULDN'T BE CALLED OUTSIDE OF A TRANSACTION
+     * @param $vwrs The view recordSet returned by getView()
+     * @param $name The new name for the view
+     * @param $owner The new owner for the view
+     * @param $schema
+     * @param $comment The comment on the view
+     * @return int 0 success
+     */
 	protected
     function _alterView($vwrs, $name, $owner, $schema, $comment) {
 
@@ -226,28 +221,23 @@ class Postgres80 extends Postgres81 {
 
 	// Sequence functions
 
-	/**
-	 * Protected method which alter a sequence
-	 * SHOULDN'T BE CALLED OUTSIDE OF A TRANSACTION
-	 * @param $seqrs The sequence recordSet returned by getSequence()
-	 * @param $name The new name for the sequence
-	 * @param $comment The comment on the sequence
-	 * @param $owner The new owner for the sequence
-	 * @param $schema The new schema for the sequence
-	 * @param $increment The increment
-	 * @param $minvalue The min value
-	 * @param $maxvalue The max value
-	 * @param $restartvalue The starting value
-	 * @param $cachevalue The cache value
-	 * @param $cycledvalue True if cycled, false otherwise
-	 * @param $startvalue The sequence start value when issueing a restart
-	 * @return 0 success
-	 * @return -3 rename error
-	 * @return -4 comment error
-	 * @return -5 owner error
-	 * @return -6 get sequence props error
-	 * @return -7 schema error
-	 */
+    /**
+     * Protected method which alter a sequence
+     * SHOULDN'T BE CALLED OUTSIDE OF A TRANSACTION
+     * @param $seqrs The sequence recordSet returned by getSequence()
+     * @param $name The new name for the sequence
+     * @param $comment The comment on the sequence
+     * @param $owner The new owner for the sequence
+     * @param $schema The new schema for the sequence
+     * @param $increment The increment
+     * @param $minvalue The min value
+     * @param $maxvalue The max value
+     * @param $restartvalue The starting value
+     * @param $cachevalue The cache value
+     * @param $cycledvalue True if cycled, false otherwise
+     * @param $startvalue The sequence start value when issueing a restart
+     * @return int 0 success
+     */
 	protected
 	function _alterSequence($seqrs, $name, $comment, $owner, $schema, $increment,
 	$minvalue, $maxvalue, $restartvalue, $cachevalue, $cycledvalue, $startvalue) {
@@ -290,13 +280,13 @@ class Postgres80 extends Postgres81 {
 
 	// Role, User/group functions
 
-	/**
-	 * Changes a user's password
-	 * @param $username The username
-	 * @param $password The new password
-	 * @return 0 success
-	 */
-	function changePassword($username, $password) {
+    /**
+     * Changes a user's password
+     * @param $username The username
+     * @param $password The new password
+     * @return A 0 success
+     */
+	public function changePassword($username, $password) {
 		$enc = $this->_encryptPassword($username, $password);
 		$this->fieldClean($username);
 		$this->clean($enc);
@@ -314,7 +304,7 @@ class Postgres80 extends Postgres81 {
 	 * @param $basetype The input data type of the aggregate
 	 * @return A recordset
 	 */
-	function getAggregate($name, $basetype) {
+	public function getAggregate($name, $basetype) {
 		$c_schema = $this->_schema;
 		$this->clean($c_schema);
 		$this->clean($name);
@@ -341,14 +331,14 @@ class Postgres80 extends Postgres81 {
 
 	// Capabilities
 
-	function hasAggregateSortOp() { return false; }
-	function hasAlterTableSchema() { return false; }
-	function hasAutovacuum() { return false; }
-	function hasDisableTriggers() { return false; }
-	function hasFunctionAlterSchema() { return false; }
-	function hasPreparedXacts() { return false; }
-	function hasRoles() { return false; }
-	function hasAlterSequenceSchema() { return false; }
-	function hasServerAdminFuncs() { return false; }
+	public function hasAggregateSortOp() { return false; }
+	public function hasAlterTableSchema() { return false; }
+	public function hasAutovacuum() { return false; }
+	public function hasDisableTriggers() { return false; }
+	public function hasFunctionAlterSchema() { return false; }
+	public function hasPreparedXacts() { return false; }
+	public function hasRoles() { return false; }
+	public function hasAlterSequenceSchema() { return false; }
+	public function hasServerAdminFuncs() { return false; }
 }
-?>
+

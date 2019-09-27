@@ -281,7 +281,7 @@ XNode.init = function(type, name, value, owner) {
   this.nextSibling = null;
   this.previousSibling = null;
   this.parentNode = null;
-}
+};
 
 XNode.unused_ = [];
 
@@ -309,7 +309,7 @@ XNode.recycle = function(node) {
   node.attributes.length = 0;
   node.childNodes.length = 0;
   XNode.init.call(node, 0, '', '', null);
-}
+};
 
 XNode.create = function(type, name, value, owner) {
   if (XNode.unused_.length > 0) {
@@ -319,7 +319,7 @@ XNode.create = function(type, name, value, owner) {
   } else {
     return new XNode(type, name, value, owner);
   }
-}
+};
 
 XNode.prototype.appendChild = function(node) {
   // firstChild
@@ -344,7 +344,7 @@ XNode.prototype.appendChild = function(node) {
 
   // childNodes
   this.childNodes.push(node);
-}
+};
 
 
 XNode.prototype.replaceChild = function(newNode, oldNode) {
@@ -385,7 +385,7 @@ XNode.prototype.replaceChild = function(newNode, oldNode) {
       break;
     }
   }
-}
+};
 
 
 XNode.prototype.insertBefore = function(newNode, oldNode) {
@@ -424,7 +424,7 @@ XNode.prototype.insertBefore = function(newNode, oldNode) {
     newChildren.push(c);
   }
   this.childNodes = newChildren;
-}
+};
 
 
 XNode.prototype.removeChild = function(node) {
@@ -449,12 +449,12 @@ XNode.prototype.removeChild = function(node) {
     }
   }
   this.childNodes = newChildren;
-}
+};
 
 
 XNode.prototype.hasAttributes = function() {
   return this.attributes.length > 0;
-}
+};
 
 
 XNode.prototype.setAttribute = function(name, value) {
@@ -465,7 +465,7 @@ XNode.prototype.setAttribute = function(name, value) {
     }
   }
   this.attributes.push(XNode.create(DOM_ATTRIBUTE_NODE, name, value, this));
-}
+};
 
 
 XNode.prototype.getAttribute = function(name) {
@@ -475,7 +475,7 @@ XNode.prototype.getAttribute = function(name) {
     }
   }
   return null;
-}
+};
 
 
 XNode.prototype.removeAttribute = function(name) {
@@ -486,7 +486,7 @@ XNode.prototype.removeAttribute = function(name) {
     }
   }
   this.attributes = a;
-}
+};
 
 
 XNode.prototype.getElementsByTagName = function(name) {
@@ -506,7 +506,7 @@ XNode.prototype.getElementsByTagName = function(name) {
     }, null);
   }
   return ret;
-}
+};
 
 
 XNode.prototype.getElementById = function(id) {
@@ -518,7 +518,7 @@ XNode.prototype.getElementById = function(id) {
     }
   }, null);
   return ret;
-}
+};
 
 
 function XDocument() {
@@ -533,34 +533,34 @@ XDocument.prototype = new XNode(DOM_DOCUMENT_NODE, '#document');
 XDocument.prototype.clear = function() {
   XNode.recycle(this.documentElement);
   this.documentElement = null;
-}
+};
 
 XDocument.prototype.appendChild = function(node) {
   XNode.prototype.appendChild.call(this, node);
   this.documentElement = this.childNodes[0];
-}
+};
 
 XDocument.prototype.createElement = function(name) {
   return XNode.create(DOM_ELEMENT_NODE, name, null, this);
-}
+};
 
 XDocument.prototype.createDocumentFragment = function() {
   return XNode.create(DOM_DOCUMENT_FRAGMENT_NODE, '#document-fragment',
                     null, this);
-}
+};
 
 XDocument.prototype.createTextNode = function(value) {
   return XNode.create(DOM_TEXT_NODE, '#text', value, this);
-}
+};
 
 XDocument.prototype.createAttribute = function(name) {
   return XNode.create(DOM_ATTRIBUTE_NODE, name, null, this);
-}
+};
 
 XDocument.prototype.createComment = function(data) {
   return XNode.create(DOM_COMMENT_NODE, '#comment', data, this);
-}
+};
 
 XDocument.prototype.createCDATASection = function(data) {
   return XNode.create(DOM_CDATA_SECTION_NODE, '#cdata-section', data, this);
-}
+};

@@ -6,10 +6,12 @@
 
 // Dummy implmentation for the logging functions. Replace by something
 // useful when you want to debug.
-function xpathLog(msg) {};
-function xsltLog(msg) {};
-function xsltLogXml(msg) {};
-
+function xpathLog(msg) {
+}
+function xsltLog(msg) {
+}
+function xsltLogXml(msg) {
+}
 var ajaxsltIsIE6 = navigator.appVersion.match(/MSIE 6.0/);
 
 // Throws an exception if false.
@@ -89,7 +91,7 @@ function Set() {
 
 Set.prototype.size = function() {
   return this.keys.length;
-}
+};
 
 // Adds the entry to the set, ignoring if it is present.
 Set.prototype.add = function(key, opt_value) {
@@ -98,7 +100,7 @@ Set.prototype.add = function(key, opt_value) {
     this[':' + key] = value;
     this.keys.push(key);
   }
-}
+};
 
 // Sets the entry in the set, adding if it is not yet present.
 Set.prototype.set = function(key, opt_value) {
@@ -109,7 +111,7 @@ Set.prototype.set = function(key, opt_value) {
   } else {
     this[':' + key] = value;
   }
-}
+};
 
 // Increments the key's value by 1. This works around the fact that
 // numbers are always passed by value, never by reference, so that we
@@ -122,7 +124,7 @@ Set.prototype.inc = function(key) {
   } else {
     this[':' + key]++;
   }
-}
+};
 
 Set.prototype.get = function(key) {
   if (this.contains(key)) {
@@ -131,7 +133,7 @@ Set.prototype.get = function(key) {
     var undefined;
     return undefined;
   }
-}
+};
 
 // Removes the entry from the set.
 Set.prototype.remove = function(key) {
@@ -139,12 +141,12 @@ Set.prototype.remove = function(key) {
     delete this[':' + key];
     removeFromArray(this.keys, key, true);
   }
-}
+};
 
 // Tests if an entry is in the set.
 Set.prototype.contains = function(entry) {
   return typeof this[':' + entry] != 'undefined';
-}
+};
 
 // Gets a list of values in the set.
 Set.prototype.items = function() {
@@ -155,7 +157,7 @@ Set.prototype.items = function() {
     list.push(v);
   }
   return list;
-}
+};
 
 
 // Invokes function f for every key value pair in the set as a method
@@ -165,14 +167,14 @@ Set.prototype.map = function(f) {
     var k = this.keys[i];
     f.call(this, k, this[':' + k]);
   }
-}
+};
 
 Set.prototype.clear = function() {
   for (var i = 0; i < this.keys.length; ++i) {
     delete this[':' + this.keys[i]];
   }
   this.keys.length = 0;
-}
+};
 
 
 // Applies the given function to each element of the array, preserving
@@ -191,8 +193,7 @@ function mapExpr(array, func) {
     ret.push(func(array[i]));
   }
   return ret;
-};
-
+}
 // Reverses the given array in place.
 function reverseInplace(array) {
   for (var i = 0; i < array.length / 2; ++i) {

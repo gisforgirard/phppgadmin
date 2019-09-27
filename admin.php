@@ -1,10 +1,12 @@
 <?php
 
 	$script = ''; // init global value script
-	
-	/**
-	 * Show confirmation of cluster and perform cluster
-	 */
+
+/**
+ * Show confirmation of cluster and perform cluster
+ * @param $type
+ * @param bool $confirm
+ */
 	function doCluster($type, $confirm=false) {
 		global $script, $data, $misc, $lang;
 
@@ -84,10 +86,12 @@
 			}
 		}
 	}
-	
-	/**
-	 * Show confirmation of reindex and perform reindex
-	 */
+
+/**
+ * Show confirmation of reindex and perform reindex
+ * @param $type
+ * @param bool $confirm
+ */
 	function doReindex($type, $confirm=false) {
 		global $script, $data, $misc, $lang, $_reload_browser;
 
@@ -162,10 +166,12 @@
 			}
 		}
 	}
-	
-	/**
-	 * Show confirmation of analyze and perform analyze
-	 */
+
+/**
+ * Show confirmation of analyze and perform analyze
+ * @param $type
+ * @param bool $confirm
+ */
 	function doAnalyze($type, $confirm=false) {
 		global $script, $data, $misc, $lang, $_reload_browser;
 
@@ -238,9 +244,11 @@
 		}
 	}
 
-	/**
-	 * Show confirmation of vacuum and perform actual vacuum
-	 */
+/**
+ * Show confirmation of vacuum and perform actual vacuum
+ * @param $type
+ * @param bool $confirm
+ */
 	function doVacuum($type, $confirm = false) {
 		global $script, $data, $misc, $lang, $_reload_browser;
 
@@ -315,9 +323,12 @@
 		}
 	}
 
-	/**
-	 * Add or Edit autovacuum params and save them
-	 */
+/**
+ * Add or Edit autovacuum params and save them
+ * @param $type
+ * @param $confirm
+ * @param string $msg
+ */
 	function doEditAutovacuum($type, $confirm, $msg='') {
 		global $script, $data, $misc, $lang;
 		
@@ -408,10 +419,12 @@
 				doEditAutovacuum($type, true, $lang['strsetvacuumtablefail']);
 		}
 	}
-	
-	/**
-	 * confirm drop autovacuum params for a table and drop it
-	 */
+
+/**
+ * confirm drop autovacuum params for a table and drop it
+ * @param $type
+ * @param $confirm
+ */
 	function doDropAutovacuum($type, $confirm) {
 		global $script, $data, $misc, $lang;
 
@@ -456,11 +469,13 @@
 		}
 	}
 
-	/**
-	 * database/table administration and tuning tasks
-	 *
-	 * $Id: admin.php
-	 */
+/**
+ * database/table administration and tuning tasks
+ *
+ * $Id: admin.php
+ * @param $type
+ * @param string $msg
+ */
 	
 	function doAdmin($type, $msg = '') {
 		global $script, $data, $misc, $lang;	
@@ -750,4 +765,4 @@
 		return true;
 	}
 
-?>
+

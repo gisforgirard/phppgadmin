@@ -19,7 +19,7 @@ if(is_dir('../Public'))
  */
 class ExportTest extends PreconditionSet 
 {
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -31,7 +31,7 @@ class ExportTest extends PreconditionSet
     }
     
     
-    function tearDown()
+    public function tearDown()
     {
         $this->logout();
         
@@ -43,7 +43,7 @@ class ExportTest extends PreconditionSet
      * TestCaseID: CED01
      * Test to export server data with "COPY" format.
      */
-    function testServerDataCopyShow() 
+    public function testServerDataCopyShow()
     {
         global $webUrl, $lang, $SERVER, $DATABASE;
         
@@ -70,7 +70,7 @@ class ExportTest extends PreconditionSet
      * TestCaseID: CED02
      * Test to export server structure with "SQL" format.
      */
-    function testServerStructureSQLDownload() 
+    public function testServerStructureSQLDownload()
     {
         global $webUrl, $lang, $SERVER, $DATABASE;
         
@@ -96,7 +96,7 @@ class ExportTest extends PreconditionSet
      * TestCaseID: CED03
      * Test to export database data with "SQL" format.
      */
-    function testDatabaseDataSQLShow() 
+    public function testDatabaseDataSQLShow()
     {
         global $webUrl, $lang, $SERVER, $DATABASE;
         
@@ -125,7 +125,7 @@ class ExportTest extends PreconditionSet
      * TestCaseID: CED04
      * Test to export database structure with "COPY" format.
      */
-    function testDatabaseStructureCOPYDownload() 
+    public function testDatabaseStructureCOPYDownload()
     {
         global $webUrl, $lang, $SERVER, $DATABASE;
         
@@ -156,7 +156,7 @@ class ExportTest extends PreconditionSet
      * This test case need insert one row data firstly.
      * And the data will be removed in the end of the test case.
      */
-    function testTableDataShow() 
+    public function testTableDataShow()
     {
         global $webUrl, $lang, $SERVER, $DATABASE;
         
@@ -235,7 +235,7 @@ class ExportTest extends PreconditionSet
      * TestCaseID: CED06
      * Test to export database structure and data with "SQL" format.
      */
-    function testTableStructureDataSQLDownload() 
+    public function testTableStructureDataSQLDownload()
     {
         global $webUrl, $lang, $SERVER, $DATABASE;
         
@@ -265,7 +265,7 @@ class ExportTest extends PreconditionSet
      * TestCaseID: CED07
      * Test to export view structure. 
      */
-    function testViewStructureShow() 
+    public function testViewStructureShow()
     {
         global $webUrl, $lang, $SERVER, $DATABASE;
         
@@ -291,4 +291,4 @@ class ExportTest extends PreconditionSet
     }
 
 }
-?>
+

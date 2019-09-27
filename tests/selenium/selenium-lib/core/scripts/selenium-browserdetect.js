@@ -74,7 +74,7 @@ var BrowserVersion = function() {
         }
         
         
-    }
+    };
     
     
 
@@ -140,7 +140,7 @@ var BrowserVersion = function() {
     }
 
     this.browser = BrowserVersion.UNKNOWN;
-}
+};
 
 BrowserVersion.OPERA = "Opera";
 BrowserVersion.IE = "IE";

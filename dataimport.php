@@ -19,9 +19,12 @@
 	$curr_col_null = false;
 	$curr_row = array();
 
-	/**
-	 * Open tag handler for XML import feature
-	 */
+/**
+ * Open tag handler for XML import feature
+ * @param $parser
+ * @param $name
+ * @param $attrs
+ */
 	function _startElement($parser, $name, $attrs) {
 		global $data, $misc, $lang;
 		global $state, $curr_row, $curr_col_name, $curr_col_val, $curr_col_null;
@@ -81,10 +84,12 @@
 				exit;			
 		}
 	}
-	
-	/**
-	 * Close tag handler for XML import feature
-	 */
+
+/**
+ * Close tag handler for XML import feature
+ * @param $parser
+ * @param $name
+ */
 	function _endElement($parser, $name) {
 		global $data, $misc, $lang;
 		global $state, $curr_row, $curr_col_name, $curr_col_val, $curr_col_null;
@@ -143,9 +148,11 @@
 		}
 	}
 
-	/**
-	 * Character data handler for XML import feature
-	 */
+/**
+ * Character data handler for XML import feature
+ * @param $parser
+ * @param $cdata
+ */
 	function _charHandler($parser, $cdata) {
 		global $data, $misc, $lang;
 		global $state, $curr_col_val;
@@ -295,4 +302,4 @@
 	
 	$misc->printFooter();
 
-?>
+

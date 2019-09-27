@@ -11,13 +11,14 @@
 
 	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
 	if (!isset($msg)) $msg = '';
-		
-	/**
-	 * If a user is not a superuser, then we have an 'account management' page
-	 * where they can change their password, etc.  We don't prevent them from
-	 * messing with the URL to gain access to other user admin stuff, because
-	 * the PostgreSQL permissions will prevent them changing anything anyway.
-	 */
+
+/**
+ * If a user is not a superuser, then we have an 'account management' page
+ * where they can change their password, etc.  We don't prevent them from
+ * messing with the URL to gain access to other user admin stuff, because
+ * the PostgreSQL permissions will prevent them changing anything anyway.
+ * @param string $msg
+ */
 	function doAccount($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -60,10 +61,12 @@
 				'content' => $lang['strchangepassword']
 			)), 'users-account', get_defined_vars());
 	}
-	
-	/**
-	 * Show confirmation of change password and actually change password
-	 */
+
+/**
+ * Show confirmation of change password and actually change password
+ * @param $confirm
+ * @param string $msg
+ */
 	function doChangePassword($confirm, $msg = '') {
 		global $data, $misc;
 		global $lang, $conf;
@@ -111,9 +114,10 @@
 		}		
 	}
 
-	/**
-	 * Function to allow editing of a user
-	 */
+/**
+ * Function to allow editing of a user
+ * @param string $msg
+ */
 	function doEdit($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -186,9 +190,10 @@
 		}
 	}
 
-	/**
-	 * Show confirmation of drop and perform actual drop
-	 */
+/**
+ * Show confirmation of drop and perform actual drop
+ * @param $confirm
+ */
 	function doDrop($confirm) {
 		global $data, $misc;
 		global $lang;
@@ -215,10 +220,11 @@
 				doDefault($lang['struserdroppedbad']);
 		}		
 	}
-	
-	/**
-	 * Displays a screen where they can enter a new user
-	 */
+
+/**
+ * Displays a screen where they can enter a new user
+ * @param string $msg
+ */
 	function doCreate($msg = '') {
 		global $data, $misc, $username;
 		global $lang;
@@ -276,11 +282,12 @@
 			else
 				doCreate($lang['strusercreatedbad']);
 		}
-	}	
+	}
 
-	/**
-	 * Show default list of users in the database
-	 */
+/**
+ * Show default list of users in the database
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -412,4 +419,4 @@
 
 	$misc->printFooter();
 
-?>
+

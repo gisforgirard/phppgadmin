@@ -45,9 +45,10 @@
 			doAlter($lang['strtablealteredbad']);
 	}
 
-	/**
-	 * Function to allow altering of a table
-	 */
+/**
+ * Function to allow altering of a table
+ * @param string $msg
+ */
 	function doAlter($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -235,9 +236,10 @@
 		else echo "<p>{$lang['strnouploads']}</p>\n";
 	}
 
-	/**
-	 * Displays a screen where they can add a column
-	 */
+/**
+ * Displays a screen where they can add a column
+ * @param string $msg
+ */
 	function doAddColumn($msg = '') {
 		global $data, $misc, $_reload_browser;
 		global $lang;
@@ -355,9 +357,10 @@
 		}
 	}
 
-	/**
-	 * Show confirmation of drop column and perform actual drop
-	 */
+/**
+ * Show confirmation of drop column and perform actual drop
+ * @param $confirm
+ */
 	function doDrop($confirm) {
 		global $data, $database, $misc, $_reload_browser;
 		global $lang;
@@ -432,9 +435,10 @@
 
 	if ($action == 'tree') doTree();
 
-	/**
-	 * Show default list of columns in the table
-	 */
+/**
+ * Show default list of columns in the table
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $conf, $misc;
 		global $lang;
@@ -779,4 +783,4 @@
 
 	$misc->printFooter();
 
-?>
+

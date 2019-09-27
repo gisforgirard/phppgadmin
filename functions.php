@@ -51,9 +51,10 @@
 		}
 	}
 
-	/**
-	 * Function to allow editing of a Function
-	 */
+/**
+ * Function to allow editing of a Function
+ * @param string $msg
+ */
 	function doEdit($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -92,7 +93,7 @@
 				$modes_arr = $data->phpArray($fndata->fields['proargmodes']);
 				$args = '';
 				$i = 0;
-				for ($i = 0; $i < sizeof($args_arr); $i++) {
+				for ($i = 0, $iMax = sizeof($args_arr); $i < $iMax; $i++) {
 					if ($i != 0) $args .= ', ';
 					if (isset($modes_arr[$i])) {
 						switch($modes_arr[$i]) {
@@ -239,9 +240,10 @@
 		else echo "<p>{$lang['strnodata']}</p>\n";
 	}
 
-	/**
-	 * Show read only properties of a function
-	 */
+/**
+ * Show read only properties of a function
+ * @param string $msg
+ */
 	function doProperties($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -264,7 +266,7 @@
 				$modes_arr = $data->phpArray($funcdata->fields['proargmodes']);
 				$args = '';
 				$i = 0;
-				for ($i = 0; $i < sizeof($args_arr); $i++) {
+				for ($i = 0, $iMax = sizeof($args_arr); $i < $iMax; $i++) {
 					if ($i != 0) $args .= ', ';
 					if (isset($modes_arr[$i])) {
 						switch($modes_arr[$i]) {
@@ -404,9 +406,10 @@
 		$misc->printNavLinks($navlinks, 'functions-properties', get_defined_vars());
 	}
 
-	/**
-	 * Show confirmation of drop and perform actual drop
-	 */
+/**
+ * Show confirmation of drop and perform actual drop
+ * @param $confirm
+ */
 	function doDrop($confirm) {
 		global $data, $misc;
 		global $lang, $_reload_browser;
@@ -482,9 +485,11 @@
 
 	}
 
-	/**
-	 * Displays a screen where they can enter a new function
-	 */
+/**
+ * Displays a screen where they can enter a new function
+ * @param string $msg
+ * @param string $szJS
+ */
 	function doCreate($msg = '',$szJS="") {
 		global $data, $misc;
 		global $lang;
@@ -761,9 +766,11 @@
 		}
 	}
 
-	/**
-	 * Build out the function arguments string
-	 */
+/**
+ * Build out the function arguments string
+ * @param $arrayVars
+ * @return string
+ */
 	function buildFunctionArguments($arrayVars) {
 		if(isset($_POST['formArgName'])) {
 			$arrayArgs = array();
@@ -775,9 +782,11 @@
 		return '';
 	}
 
-	/**
-	 * Build out JS to re-create table rows for arguments
-	 */
+/**
+ * Build out JS to re-create table rows for arguments
+ * @param $szArgs
+ * @return string
+ */
 	function buildJSRows($szArgs) {
 		$arrayModes = array('IN','OUT','INOUT');
 		$arrayArgs = explode(',',$szArgs);
@@ -828,9 +837,10 @@
 		return $szTypes . $szModes;
 	}
 
-	/**
-	 * Show default list of functions in the database
-	 */
+/**
+ * Show default list of functions in the database
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $conf, $misc, $func;
 		global $lang;
@@ -1035,4 +1045,4 @@
 
 	$misc->printFooter();
 
-?>
+

@@ -143,7 +143,7 @@ objectExtend(HtmlTestRunner.prototype, {
         testFrame.scrollToTop();
         //todo: move testFailed and storedVars to TestCase
         this.testFailed = false;
-        storedVars = new Object();
+        storedVars = {};
         storedVars.nbsp = String.fromCharCode(160);
         storedVars.space = ' ';
         this.currentTest = new HtmlRunnerTestLoop(testFrame.getCurrentTestCase(), this.metrics, this.commandFactory);
@@ -658,7 +658,7 @@ objectExtend(HtmlTestSuite.prototype, {
     },
 
     unselectCurrentRow: function() {
-        var currentRow = this.getCurrentRow()
+        var currentRow = this.getCurrentRow();
         if (currentRow) {
             currentRow.unselect();
         }
@@ -824,12 +824,12 @@ objectExtend(SeleniumTestResult.prototype, {
 
     _saveToFile: function (fileName, form) {
         // This only works when run as an IE HTA
-        var inputs = new Object();
+        var inputs = {};
         for (var i = 0; i < form.elements.length; i++) {
             inputs[form.elements[i].name] = form.elements[i].value;
         }
         
-        var objFSO = new ActiveXObject("Scripting.FileSystemObject")
+        var objFSO = new ActiveXObject("Scripting.FileSystemObject");
         
         // DGF get CSS
         var styles = "";
@@ -998,7 +998,7 @@ objectExtend(HtmlTestCase.prototype, {
 // TODO: split out an JavascriptTestCase class to handle the "sejs" stuff
 
 var get_new_rows = function() {
-    var row_array = new Array();
+    var row_array = [];
     for (var i = 0; i < new_block.length; i++) {
 
         var new_source = (new_block[i][0].tokenizer.source.slice(new_block[i][0].start,
@@ -1007,7 +1007,7 @@ var get_new_rows = function() {
         var row = '<td style="display:none;" class="js">getEval</td>' +
                   '<td style="display:none;">currentTest.doNextCommand()</td>' +
                   '<td style="white-space: pre;">' + new_source + '</td>' +
-                  '<td></td>'
+                  '<td></td>';
 
         row_array.push(row);
     }
@@ -1103,7 +1103,7 @@ objectExtend(HtmlRunnerTestLoop.prototype, {
 
         // used for selenium tests in javascript
         this.currentItem = null;
-        this.commandAgenda = new Array();
+        this.commandAgenda = [];
         this.expectedFailure = null;
         this.expectedFailureType = null;
 
@@ -1233,12 +1233,12 @@ objectExtend(HtmlRunnerTestLoop.prototype, {
         var _n = this.currentItem[0];
         var _x = this.currentItem[1];
 
-        new_block = new Array()
+        new_block = [];
         execute(_n, _x);
         if (new_block.length > 0) {
-            var the_table = this.htmlTestCase.testDocument.getElementById("se-js-table")
-            var loc = this.currentRowIndex
-            var new_rows = get_new_rows()
+            var the_table = this.htmlTestCase.testDocument.getElementById("se-js-table");
+            var loc = this.currentRowIndex;
+            var new_rows = get_new_rows();
 
             // make the new statements visible on screen...
             for (var i = 0; i < new_rows.length; i++) {
@@ -1275,7 +1275,7 @@ Selenium.prototype.doStore = function(expression, variableName) {
      * @param variableName the name of a <a href="#storedVars">variable</a> in which the result is to be stored.
      */
     storedVars[variableName] = expression;
-}
+};
 
 /*
  * Click on the located element, and attach a callback to notify
@@ -1292,7 +1292,7 @@ Selenium.prototype.doEcho = function(message) {
      * @param message the message to print
      */
     currentTest.currentRow.setMessage(message);
-}
+};
 
 /*
  * doSetSpeed and getSpeed are already defined in selenium-api.js,
@@ -1304,12 +1304,12 @@ Selenium.prototype._doSetSpeed = function(value) {
     if (milliseconds < 0) milliseconds = 0;
     htmlTestRunner.controlPanel.speedController.setValue(milliseconds);
     htmlTestRunner.controlPanel.setRunInterval(milliseconds);
-}
+};
 Selenium.prototype.doSetSpeed = Selenium.prototype._doSetSpeed;
 
 Selenium.prototype._getSpeed = function() {
     return htmlTestRunner.controlPanel.runInterval;
-}
+};
 Selenium.prototype.getSpeed = Selenium.prototype._getSpeed;
 
 Selenium.prototype.assertSelected = function(selectLocator, optionLocator) {

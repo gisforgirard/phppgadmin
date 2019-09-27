@@ -17,7 +17,7 @@ class Report extends Plugin {
 	 * Call parent constructor, passing the language that will be used.
 	 * @param $language Current phpPgAdmin language. If it was not found in the plugin, English will be used.
 	 */
-	function __construct($language) {
+	public function __construct($language) {
 
 		/* loads $this->lang and $this->conf */
 		parent::__construct($language);
@@ -37,7 +37,7 @@ class Report extends Plugin {
 		}
 	}
 
-	function get_reportsdb() {
+	public function get_reportsdb() {
 		if ($this->_reportsdb === null) {
 			$status = 0;
 			$this->_reportsdb = new Reports($this->conf, $status);
@@ -57,21 +57,21 @@ class Report extends Plugin {
 		return $this->_reportsdb;
 	}
 
-	/**
-	 * This method returns the functions that will hook in the phpPgAdmin core.
-	 * To do include a function just put in the $hooks array the follwing code:
-	 * 'hook' => array('function1', 'function2').
-	 *
-	 * Example:
-	 * $hooks = array(
-	 *	'toplinks' => array('add_plugin_toplinks'),
-	 *	'tabs' => array('add_tab_entry'),
-	 *  'action_buttons' => array('add_more_an_entry')
-	 * );
-	 *
-	 * @return $hooks
-	 */
-	function get_hooks() {
+    /**
+     * This method returns the functions that will hook in the phpPgAdmin core.
+     * To do include a function just put in the $hooks array the follwing code:
+     * 'hook' => array('function1', 'function2').
+     *
+     * Example:
+     * $hooks = array(
+     *    'toplinks' => array('add_plugin_toplinks'),
+     *    'tabs' => array('add_tab_entry'),
+     *  'action_buttons' => array('add_more_an_entry')
+     * );
+     *
+     * @return array $hooks
+     */
+	public function get_hooks() {
 		$hooks = array(
 			'tabs' => array('add_plugin_tabs'),
 			'trail' => array('add_plugin_trail'),
@@ -80,18 +80,18 @@ class Report extends Plugin {
 		return $hooks;
 	}
 
-	/**
-	 * This method returns the functions that will be used as actions.
-	 * To do include a function that will be used as action, just put in the $actions array the follwing code:
-	 *
-	 * $actions = array(
-	 *	'show_page',
-	 *	'show_error',
-	 * );
-	 *
-	 * @return $actions
-	 */
-	function get_actions() {
+    /**
+     * This method returns the functions that will be used as actions.
+     * To do include a function that will be used as action, just put in the $actions array the follwing code:
+     *
+     * $actions = array(
+     *    'show_page',
+     *    'show_error',
+     * );
+     *
+     * @return array $actions
+     */
+	public function get_actions() {
 		$actions = array(
 			'save_edit',
 			'edit',
@@ -110,7 +110,7 @@ class Report extends Plugin {
 	 * Add plugin in the tabs
 	 * @param $plugin_functions_parameters
 	 */
-	function add_plugin_tabs(&$plugin_functions_parameters) {
+	public function add_plugin_tabs(&$plugin_functions_parameters) {
 		global $misc;
 
 		$tabs = &$plugin_functions_parameters['tabs'];
@@ -148,7 +148,7 @@ class Report extends Plugin {
 	 * Add plugin in the trail
 	 * @param $plugin_functions_parameters
 	 */
-	function add_plugin_trail(&$plugin_functions_parameters) {
+	public function add_plugin_trail(&$plugin_functions_parameters) {
 		global $misc;
 		$trail = &$plugin_functions_parameters['trail'];
 		$done = false;
@@ -209,11 +209,11 @@ class Report extends Plugin {
 		}
 	}
 
-	/**
-	 * Add plugin in the navlinks
-	 * @param $plugin_functions_parameters
-	 */
-	function plugin_navlinks(&$params) {
+    /**
+     * Add plugin in the navlinks
+     * @param $params
+     */
+	public function plugin_navlinks(&$params) {
 		global $misc, $lang;
 
 		if (
@@ -321,7 +321,7 @@ class Report extends Plugin {
 		}
 	}
 
-	function get_subject_params() {
+	public function get_subject_params() {
 		$vars = array();
 		
 		if (! isset($_REQUEST['action']))
@@ -344,7 +344,7 @@ class Report extends Plugin {
 		return $vars;
 	}
 
-	function edit($msg = '') {
+	public function edit($msg = '') {
 		global $data, $misc, $lang;
 
 		$reportsdb = $this->get_reportsdb();
@@ -408,7 +408,7 @@ class Report extends Plugin {
 	/**
 	 * Saves changes to a report
 	 */
-	function save_edit() {
+	public function save_edit() {
 		$reportsdb = $this->get_reportsdb();
 
 		if (isset($_REQUEST['cancel'])) {
@@ -436,10 +436,11 @@ class Report extends Plugin {
 		}
 	}
 
-	/**
-	 * Display read-only properties of a report
-	 */
-	function properties($msg = '') {
+    /**
+     * Display read-only properties of a report
+     * @param string $msg
+     */
+	public function properties($msg = '') {
 		global $data, $reportsdb, $misc;
 		global $lang;
 
@@ -522,10 +523,11 @@ class Report extends Plugin {
 		$misc->printNavLinks($navlinks, 'reports-properties');
 	}
 
-	/**
-	 * Displays a screen where they can enter a new report
-	 */
-	function create($msg = '') {
+    /**
+     * Displays a screen where they can enter a new report
+     * @param string $msg
+     */
+	public function create($msg = '') {
 		global $data, $reportsdb, $misc;
 		global $lang;
 
@@ -598,7 +600,7 @@ class Report extends Plugin {
 	/**
 	 * Actually creates the new report in the database
 	 */
-	function save_create() {
+	public function save_create() {
 		if (isset($_REQUEST['cancel'])) {
 			$this->default_action();
 			exit;
@@ -627,7 +629,7 @@ class Report extends Plugin {
 	/**
 	 * Show confirmation of drop and perform actual drop
 	 */
-	function drop() {
+	public function drop() {
 		global $reportsdb, $misc;
 		global $lang;
 
@@ -672,7 +674,7 @@ class Report extends Plugin {
 		$misc->printFooter();
 	}
 
-	function execute() {
+	public function execute() {
 		global $misc, $data;
 
 		$reportsdb = $this->get_reportsdb();
@@ -684,10 +686,11 @@ class Report extends Plugin {
 		include('./sql.php');
 	}
 
-	/**
-	 * Show default list of reports in the database
-	 */
-	function default_action($msg = '') {
+    /**
+     * Show default list of reports in the database
+     * @param string $msg
+     */
+	public function default_action($msg = '') {
 		global $data, $misc, $lang;
 
 		$reportsdb = $this->get_reportsdb();
@@ -804,4 +807,4 @@ class Report extends Plugin {
 		$misc->printFooter();
 	}
 }
-?>
+

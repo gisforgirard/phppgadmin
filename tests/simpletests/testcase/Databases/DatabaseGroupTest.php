@@ -24,7 +24,7 @@
  */
  class DatabaseGroupTest extends GroupTest
  {
-    function DatabaseGroupTest()
+    public function __construct()
     {
         $this->GroupTest('Database group test begins.');
 
@@ -45,4 +45,4 @@
     }
  }
 
-?>
+

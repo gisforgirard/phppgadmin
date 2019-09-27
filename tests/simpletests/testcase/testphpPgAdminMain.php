@@ -26,7 +26,7 @@ require_once('Common/CommonGroupTest.php');
  */
 class phpPgAdminGroupTest extends GroupTest
 {
-    function phpPgAdminGroupTest() 
+    public function __construct()
     {
 		$this->GroupTest('phpPgAdmin automation test.');
 		$this->addTestClass(new ServerGroupTest());
@@ -42,4 +42,4 @@ $phpPgAdminTest = &new phpPgAdminGroupTest();
 
 $phpPgAdminTest->run(new HtmlReporter());
 
-?>
+

@@ -2,7 +2,7 @@
     if (window["selenium_has_been_loaded_into_this_window"]==null)
     {
 
-        __SELENIUM_JS__
+        __SELENIUM_JS__;
 // Some background on the code below: broadly speaking, where we are relative to other windows
 // when running in proxy injection mode depends on whether we are in a frame set file or not.
 //
@@ -36,7 +36,7 @@ BrowserBot.prototype.relayToRC = function(name) {
 	var object = eval(name);
         var s = 'state:' + serializeObject(name, object) + "\n";
         sendToRC(s,"state=true");
-}
+};
 
 function selenium_frameRunTest(oldOnLoadRoutine) {
 	if (oldOnLoadRoutine) {

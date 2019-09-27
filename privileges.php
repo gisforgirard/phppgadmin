@@ -137,9 +137,10 @@
 		}
 	}
 
-	/**
-	 * Show permissions on a database, namespace, relation, language or function
-	 */
+/**
+ * Show permissions on a database, namespace, relation, language or function
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $misc, $database;
 		global $lang;
@@ -351,4 +352,4 @@
 
 	$misc->printFooter();
 	
-?>
+

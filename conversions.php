@@ -12,9 +12,10 @@
 	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
 	if (!isset($msg)) $msg = '';
 
-	/**
-	 * Show default list of conversions in the database
-	 */
+/**
+ * Show default list of conversions in the database
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $conf, $misc, $database;
 		global $lang;
@@ -85,4 +86,4 @@
 
 	$misc->printFooter();
 
-?>
+

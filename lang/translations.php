@@ -83,4 +83,4 @@
 		'tr' => 'turkish',
 		'uk' => 'ukrainian'
 	);
-?>
+

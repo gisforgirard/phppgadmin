@@ -22,7 +22,7 @@ class IndexesTest extends PreconditionSet{
     /**
      * Set up the preconditon. 
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -37,7 +37,7 @@ class IndexesTest extends PreconditionSet{
     /**
      * Clean up all the result. 
      */ 
-    function tearDown(){
+    public function tearDown(){
         $this->logout(); 
         
         return TRUE;
@@ -47,7 +47,7 @@ class IndexesTest extends PreconditionSet{
      * TestCaseID: TCI01
      * Test creating indexes in a table
      */
-    function testCreateIndex(){
+    public function testCreateIndex(){
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
         
@@ -81,7 +81,7 @@ class IndexesTest extends PreconditionSet{
      * TestCaseID: TCI02
      * Cancel creating index
      */
-    function testCancelCreateIndex(){
+    public function testCancelCreateIndex(){
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
         
@@ -111,7 +111,7 @@ class IndexesTest extends PreconditionSet{
      * TestCaseID: TRI01
      * Test reindexing an index in a table
      */
-    function testReindex()
+    public function testReindex()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -137,7 +137,7 @@ class IndexesTest extends PreconditionSet{
      * TestCaseID: TCP01
      * Test clustering and analyzing the primary key in a table
      */
-    function testClusterPrimaryKeyWithAnalyze()
+    public function testClusterPrimaryKeyWithAnalyze()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -164,7 +164,7 @@ class IndexesTest extends PreconditionSet{
      * TestCaseID: TCP02
      * Test clustering the primary key without analyzing in a table
      */
-    function testClusterPrimaryKeyWithoutAnalyze()
+    public function testClusterPrimaryKeyWithoutAnalyze()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -190,7 +190,7 @@ class IndexesTest extends PreconditionSet{
      * TestCaseID: TCP03
      * Test cancelling clustering the primary key in a table
      */
-    function testCancelCluster()
+    public function testCancelCluster()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -213,7 +213,7 @@ class IndexesTest extends PreconditionSet{
      * TestCaseID: TDI02
      * Cancel dropping an index in a table
      */
-    function testCancelDropIndex()
+    public function testCancelDropIndex()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -236,7 +236,7 @@ class IndexesTest extends PreconditionSet{
      * TestCaseID: TDI01
      * Test dropping an index in a table
      */
-    function testDropIndex()
+    public function testDropIndex()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;

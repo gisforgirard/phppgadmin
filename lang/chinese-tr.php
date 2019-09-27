@@ -580,4 +580,4 @@
    $lang['strtimefmt'] = 'jS M, Y g:iA';
    $lang['strhelp'] = '說明';
 	
-?>
+

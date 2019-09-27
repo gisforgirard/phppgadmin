@@ -21,7 +21,7 @@ class CastsTest extends PreconditionSet
     /**
      * Set up the preconditon.
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -36,7 +36,7 @@ class CastsTest extends PreconditionSet
     /**
      * Release the relational resource.
      */
-    function tearDown()
+    public function tearDown()
     {
         // Logout this system.
         $this->logout();
@@ -51,7 +51,7 @@ class CastsTest extends PreconditionSet
      *
      * Note: It's strange here, because it only display one sentecse.
      */
-    function testLanguage()
+    public function testLanguage()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -72,4 +72,4 @@ class CastsTest extends PreconditionSet
     }
 }
 
-?>
+

@@ -11,10 +11,10 @@ include_once('./classes/database/Postgres80.php');
 
 class Postgres74 extends Postgres80 {
 
-	var $major_version = 7.4;
+	public $major_version = 7.4;
 	// List of all legal privileges that can be applied to different types
 	// of objects.
-	var $privlist = array(
+	public $privlist = array(
 		'table' => array('SELECT', 'INSERT', 'UPDATE', 'DELETE', 'RULE', 'REFERENCES', 'TRIGGER', 'ALL PRIVILEGES'),
 		'view' => array('SELECT', 'INSERT', 'UPDATE', 'DELETE', 'RULE', 'REFERENCES', 'TRIGGER', 'ALL PRIVILEGES'),
 		'sequence' => array('SELECT', 'UPDATE', 'ALL PRIVILEGES'),
@@ -29,31 +29,29 @@ class Postgres74 extends Postgres80 {
 	 * Constructor
 	 * @param $conn The database connection
 	 */
-	function __construct($conn) {
-		parent::__construct($conn);
+	public function __construct($conn) {
+		Postgres80::__construct($conn);
 	}
 
 	// Help functions
 
-	function getHelpPages() {
+	public function getHelpPages() {
 		include_once('./help/PostgresDoc74.php');
 		return $this->help_page;
 	}
 
 	// Database functions
 
-	/**
-	 * Alters a database
-	 * the multiple return vals are for postgres 8+ which support more functionality in alter database
-	 * @param $dbName The name of the database
-	 * @param $newName new name for the database
-	 * @param $newOwner The new owner for the database
-	 * @return 0 success
-	 * @return -1 transaction error
-	 * @return -2 owner error
-	 * @return -3 rename error
-	 */
-	function alterDatabase($dbName, $newName, $newOwner = '', $comment = '') {
+    /**
+     * Alters a database
+     * the multiple return vals are for postgres 8+ which support more functionality in alter database
+     * @param $dbName The name of the database
+     * @param $newName new name for the database
+     * @param string $newOwner The new owner for the database
+     * @param string $comment
+     * @return int 0 success
+     */
+	public function alterDatabase($dbName, $newName, $newOwner = '', $comment = '') {
 		//ignore $newowner, not supported pre 8.0
 		//ignore $comment, not supported pre 8.2
 		$this->clean($dbName);
@@ -64,11 +62,12 @@ class Postgres74 extends Postgres80 {
 		else return 0;
 	}
 
-	/**
-	 * Return all database available on the server
-	 * @return A list of databases, sorted alphabetically
-	 */
-	function getDatabases($currentdatabase = NULL) {
+    /**
+     * Return all database available on the server
+     * @param null $currentdatabase
+     * @return A list of databases, sorted alphabetically
+     */
+	public function getDatabases($currentdatabase = NULL) {
 		global $conf, $misc;
 
 		$server_info = $misc->getServerInfo();
@@ -109,7 +108,7 @@ class Postgres74 extends Postgres80 {
 	 * @param $filter The object type to restrict to ('' means no restriction)
 	 * @return A recordset
 	 */
-	function findObject($term, $filter) {
+	public function findObject($term, $filter) {
 		global $conf;
 
 		/*about escaping:
@@ -255,7 +254,7 @@ class Postgres74 extends Postgres80 {
 	 * Returns table locks information in the current database
 	 * @return A recordset
 	 */
-	function getLocks() {
+	public function getLocks() {
 		global $conf;
 
 		if (!$conf['show_system'])
@@ -271,11 +270,11 @@ class Postgres74 extends Postgres80 {
 		return $this->selectSet($sql);
 	}
 
-	/**
-	 * Returns the current database encoding
-	 * @return The encoding.  eg. SQL_ASCII, UTF-8, etc.
-	 */
-	function getDatabaseEncoding() {
+    /**
+     * Returns the current database encoding
+     * @return A encoding.  eg. SQL_ASCII, UTF-8, etc.
+     */
+	public function getDatabaseEncoding() {
 		$sql = "SELECT getdatabaseencoding() AS encoding";
 
 		return $this->selectField($sql, 'encoding');
@@ -283,20 +282,17 @@ class Postgres74 extends Postgres80 {
 
 	// Table functions
 
-	/**
-	 * Protected method which alter a table
-	 * SHOULDN'T BE CALLED OUTSIDE OF A TRANSACTION
-	 * @param $tblrs The table recordSet returned by getTable()
-	 * @param $name The new name for the table
-	 * @param $owner The new owner for the table
-	 * @param $schema The new schema for the table
-	 * @param $comment The comment on the table
-	 * @param $tablespace The new tablespace for the table ('' means leave as is)
-	 * @return 0 success
-	 * @return -3 rename error
-	 * @return -4 comment error
-	 * @return -5 owner error
-	 */
+    /**
+     * Protected method which alter a table
+     * SHOULDN'T BE CALLED OUTSIDE OF A TRANSACTION
+     * @param $tblrs The table recordSet returned by getTable()
+     * @param $name The new name for the table
+     * @param $owner The new owner for the table
+     * @param $schema The new schema for the table
+     * @param $comment The comment on the table
+     * @param $tablespace The new tablespace for the table ('' means leave as is)
+     * @return int 0 success
+     */
 	protected
 	function _alterTable($tblrs, $name, $owner, $schema, $comment, $tablespace) {
 
@@ -320,29 +316,24 @@ class Postgres74 extends Postgres80 {
 		return 0;
 	}
 
-	/**
-	 * Alters a column in a table OR view
-	 * @param $table The table in which the column resides
-	 * @param $column The column to alter
-	 * @param $name The new name for the column
-	 * @param $notnull (boolean) True if not null, false otherwise
-	 * @param $oldnotnull (boolean) True if column is already not null, false otherwise
-	 * @param $default The new default for the column
-	 * @param $olddefault The old default for the column
-	 * @param $type The new type for the column
-	 * @param $array True if array type, false otherwise
-	 * @param $length The optional size of the column (ie. 30 for varchar(30))
-	 * @param $oldtype The old type for the column
-	 * @param $comment Comment for the column
-	 * @return 0 success
-	 * @return -2 set not null error
-	 * @return -3 set default error
-	 * @return -4 rename column error
-	 * @return -5 comment error
-	 * @return -6 transaction error
-	 */
-	function alterColumn($table, $column, $name, $notnull, $oldnotnull, $default, $olddefault,
-	$type, $length, $array, $oldtype, $comment)
+    /**
+     * Alters a column in a table OR view
+     * @param $table The table in which the column resides
+     * @param $column The column to alter
+     * @param $name The new name for the column
+     * @param $notnull (boolean) True if not null, false otherwise
+     * @param $oldnotnull (boolean) True if column is already not null, false otherwise
+     * @param $default The new default for the column
+     * @param $olddefault The old default for the column
+     * @param $type The new type for the column
+     * @param $length The optional size of the column (ie. 30 for varchar(30))
+     * @param $array True if array type, false otherwise
+     * @param $oldtype The old type for the column
+     * @param $comment Comment for the column
+     * @return bool|int 0 success
+     */
+	public function alterColumn($table, $column, $name, $notnull, $oldnotnull, $default, $olddefault,
+                                $type, $length, $array, $oldtype, $comment)
 	{
 		$status = $this->beginTransaction();
 		if ($status != 0) return -1;
@@ -396,7 +387,7 @@ class Postgres74 extends Postgres80 {
 	 * @param $table The name of the table
 	 * @return A recordset
 	 */
-	function getTable($table) {
+	public function getTable($table) {
 		$c_schema = $this->_schema;
 		$this->clean($c_schema);
 		$this->clean($table);
@@ -415,12 +406,12 @@ class Postgres74 extends Postgres80 {
 		return $this->selectSet($sql);
 	}
 
-	/**
-	 * Return all tables in current database (and schema)
-	 * @param $all True to fetch all tables, false for just in current schema
-	 * @return All tables, sorted alphabetically
-	 */
-	function getTables($all = false) {
+    /**
+     * Return all tables in current database (and schema)
+     * @param $all True to fetch all tables, false for just in current schema
+     * @return A tables, sorted alphabetically
+     */
+	public function getTables($all = false) {
 		$c_schema = $this->_schema;
 		$this->clean($c_schema);
 		if ($all) {
@@ -447,7 +438,7 @@ class Postgres74 extends Postgres80 {
 	 * Returns the current default_with_oids setting
 	 * @return default_with_oids setting
 	 */
-	function getDefaultWithOid() {
+	public function getDefaultWithOid() {
 		// 8.0 is the first release to have this setting
 		// Prior releases don't have this setting... oids always activated
 		return 'on';
@@ -462,7 +453,7 @@ class Postgres74 extends Postgres80 {
 	 * @param $table the table where we are looking for fk
 	 * @return a recordset
 	 */
-	function getConstraintsWithFields($table) {
+	public function getConstraintsWithFields($table) {
 
 		$c_schema = $this->_schema;
 		$this->clean($c_schema);
@@ -516,11 +507,12 @@ class Postgres74 extends Postgres80 {
 
 	// Sequence functions
 
-	/**
-	 * Returns all sequences in the current database
-	 * @return A recordset
-	 */
-	function getSequences($all = false) {
+    /**
+     * Returns all sequences in the current database
+     * @param bool $all
+     * @return A recordset
+     */
+	public function getSequences($all = false) {
 		$c_schema = $this->_schema;
 		$this->clean($c_schema);
 		if ($all) {
@@ -543,12 +535,12 @@ class Postgres74 extends Postgres80 {
 
 	// Function functions
 
-	/**
-	 * Returns all details for a particular function
-	 * @param $func The name of the function to retrieve
-	 * @return Function info
-	 */
-	function getFunction($function_oid) {
+    /**
+     * Returns all details for a particular function
+     * @param $function_oid
+     * @return A info
+     */
+	public function getFunction($function_oid) {
 		$this->clean($function_oid);
 
 		$sql = "
@@ -578,11 +570,11 @@ class Postgres74 extends Postgres80 {
 		return $this->selectSet($sql);
 	}
 
-	/**
-	 * Returns a list of all casts in the database
-	 * @return All casts
-	 */
-	function getCasts() {
+    /**
+     * Returns a list of all casts in the database
+     * @return A casts
+     */
+	public function getCasts() {
 		global $conf;
 
 		if ($conf['show_system'])
@@ -622,14 +614,14 @@ class Postgres74 extends Postgres80 {
 
 	// Capabilities
 
-	function hasAlterColumnType() { return false; }
-	function hasCreateFieldWithConstraints() { return false; }
-	function hasAlterDatabaseOwner() { return false; }
-	function hasAlterSchemaOwner() { return false; }
-	function hasFunctionAlterOwner() { return false; }
-	function hasNamedParams() { return false; }
-	function hasQueryCancel() { return false; }
-	function hasTablespaces() { return false; }
-	function hasMagicTypes() { return false; }
+	public function hasAlterColumnType() { return false; }
+	public function hasCreateFieldWithConstraints() { return false; }
+	public function hasAlterDatabaseOwner() { return false; }
+	public function hasAlterSchemaOwner() { return false; }
+	public function hasFunctionAlterOwner() { return false; }
+	public function hasNamedParams() { return false; }
+	public function hasQueryCancel() { return false; }
+	public function hasTablespaces() { return false; }
+	public function hasMagicTypes() { return false; }
 }
-?>
+

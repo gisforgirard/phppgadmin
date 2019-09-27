@@ -25,7 +25,7 @@ class ImportTest extends PreconditionSet
     private $_tableName = 'student';
     private $_dataFilePath = '.';
     
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -37,7 +37,7 @@ class ImportTest extends PreconditionSet
     }
     
     
-    function tearDown()
+    public function tearDown()
     {
         // Clear the data and logout.
         $this->emptyTable();
@@ -53,7 +53,7 @@ class ImportTest extends PreconditionSet
      * 
      * This test case will failed because SimpleTest1.0 doesn't support upload file.
      */
-    function testXMLData() 
+    public function testXMLData()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -88,7 +88,7 @@ class ImportTest extends PreconditionSet
      * 
      * This test case will failed because SimpleTest1.0 doesn't support upload file.
      */
-    function testIncorectTxtData() 
+    public function testIncorectTxtData()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -119,7 +119,7 @@ class ImportTest extends PreconditionSet
     /*
      * Help to empty the table's data.
      */
-    function emptyTable()
+    public function emptyTable()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -137,4 +137,4 @@ class ImportTest extends PreconditionSet
     }
     
 }
-?>
+

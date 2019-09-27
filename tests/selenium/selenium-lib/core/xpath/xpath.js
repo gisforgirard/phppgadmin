@@ -563,19 +563,19 @@ function StringValue(value) {
 
 StringValue.prototype.stringValue = function() {
   return this.value;
-}
+};
 
 StringValue.prototype.booleanValue = function() {
   return this.value.length > 0;
-}
+};
 
 StringValue.prototype.numberValue = function() {
   return this.value - 0;
-}
+};
 
 StringValue.prototype.nodeSetValue = function() {
   throw this;
-}
+};
 
 function BooleanValue(value) {
   this.value = value;
@@ -584,19 +584,19 @@ function BooleanValue(value) {
 
 BooleanValue.prototype.stringValue = function() {
   return '' + this.value;
-}
+};
 
 BooleanValue.prototype.booleanValue = function() {
   return this.value;
-}
+};
 
 BooleanValue.prototype.numberValue = function() {
   return this.value ? 1 : 0;
-}
+};
 
 BooleanValue.prototype.nodeSetValue = function() {
   throw this;
-}
+};
 
 function NumberValue(value) {
   this.value = value;
@@ -605,19 +605,19 @@ function NumberValue(value) {
 
 NumberValue.prototype.stringValue = function() {
   return '' + this.value;
-}
+};
 
 NumberValue.prototype.booleanValue = function() {
   return !!this.value;
-}
+};
 
 NumberValue.prototype.numberValue = function() {
   return this.value - 0;
-}
+};
 
 NumberValue.prototype.nodeSetValue = function() {
   throw this;
-}
+};
 
 function NodeSetValue(value) {
   this.value = value;
@@ -630,15 +630,15 @@ NodeSetValue.prototype.stringValue = function() {
   } else {
     return xmlValue(this.value[0]);
   }
-}
+};
 
 NodeSetValue.prototype.booleanValue = function() {
   return this.value.length > 0;
-}
+};
 
 NodeSetValue.prototype.numberValue = function() {
   return this.stringValue() - 0;
-}
+};
 
 NodeSetValue.prototype.nodeSetValue = function() {
   return this.value;
@@ -681,7 +681,7 @@ LocationExpr.prototype.appendStep = function(s) {
   } else {
     this.steps.push(s);
   }
-}
+};
 
 LocationExpr.prototype.prependStep = function(s) {
   var combinedStep = this._combineSteps(s, this.steps[0]);
@@ -716,7 +716,7 @@ LocationExpr.prototype._combineSteps = function(prevStep, nextStep) {
     }
   }
   return null;
-}
+};
 
 LocationExpr.prototype.evaluate = function(ctx) {
   var start;
@@ -801,7 +801,7 @@ StepExpr.prototype.appendPredicate = function(p) {
   if (!this.hasPositionalPredicate) {
     this.hasPositionalPredicate = predicateExprHasPositionalSelector(p.expr);
   }
-}
+};
 
 StepExpr.prototype.evaluate = function(ctx) {
   var input = ctx.node;
@@ -965,19 +965,19 @@ NodeTestElementOrAttribute.prototype.evaluate = function(ctx) {
   return new BooleanValue(
       ctx.node.nodeType == DOM_ELEMENT_NODE ||
       ctx.node.nodeType == DOM_ATTRIBUTE_NODE);
-}
+};
 
 function NodeTestText() {}
 
 NodeTestText.prototype.evaluate = function(ctx) {
   return new BooleanValue(ctx.node.nodeType == DOM_TEXT_NODE);
-}
+};
 
 function NodeTestComment() {}
 
 NodeTestComment.prototype.evaluate = function(ctx) {
   return new BooleanValue(ctx.node.nodeType == DOM_COMMENT_NODE);
-}
+};
 
 function NodeTestPI(target) {
   this.target = target;
@@ -987,7 +987,7 @@ NodeTestPI.prototype.evaluate = function(ctx) {
   return new
   BooleanValue(ctx.node.nodeType == DOM_PROCESSING_INSTRUCTION_NODE &&
                (!this.target || ctx.node.nodeName == this.target));
-}
+};
 
 function NodeTestNC(nsprefix) {
   this.regex = new RegExp("^" + nsprefix + ":");
@@ -997,7 +997,7 @@ function NodeTestNC(nsprefix) {
 NodeTestNC.prototype.evaluate = function(ctx) {
   var n = ctx.node;
   return new BooleanValue(this.regex.match(n.nodeName));
-}
+};
 
 function NodeTestName(name) {
   this.name = name;
@@ -1012,7 +1012,7 @@ NodeTestName.prototype.evaluate = function(ctx) {
   } else {
     return new BooleanValue(n.nodeName == this.name);
   }
-}
+};
 
 function PredicateExpr(expr) {
   this.expr = expr;
@@ -1470,7 +1470,7 @@ FilterExpr.prototype.evaluate = function(ctx) {
   }
 
   return new NodeSetValue(nodes);
-}
+};
 
 function UnaryMinusExpr(expr) {
   this.expr = expr;
@@ -1644,7 +1644,7 @@ BinaryExpr.prototype.compare = function(ctx, cmp) {
   }
 
   return new BooleanValue(ret);
-}
+};
 
 function LiteralExpr(value) {
   this.value = value;
@@ -1668,7 +1668,7 @@ function VariableExpr(name) {
 
 VariableExpr.prototype.evaluate = function(ctx) {
   return ctx.getVariable(this.name);
-}
+};
 
 // Factory functions for semantic values (i.e. Expressions) of the
 // productions in the grammar. When a production is matched to reduce

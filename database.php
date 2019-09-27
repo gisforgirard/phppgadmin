@@ -30,9 +30,11 @@
 			doProcesses($lang['strsignalsentbad']);
 	}
 
-	/**
-	 * Searches for a named database object
-	 */
+/**
+ * Searches for a named database object
+ * @param bool $confirm
+ * @param string $msg
+ */
 	function doFind($confirm = true, $msg = '') {
 		global $data, $misc;
 		global $lang, $conf;
@@ -298,9 +300,10 @@
 		}		
 	}
 
-	/**
-	 * Displays options for database download
-	 */
+/**
+ * Displays options for database download
+ * @param string $msg
+ */
 	function doExport($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -379,10 +382,11 @@
 		$misc->printTable($variables, $columns, $actions, 'database-variables', $lang['strnodata']);
 	}
 
-	/**
-	 * Show all current database connections and any queries they
-	 * are running.
-	 */
+/**
+ * Show all current database connections and any queries they
+ * are running.
+ * @param string $msg
+ */
 	function doProcesses($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -695,4 +699,4 @@
 	}
 
 	$misc->printFooter();
-?>
+

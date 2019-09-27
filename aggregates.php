@@ -46,11 +46,12 @@
 		else {
 			doCreate($lang['straggrcreatedbad']);
 		}
-	}	
+	}
 
-	/**
-	 * Displays a screen for create a new aggregate function
-	 */
+/**
+ * Displays a screen for create a new aggregate function
+ * @param string $msg
+ */
 	function doCreate($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -127,9 +128,10 @@
 	}
 
 
-	/**
-	 * Function to allow editing an aggregate function
-	 */
+/**
+ * Function to allow editing an aggregate function
+ * @param string $msg
+ */
 	function doAlter($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -171,9 +173,10 @@
 		echo "</form>\n";						
 	}
 
-	/**
-	 * Show confirmation of drop and perform actual drop of the aggregate function selected
-	 */
+/**
+ * Show confirmation of drop and perform actual drop of the aggregate function selected
+ * @param $confirm
+ */
 	function doDrop($confirm) {
 		global $data, $misc;
 		global $lang, $_reload_browser;
@@ -205,9 +208,10 @@
 		}
 	}
 
-	/**
-	 * Show the properties of an aggregate
-	 */
+/**
+ * Show the properties of an aggregate
+ * @param string $msg
+ */
 	function doProperties($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -301,9 +305,10 @@
 	}
 
 
-	/**
-	 * Show default list of aggregate functions in the database
-	 */
+/**
+ * Show default list of aggregate functions in the database
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $conf, $misc;	
 		global $lang;
@@ -459,4 +464,4 @@
 
 	$misc->printFooter();
 
-?>
+

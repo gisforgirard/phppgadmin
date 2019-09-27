@@ -21,7 +21,7 @@ class OperatorTest extends PreconditionSet
     /**
      * Set up the precondition. 
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -38,7 +38,7 @@ class OperatorTest extends PreconditionSet
     /**
      * Clean up all the result. 
      */
-    function tearDown()
+    public function tearDown()
     {        
         // Logout from the system.
         $this->logout(); 
@@ -51,7 +51,7 @@ class OperatorTest extends PreconditionSet
      * TestCaseID: HCO01
      * Create a operator.
      */
-    function testCreateOperator()
+    public function testCreateOperator()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -82,7 +82,7 @@ class OperatorTest extends PreconditionSet
      * TestCaseID: HSP01
      * Show the properties of the specified operator.
      */
-    function testShowProperty()
+    public function testShowProperty()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -107,7 +107,7 @@ class OperatorTest extends PreconditionSet
      * TestCaseID: HDO01
      * Drop the operators.
      */
-    function testDropOperator()
+    public function testDropOperator()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -145,4 +145,4 @@ class OperatorTest extends PreconditionSet
     } 
 }
 
-?>
+

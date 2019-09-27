@@ -11,9 +11,11 @@
 
 	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
 
-	/**
-	 * Confirm and then actually create a rule
-	 */
+/**
+ * Confirm and then actually create a rule
+ * @param $confirm
+ * @param string $msg
+ */
 	function createRule($confirm, $msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -81,9 +83,10 @@
 		}
 	}
 
-	/**
-	 * Show confirmation of drop and perform actual drop
-	 */
+/**
+ * Show confirmation of drop and perform actual drop
+ * @param $confirm
+ */
 	function doDrop($confirm) {
 		global $data, $misc;
 		global $lang;
@@ -117,9 +120,10 @@
 
 	}
 
-	/**
-	 * List all the rules on the table
-	 */
+/**
+ * List all the rules on the table
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -229,4 +233,4 @@
 	
 	$misc->printFooter();
 
-?>
+

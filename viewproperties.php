@@ -23,10 +23,11 @@
 		else
 			doEdit($lang['strviewupdatedbad']);
 	}
-	
-	/**
-	 * Function to allow editing of a view
-	 */
+
+/**
+ * Function to allow editing of a view
+ * @param string $msg
+ */
 	function doEdit($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -63,13 +64,14 @@
 		else echo "<p>{$lang['strnodata']}</p>\n";
 	}
 
-	/** 
-	 * Allow the dumping of the data "in" a view
-	 * NOTE:: PostgreSQL doesn't currently support dumping the data in a view 
-	 *        so I have disabled the data related parts for now. In the future 
-	 *        we should allow it conditionally if it becomes supported.  This is 
-	 *        a SMOP since it is based on pg_dump version not backend version. 
-	 */
+/**
+ * Allow the dumping of the data "in" a view
+ * NOTE:: PostgreSQL doesn't currently support dumping the data in a view
+ *        so I have disabled the data related parts for now. In the future
+ *        we should allow it conditionally if it becomes supported.  This is
+ *        a SMOP since it is based on pg_dump version not backend version.
+ * @param string $msg
+ */
 	function doExport($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -124,9 +126,10 @@
 		echo "</form>\n";
 	}
 
-	/**
-	 * Show definition for a view
-	 */
+/**
+ * Show definition for a view
+ * @param string $msg
+ */
 	function doDefinition($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -167,9 +170,10 @@
 			)), 'viewproperties-definition', get_defined_vars());
 	}
 
-	/**
-	 * Displays a screen where they can alter a column in a view
-	 */
+/**
+ * Displays a screen where they can alter a column in a view
+ * @param string $msg
+ */
 	function doProperties($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -383,9 +387,10 @@
 
 	if ($action == 'tree') doTree();
 
-	/**
-	 * Show view definition and virtual columns
-	 */
+/**
+ * Show view definition and virtual columns
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -561,4 +566,4 @@
 	
 	$misc->printFooter();
 
-?>
+

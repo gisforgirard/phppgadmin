@@ -21,7 +21,7 @@ class ViewTest extends PreconditionSet
     /**
      * Set up the precondition. 
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -38,7 +38,7 @@ class ViewTest extends PreconditionSet
     /**
      * Clean up all the result. 
      */
-    function tearDown()
+    public function tearDown()
     {
         // Logout from the system.
         $this->logout(); 
@@ -51,7 +51,7 @@ class ViewTest extends PreconditionSet
      * TestCaseID: HCV01
      * Test creating a view in an existing table directly.
      */
-    function testCreateViewDirectly()
+    public function testCreateViewDirectly()
     {
     	
         global $webUrl;
@@ -87,7 +87,7 @@ class ViewTest extends PreconditionSet
      * TestCaseID: HCV02
      * This test case test for creating a view in an existing table with wizard.
      */
-    function testCreateViewWithWizard()
+    public function testCreateViewWithWizard()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -123,7 +123,7 @@ class ViewTest extends PreconditionSet
      * Test creating a view in an existing table directly.
      * But in this test case, some illegal data will be input.
      */
-    function testCreateViewDirectlyNegative()
+    public function testCreateViewDirectlyNegative()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -158,7 +158,7 @@ class ViewTest extends PreconditionSet
      * Test creating a view in an existing table with wizard.
      * But in this test case, some illegal data will be input.
      */
-    function  testCreateViewWithWizardNegation()
+    public function  testCreateViewWithWizardNegation()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -193,7 +193,7 @@ class ViewTest extends PreconditionSet
      * TestCaseID: HBV01
      * Test browsing an existing view with illegal data.
      */
-    function testBrowseView()
+    public function testBrowseView()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -223,7 +223,7 @@ class ViewTest extends PreconditionSet
      * TestCaseID: HSV01
      * Test selecting rows from an existing view.
      */
-    function testSelectView()
+    public function testSelectView()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -253,7 +253,7 @@ class ViewTest extends PreconditionSet
      * TestCaseID: HAV01
      * Alter the properties of an existing view.
      */ 
-    function testAlterView()
+    public function testAlterView()
      {
          global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -286,7 +286,7 @@ class ViewTest extends PreconditionSet
      * TestCaseID: HAD01
      * Alter the definiton of an existing view.
      */
-    function testAlterDefinition()
+    public function testAlterDefinition()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -323,7 +323,7 @@ class ViewTest extends PreconditionSet
      * TestCaseID: HDV01
      * Test dropping a view.
      */
-    function testDropView()
+    public function testDropView()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -349,4 +349,4 @@ class ViewTest extends PreconditionSet
         return TRUE;   
     } 
 }
-?>
+

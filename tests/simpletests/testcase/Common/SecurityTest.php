@@ -23,13 +23,13 @@ class SecurityTest extends PreconditionSet
     private $_invalidUserName = 'invalidusername';
     private $_invalidPassword = 'invalidpassword';
     
-    function setUp()
+    public function setUp()
     {  
         return TRUE;
     }
     
     
-    function tearDown()
+    public function tearDown()
     {        
         return TRUE;
     }
@@ -39,7 +39,7 @@ class SecurityTest extends PreconditionSet
      * TestCaseID: CSM01
      * Test to login with special user name.
      */
-    function testSpecialLogin() 
+    public function testSpecialLogin()
     {
         global $webUrl;
         global $NORMAL_USER_NAME;
@@ -66,7 +66,7 @@ class SecurityTest extends PreconditionSet
      * TestCaseID: CSM02
      * Test to login with invalid user name or password.
      */
-    function testInvalidLogin() 
+    public function testInvalidLogin()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -92,7 +92,7 @@ class SecurityTest extends PreconditionSet
      * TestCaseID: CSM03
      * Test to change the current user's password.
      */
-    function testAccount() 
+    public function testAccount()
     {
         global $webUrl;
         global $NORMAL_USER_NAME;
@@ -128,4 +128,4 @@ class SecurityTest extends PreconditionSet
     }
 
 }
-?>
+

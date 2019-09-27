@@ -586,6 +586,9 @@ function proc_void($span, $lang, $ch)
  * Syntax highlight function
  * Does the bulk of the syntax highlighting by lexing the input
  * string, then calling the helper function to highlight keywords.
+ * @param $text
+ * @param $language
+ * @return string
  */
 function syntax_highlight($text, $language)
 {
@@ -1111,4 +1114,4 @@ function syntax_highlight($text, $language)
     return $output;
 }
 
-?>
+

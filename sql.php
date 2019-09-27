@@ -17,10 +17,12 @@
 	// Include application functions
 	include_once('./libraries/lib.inc.php');
 
-	/**
-	 * This is a callback function to display the result of each separate query
-	 * @param ADORecordSet $rs The recordset returned by the script execetor
-	 */
+/**
+ * This is a callback function to display the result of each separate query
+ * @param $query
+ * @param ADORecordSet $rs The recordset returned by the script execetor
+ * @param $lineno
+ */
 	function sqlCallback($query, $rs, $lineno) {
 		global $data, $misc, $lang, $_connection;
 		// Check if $rs is false, if so then there was a fatal error
@@ -260,4 +262,4 @@
 	$misc->printNavLinks($navlinks, 'sql-form', get_defined_vars());
 	
 	$misc->printFooter();
-?>
+

@@ -21,7 +21,7 @@ class ProcessesTest extends PreconditionSet
     /**
      * Set up the preconditon.
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -37,7 +37,7 @@ class ProcessesTest extends PreconditionSet
     /**
      * Release the relational resource.
      */
-    function tearDown()
+    public function tearDown()
     {
         // Logout this system.
         $this->logout();
@@ -52,7 +52,7 @@ class ProcessesTest extends PreconditionSet
      *
      * Note: This sub function is dynamic during the run time.
      */
-    function testProcesses()
+    public function testProcesses()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -70,4 +70,4 @@ class ProcessesTest extends PreconditionSet
     }
 }
 
-?>
+

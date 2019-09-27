@@ -21,7 +21,7 @@ class ConversionTest extends PreconditionSet
     /**
      * Set up the precondition. 
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -37,7 +37,7 @@ class ConversionTest extends PreconditionSet
     /**
      * Clean up all the result. 
      */
-    function tearDown()
+    public function tearDown()
     {
         // Logout from the system.
         $this->logout(); 
@@ -49,7 +49,7 @@ class ConversionTest extends PreconditionSet
      * TestCaseID: HBC01
      * Browse the conversions.
      */
-    function testBrowseConversion()
+    public function testBrowseConversion()
     {
         global $webUrl;
         global $lang, $SERVER;
@@ -73,4 +73,4 @@ class ConversionTest extends PreconditionSet
     } 
 }    
 
-?>
+

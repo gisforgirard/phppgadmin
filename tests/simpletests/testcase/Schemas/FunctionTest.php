@@ -21,7 +21,7 @@ class FunctionTest extends PreconditionSet
     /**
      * Set up the precondition. 
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -38,7 +38,7 @@ class FunctionTest extends PreconditionSet
     /**
      * Clean up all the result. 
      */
-    function tearDown()
+    public function tearDown()
     {
         // Logout from the system.
         $this->logout(); 
@@ -51,7 +51,7 @@ class FunctionTest extends PreconditionSet
      * TestCaseID: HCF01
      * Create a SQL/PL function.
      */
-    function testCreatSqlFunction()
+    public function testCreatSqlFunction()
     {
         global $webUrl;
         global $lang, $DATABASE, $SERVER;
@@ -89,7 +89,7 @@ class FunctionTest extends PreconditionSet
      * TestCaseID: HCF02
      * Create a internal function.
      */
-    function testCreateInternalFunction()
+    public function testCreateInternalFunction()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -127,7 +127,7 @@ class FunctionTest extends PreconditionSet
      * TestCaseID: HCF03
      * Create a C function. 
      */
-    function testCreateCFunction()
+    public function testCreateCFunction()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -164,7 +164,7 @@ class FunctionTest extends PreconditionSet
      * TestCaseID: HAF01
      * Alter the definition of an existing function.
      */
-    function testAlterFunction()
+    public function testAlterFunction()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -199,7 +199,7 @@ class FunctionTest extends PreconditionSet
      * TestCaseID: HDF01
      * Drop an existing function.
      */
-    function testDropFunction()
+    public function testDropFunction()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -245,4 +245,4 @@ class FunctionTest extends PreconditionSet
         return TRUE;
     } 
 }
-?>
+

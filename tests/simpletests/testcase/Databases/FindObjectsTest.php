@@ -21,7 +21,7 @@ class FindObjectsTest extends PreconditionSet
     /**
      * Set up the preconditon.
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -36,7 +36,7 @@ class FindObjectsTest extends PreconditionSet
     /**
      * Release the relational resource.
      */
-    function tearDown()
+    public function tearDown()
     {
         // Logout this system.
         $this->logout();
@@ -48,7 +48,7 @@ class FindObjectsTest extends PreconditionSet
      * TestCaseId: DFO001
      * This test is used to find objects in the search component.
      */
-    function testSimpleFindObject()
+    public function testSimpleFindObject()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -72,7 +72,7 @@ class FindObjectsTest extends PreconditionSet
      * TestCaseId: DFO002
      * This test is used to find objects in the search component.
      */
-    function testFindObjsInSchemas()
+    public function testFindObjsInSchemas()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -217,7 +217,7 @@ class FindObjectsTest extends PreconditionSet
      * TestCaseId: DFO003
      * This test is used to find objects in the search component in top bar.
      */
-    function testFindTopObjects()
+    public function testFindTopObjects()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -235,4 +235,4 @@ class FindObjectsTest extends PreconditionSet
     }
 }
 
-?>
+

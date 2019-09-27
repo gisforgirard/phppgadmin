@@ -14,12 +14,11 @@
 	 * This class help building a selenium HTML test file for PPA.
 	**/
 	class TestBuilder {
-		/**
-		 * Constructor
-		 * @param $serverDesc The server['desc'] conf param to which we are writing this test file for.
-		 * @param $title The title of the HTML test page
-		 * @param $desc The top description on the HTML test page
-		 */
+        /**
+         * Constructor
+         * @param $title The title of the HTML test page
+         * @param $desc The top description on the HTML test page
+         */
 		public function __construct($title, $desc) {
 			global $misc;
 			$this->title = $title;
@@ -52,13 +51,11 @@
 				<tr><td rowspan=\"1\" colspan=\"3\">$desc</td></tr>
 				</thead><tbody>";
 		}
-		
-		/**
-		 * Write the test file, close it,
-		 * append the test file to the TestSuite.html file and destroy itself
-		 * @param $testfile The path to the test file to create
-		 * @param $testsuite_file The path to the TestSuite.html file
-		 */
+
+        /**
+         * Write the test file, close it,
+         * append the test file to the TestSuite.html file and destroy itself
+         */
 		public function writeTests() { //$testfile, $testsuite_file) {
 			//echo $this->code;
 			return;
@@ -187,4 +184,4 @@
 		}
 		
 	}
-?>
+

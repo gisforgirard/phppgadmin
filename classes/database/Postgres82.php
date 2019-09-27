@@ -10,10 +10,10 @@ include_once('./classes/database/Postgres83.php');
 
 class Postgres82 extends Postgres83 {
 
-	var $major_version = 8.2;
+	public $major_version = 8.2;
 
 	// Select operators
-	var $selectOps = array('=' => 'i', '!=' => 'i', '<' => 'i', '>' => 'i', '<=' => 'i', '>=' => 'i', '<<' => 'i', '>>' => 'i', '<<=' => 'i', '>>=' => 'i',
+	public $selectOps = array('=' => 'i', '!=' => 'i', '<' => 'i', '>' => 'i', '<=' => 'i', '>=' => 'i', '<<' => 'i', '>>' => 'i', '<<=' => 'i', '>>=' => 'i',
 		'LIKE' => 'i', 'NOT LIKE' => 'i', 'ILIKE' => 'i', 'NOT ILIKE' => 'i', 'SIMILAR TO' => 'i',
 		'NOT SIMILAR TO' => 'i', '~' => 'i', '!~' => 'i', '~*' => 'i', '!~*' => 'i',
 		'IS NULL' => 'p', 'IS NOT NULL' => 'p', 'IN' => 'x', 'NOT IN' => 'x');
@@ -22,13 +22,13 @@ class Postgres82 extends Postgres83 {
 	 * Constructor
 	 * @param $conn The database connection
 	 */
-	function __construct($conn) {
-		parent::__construct($conn);
+	public function __construct($conn) {
+		Postgres::__construct($conn);
 	}
 
 	// Help functions
 
-	function getHelpPages() {
+	public function getHelpPages() {
 		include_once('./help/PostgresDoc82.php');
 		return $this->help_page;
 	}
@@ -39,7 +39,7 @@ class Postgres82 extends Postgres83 {
 	 * Returns table locks information in the current database
 	 * @return A recordset
 	 */
-	function getLocks() {
+	public function getLocks() {
 		global $conf;
 
 		if (!$conf['show_system'])
@@ -57,13 +57,13 @@ class Postgres82 extends Postgres83 {
 
 	// Sequence functions
 
-	/**
-	 * Rename a sequence
-	 * @param $seqrs The sequence RecordSet returned by getSequence()
-	 * @param $name The new name for the sequence
-	 * @return 0 success
-	 */
-	function alterSequenceName($seqrs, $name) {
+    /**
+     * Rename a sequence
+     * @param $seqrs The sequence RecordSet returned by getSequence()
+     * @param $name The new name for the sequence
+     * @return A|int 0 success
+     */
+	public function alterSequenceName($seqrs, $name) {
 		/* vars are cleaned in _alterSequence */
 		if (!empty($name) && ($seqrs->fields['seqname'] != $name)) {
 			$f_schema = $this->_schema;
@@ -80,14 +80,13 @@ class Postgres82 extends Postgres83 {
 
 	// View functions
 
-	/**
-	 * Rename a view
-	 * @param $vwrs The view recordSet returned by getView()
-	 * @param $name The new view's name
-	 * @return -1 Failed
-	 * @return 0 success
-	 */
-	function alterViewName($vwrs, $name) {
+    /**
+     * Rename a view
+     * @param $vwrs The view recordSet returned by getView()
+     * @param $name The new view's name
+     * @return A|int -1 Failed
+     */
+	public function alterViewName($vwrs, $name) {
 		// Rename (only if name has changed)
 		/* $vwrs and $name are cleaned in _alterView */
 		if (!empty($name) && ($name != $vwrs->fields['relname'])) {
@@ -105,12 +104,12 @@ class Postgres82 extends Postgres83 {
 
 	// Trigger functions
 
-	/**
-	 * Grabs a list of triggers on a table
-	 * @param $table The name of a table whose triggers to retrieve
-	 * @return A recordset
-	 */
-	function getTriggers($table = '') {
+    /**
+     * Grabs a list of triggers on a table
+     * @param string $table The name of a table whose triggers to retrieve
+     * @return A recordset
+     */
+	public function getTriggers($table = '') {
 		$c_schema = $this->_schema;
 		$this->clean($c_schema);
 		$this->clean($table);
@@ -134,12 +133,12 @@ class Postgres82 extends Postgres83 {
 
 	// Function functions
 
-	/**
-	 * Returns all details for a particular function
-	 * @param $func The name of the function to retrieve
-	 * @return Function info
-	 */
-	function getFunction($function_oid) {
+    /**
+     * Returns all details for a particular function
+     * @param $function_oid
+     * @return A info
+     */
+	public function getFunction($function_oid) {
 		$this->clean($function_oid);
 
 		$sql = "SELECT
@@ -169,24 +168,22 @@ class Postgres82 extends Postgres83 {
 		return $this->selectSet($sql);
 	}
 
-	/**
-	 * Creates a new function.
-	 * @param $funcname The name of the function to create
-	 * @param $args A comma separated string of types
-	 * @param $returns The return type
-	 * @param $definition The definition for the new function
-	 * @param $language The language the function is written for
-	 * @param $flags An array of optional flags
-	 * @param $setof True if it returns a set, false otherwise
-	 * @param $rows number of rows planner should estimate will be returned
+    /**
+     * Creates a new function.
+     * @param $funcname The name of the function to create
+     * @param $args A comma separated string of types
+     * @param $returns The return type
+     * @param $definition The definition for the new function
+     * @param $language The language the function is written for
+     * @param $flags An array of optional flags
+     * @param $setof True if it returns a set, false otherwise
      * @param $cost cost the planner should use in the function execution step
-	 * @param $comment The comment on the function
-	 * @param $replace (optional) True if OR REPLACE, false for normal
-	 * @return 0 success
-	 * @return -1 create function failed
-	 * @return -4 set comment failed
-	 */
-	function createFunction($funcname, $args, $returns, $definition, $language, $flags, $setof, $cost, $rows, $comment, $replace = false) {
+     * @param $rows number of rows planner should estimate will be returned
+     * @param $comment The comment on the function
+     * @param bool $replace (optional) True if OR REPLACE, false for normal
+     * @return bool|int 0 success
+     */
+	public function createFunction($funcname, $args, $returns, $definition, $language, $flags, $setof, $cost, $rows, $comment, $replace = false) {
 		
 		// Begin a transaction
 		$status = $this->beginTransaction();
@@ -252,13 +249,13 @@ class Postgres82 extends Postgres83 {
 
 	// Index functions
 
-	/**
-	 * Clusters an index
-	 * @param $index The name of the index
-	 * @param $table The table the index is on
-	 * @return 0 success
-	 */
-	function clusterIndex($table='', $index='') {
+    /**
+     * Clusters an index
+     * @param string $table The table the index is on
+     * @param string $index The name of the index
+     * @return A 0 success
+     */
+	public function clusterIndex($table='', $index='') {
 
 		$sql = 'CLUSTER';
 		
@@ -284,12 +281,12 @@ class Postgres82 extends Postgres83 {
 
 	// Operator functions
 
-	/**
-	 * Returns all details for a particular operator
-	 * @param $operator_oid The oid of the operator
-	 * @return Function info
-	 */
-	function getOperator($operator_oid) {
+    /**
+     * Returns all details for a particular operator
+     * @param $operator_oid The oid of the operator
+     * @return A info
+     */
+	public function getOperator($operator_oid) {
 		$this->clean($operator_oid);
 
 		$sql = "
@@ -323,7 +320,7 @@ class Postgres82 extends Postgres83 {
 	 * Gets all opclasses
 	 * @return A recordset
 	 */
-	function getOpClasses() {
+	public function getOpClasses() {
 		$c_schema = $this->_schema;
 		$this->clean($c_schema);
 		$sql = "
@@ -347,13 +344,13 @@ class Postgres82 extends Postgres83 {
 
 	// Capabilities
 
-	function hasCreateTableLikeWithIndexes() {return false;}
-	function hasEnumTypes() {return false;}
-	function hasFTS() {return false;}
-	function hasFunctionCosting() {return false;}
-	function hasFunctionGUC() {return false;}
-	function hasVirtualTransactionId() {return false;}
+	public function hasCreateTableLikeWithIndexes() {return false;}
+	public function hasEnumTypes() {return false;}
+	public function hasFTS() {return false;}
+	public function hasFunctionCosting() {return false;}
+	public function hasFunctionGUC() {return false;}
+	public function hasVirtualTransactionId() {return false;}
 
 }
 
-?>
+

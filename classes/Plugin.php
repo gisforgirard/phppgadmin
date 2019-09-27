@@ -6,7 +6,7 @@ abstract class Plugin {
 	 * Register the plugin's functions in hooks of PPA.
 	 * @param $language Current phpPgAdmin language.
 	 */
-	function __construct($language) {
+	public function __construct($language) {
 		// Set the plugin's language
 		$plugin_directory = "plugins/". $this->get_name();
 
@@ -28,9 +28,9 @@ abstract class Plugin {
 		}
 	}
 
-	abstract function get_hooks();
+	abstract public function get_hooks();
 
-	abstract function get_actions();
+	abstract public function get_actions();
 
 	/**
 	 * In some page (display, sql, ...), a "return" link will show up if
@@ -42,27 +42,27 @@ abstract class Plugin {
 	 *
 	 * @returns an associative of parameter_name => value
 	 */
-	function get_subject_params() {
+	public function get_subject_params() {
 		$vars = array();
 		return $vars;
 	}
 
-	/**
-	 * Get the plugin name, that will be used as identification
-	 * @return $name
-	 */
-	function get_name() {
+    /**
+     * Get the plugin name, that will be used as identification
+     * @return  $name
+     */
+	public function get_name() {
 		return $this->name;
 	}
 
-	/**
-	 * Returns the structure suitable for the method $misc->icon() to print
-	 * the given icon.
-	 * @param $img - The icon name
-	 * @return the information suitable for the method $misc->icon()
-	 */
-	function icon($img) {
+    /**
+     * Returns the structure suitable for the method $misc->icon() to print
+     * the given icon.
+     * @param $img - The icon name
+     * @return array information suitable for the method $misc->icon()
+     */
+	public function icon($img) {
 		return array($this->name, $img);
 	}
 }
-?>
+

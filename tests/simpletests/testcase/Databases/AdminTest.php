@@ -22,7 +22,7 @@ class AdminTest extends PreconditionSet
     /**
      * Set up the preconditon.
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -37,7 +37,7 @@ class AdminTest extends PreconditionSet
     /**
      * Release the relational resource.
      */
-    function tearDown()
+    public function tearDown()
     {
         // Logout this system.
         $this->logout();
@@ -50,7 +50,7 @@ class AdminTest extends PreconditionSet
      * TestCaseId: DAV001
      * This test is used to test the admin about Vacuum and full.
      */
-    function testAdminVacuumAna()
+    public function testAdminVacuumAna()
     {
         global $webUrl, $lang, $SERVER, $DATABASE;
         
@@ -74,7 +74,7 @@ class AdminTest extends PreconditionSet
      * TestCaseId: DCS002
      * This test is used to test the admin about freeze.
      */
-    function testAdminFreeze()
+    public function testAdminFreeze()
     {
         global $webUrl, $lang, $SERVER, $DATABASE;
         
@@ -97,7 +97,7 @@ class AdminTest extends PreconditionSet
      * TestCaseId: DCS003
      * This test is used to test the admin about Analyze.
      */
-    function testAdminAnalyze()
+    public function testAdminAnalyze()
     {
         global $webUrl, $lang, $SERVER, $DATABASE;
         
@@ -119,7 +119,7 @@ class AdminTest extends PreconditionSet
      * TestCaseId: DCS004
      * This test is used to test the admin about Cluster.
      */
-    function testAdminCluster()
+    public function testAdminCluster()
     {
         global $webUrl, $lang, $SERVER, $DATABASE;
         
@@ -141,7 +141,7 @@ class AdminTest extends PreconditionSet
      * TestCaseId: DCS005
      * This test is used to test the admin about Reindex.
      */
-    function testAdminReindex()
+    public function testAdminReindex()
     {
         global $webUrl, $lang, $SERVER, $DATABASE;
 
@@ -160,4 +160,4 @@ class AdminTest extends PreconditionSet
     }
 }
 
-?>
+

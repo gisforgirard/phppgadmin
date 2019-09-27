@@ -22,7 +22,7 @@ class SequenceTest extends PreconditionSet
     /**
      * Set up the precondition. 
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -39,7 +39,7 @@ class SequenceTest extends PreconditionSet
     /**
      * Clean up all the result. 
      */
-    function tearDown()
+    public function tearDown()
     {
         // Logout from the system.
         $this->logout(); 
@@ -52,7 +52,7 @@ class SequenceTest extends PreconditionSet
      * TestCaseID: HCS01
      * Create a sequence.
      */
-    function testCreateSequence()
+    public function testCreateSequence()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -88,7 +88,7 @@ class SequenceTest extends PreconditionSet
      * TestCaseID: HRS01
      * Reset an existing sequence.
      */
-    function testResetSequence()
+    public function testResetSequence()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -118,7 +118,7 @@ class SequenceTest extends PreconditionSet
      * TestCaseID: HDS01
      * Drop a sequence.
      */
-    function testDropSequence()
+    public function testDropSequence()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -140,4 +140,4 @@ class SequenceTest extends PreconditionSet
         return TRUE;   
     }
 }
-?>
+

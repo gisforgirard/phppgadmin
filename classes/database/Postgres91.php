@@ -10,19 +10,19 @@ include_once('./classes/database/Postgres92.php');
 
 class Postgres91 extends Postgres92 {
 
-	var $major_version = 9.1;
+	public $major_version = 9.1;
 
 	/**
 	 * Constructor
 	 * @param $conn The database connection
 	 */
-	function __construct($conn) {
-		parent::__construct($conn);
+	public function __construct($conn) {
+		Postgres::__construct($conn);
 	}
 
 	// Help functions
 
-	function getHelpPages() {
+	public function getHelpPages() {
 		include_once('./help/PostgresDoc91.php');
 		return $this->help_page;
 	}
@@ -33,7 +33,7 @@ class Postgres91 extends Postgres92 {
 	 * @param $database (optional) Find only connections to specified database
 	 * @return A recordset
 	 */
-	function getProcesses($database = null) {
+	public function getProcesses($database = null) {
 		if ($database === null)
 			$sql = "SELECT datname, usename, procpid AS pid, waiting, current_query AS query, query_start
 				FROM pg_catalog.pg_stat_activity
@@ -53,12 +53,12 @@ class Postgres91 extends Postgres92 {
 
 	// Tablespace functions
 
-	/**
-	 * Retrieves information for all tablespaces
-	 * @param $all Include all tablespaces (necessary when moving objects back to the default space)
-	 * @return A recordset
-	 */
-	function getTablespaces($all = false) {
+    /**
+     * Retrieves information for all tablespaces
+     * @param bool $all Include all tablespaces (necessary when moving objects back to the default space)
+     * @return A recordset
+     */
+	public function getTablespaces($all = false) {
 		global $conf;
 
 		$sql = "SELECT spcname, pg_catalog.pg_get_userbyid(spcowner) AS spcowner, spclocation,
@@ -74,11 +74,12 @@ class Postgres91 extends Postgres92 {
 		return $this->selectSet($sql);
 	}
 
-	/**
-	 * Retrieves a tablespace's information
-	 * @return A recordset
-	 */
-	function getTablespace($spcname) {
+    /**
+     * Retrieves a tablespace's information
+     * @param $spcname
+     * @return A recordset
+     */
+	public function getTablespace($spcname) {
 		$this->clean($spcname);
 
 		$sql = "SELECT spcname, pg_catalog.pg_get_userbyid(spcowner) AS spcowner, spclocation,
@@ -90,9 +91,9 @@ class Postgres91 extends Postgres92 {
 
 
 	// Capabilities
-	function hasUserSignals() { return false; }
+	public function hasUserSignals() { return false; }
 
 
 
 }
-?>
+

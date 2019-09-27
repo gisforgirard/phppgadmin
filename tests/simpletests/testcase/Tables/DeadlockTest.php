@@ -21,7 +21,7 @@ class DeadlockTest extends PreconditionSet{
     /**
      * Set up the preconditon. 
      */
-    function setUp()
+    public function setUp()
     {       
         return TRUE;
     }
@@ -29,7 +29,7 @@ class DeadlockTest extends PreconditionSet{
     /**
      * Clean up all the result. 
      */ 
-    function tearDown()
+    public function tearDown()
     {
         $this->logout(); 
         
@@ -51,7 +51,7 @@ class DeadlockTest extends PreconditionSet{
      * 
      * Expected result:  Login failed.
      */
-    function testAddCheckScenario()
+    public function testAddCheckScenario()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -143,7 +143,7 @@ class DeadlockTest extends PreconditionSet{
      * 
      * Expected result:  Failed to add database. Permission denied.
      */
-    function testCreateDatabaseScenario()
+    public function testCreateDatabaseScenario()
     {
         global $webUrl;
         global $lang, $SERVER;
@@ -222,7 +222,7 @@ class DeadlockTest extends PreconditionSet{
      * 
      * Expected result:  Failed to alter the column.
      */
-    function testDropColumnScenario()
+    public function testDropColumnScenario()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -305,7 +305,7 @@ class DeadlockTest extends PreconditionSet{
      * 
      * Expected result:  ERROR:  relation "public.newtable" does not exist.
      */
-    function testQueryDroppedTable()
+    public function testQueryDroppedTable()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -396,4 +396,4 @@ class DeadlockTest extends PreconditionSet{
         return TRUE;
     }
 }
-?>
+

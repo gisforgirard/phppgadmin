@@ -27,7 +27,7 @@ class PluginManager {
 	 * Register the plugins
 	 * @param $language - Language that have been used.
 	 */
-	function __construct($language) {
+	public function __construct($language) {
 		global $conf, $lang;
 
 		if (! isset($conf['plugins'])) return;
@@ -59,7 +59,7 @@ class PluginManager {
 	 * Add a plugin in the list of plugins to manage
 	 * @param $plugin - Instance from plugin
 	 */
-	function add_plugin($plugin) {
+	public function add_plugin($plugin) {
 		global $lang;
 
 		//The $plugin_name is the identification of the plugin.
@@ -83,7 +83,7 @@ class PluginManager {
 		$this->actions[$plugin_name] = $actions;
 	}
 
-	function getPlugin($plugin) {
+	public function getPlugin($plugin) {
 		if (isset($this->plugins_list[$plugin]))
 			return $this->plugins_list[$plugin];
 
@@ -95,7 +95,7 @@ class PluginManager {
 	 * @param $hook - The place where the function will be called
 	 * @param $function_args - An array reference with arguments to give to called function
 	 */
-	function do_hook($hook, &$function_args) {
+	public function do_hook($hook, &$function_args) {
 		if (isset($this->hooks[$hook])) {
 			foreach ($this->hooks[$hook] as $plugin_name => $functions) {
 				$plugin = $this->plugins_list[$plugin_name];
@@ -113,7 +113,7 @@ class PluginManager {
 	 * @param $plugin_name - The plugin name.
 	 * @param $action - action that will be executed.
 	 */
-	function do_action($plugin_name, $action) {
+	public function do_action($plugin_name, $action) {
 		global $lang;
 
 		if (!isset($this->plugins_list[$plugin_name])) {
@@ -134,4 +134,4 @@ class PluginManager {
 		}
 	}
 }
-?>
+

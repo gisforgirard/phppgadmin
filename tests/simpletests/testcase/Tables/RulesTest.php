@@ -21,7 +21,7 @@ class RulesTest extends PreconditionSet{
     /**
      * Set up the preconditon. 
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $POWER_USER_NAME;
@@ -36,7 +36,7 @@ class RulesTest extends PreconditionSet{
     /**
      * Clean up all the result. 
      */ 
-    function tearDown(){
+    public function tearDown(){
         $this->logout(); 
         
         return TRUE;
@@ -46,7 +46,7 @@ class RulesTest extends PreconditionSet{
      * TestCaseID: TCR01
      * Create a rule for a table
      */ 
-    function testCreateRule()
+    public function testCreateRule()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -79,7 +79,7 @@ class RulesTest extends PreconditionSet{
      * TestCaseID: TCR02
      * Cancel creating a rule for a table
      */ 
-    function testCancelCreateRule()
+    public function testCancelCreateRule()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -109,7 +109,7 @@ class RulesTest extends PreconditionSet{
      * TestCaseID: TDR03
      * Cancel the drop rule operation
      */ 
-    function testCancelDropRule()
+    public function testCancelDropRule()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -134,7 +134,7 @@ class RulesTest extends PreconditionSet{
      * TestCaseID: TDR01
      * Drop a rule from the table
      */ 
-    function testDropRule()
+    public function testDropRule()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -162,7 +162,7 @@ class RulesTest extends PreconditionSet{
      * TestCaseID: TDR02
      * Drop a rule from the table witch CASCADE checked
      */ 
-    function testDropRuleWithCascade()
+    public function testDropRuleWithCascade()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -212,4 +212,4 @@ class RulesTest extends PreconditionSet{
         return TRUE; 
     }                        
 }
-?>
+

@@ -21,7 +21,7 @@ class InfoTest extends PreconditionSet{
     /**
      * Set up the preconditon. 
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $lang;
@@ -37,7 +37,7 @@ class InfoTest extends PreconditionSet{
     /**
      * Clean up all the result. 
      */ 
-    function tearDown(){
+    public function tearDown(){
         $this->logout(); 
         
         return TRUE;
@@ -47,7 +47,7 @@ class InfoTest extends PreconditionSet{
      * TestCaseID: TSI01
      * List the performance info of the parent table -- student
      */ 
-    function testListParentTableInfo()
+    public function testListParentTableInfo()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -69,7 +69,7 @@ class InfoTest extends PreconditionSet{
      * TestCaseID: TSI02
      * List the performance info of the children table -- college_student
      */ 
-    function testListChildrenTableInfo()
+    public function testListChildrenTableInfo()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -91,7 +91,7 @@ class InfoTest extends PreconditionSet{
      * TestCaseID: TSI03
      * List the performance info of the foreign table -- department
      */ 
-    function testListForeignTableInfo()
+    public function testListForeignTableInfo()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -112,7 +112,7 @@ class InfoTest extends PreconditionSet{
      * TestCaseID: TSP01
      * Show the properties of the foreign key constraint
      */ 
-    function testShowForeignKeyProperties()
+    public function testShowForeignKeyProperties()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -133,4 +133,4 @@ class InfoTest extends PreconditionSet{
         return TRUE;         
     }    
 }
-?>
+

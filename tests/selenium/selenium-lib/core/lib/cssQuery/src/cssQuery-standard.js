@@ -48,6 +48,6 @@ if (!isMSIE) {
 			}
 		}
 		return $textContent;
-	};
+    }
 }
 }); // addModule

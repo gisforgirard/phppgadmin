@@ -12,9 +12,10 @@
 	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
 	if (!isset($msg)) $msg = '';
 
-	/**
-	 * Show read only properties for an operator
-	 */
+/**
+ * Show read only properties for an operator
+ * @param string $msg
+ */
 	function doProperties($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -84,9 +85,10 @@
 			doDefault($lang['strinvalidparam']);
 	}
 
-	/**
-	 * Show confirmation of drop and perform actual drop
-	 */
+/**
+ * Show confirmation of drop and perform actual drop
+ * @param $confirm
+ */
 	function doDrop($confirm) {
 		global $data, $misc;
 		global $lang;
@@ -116,10 +118,11 @@
 		}
 		
 	}
-	
-	/**
-	 * Show default list of operators in the database
-	 */
+
+/**
+ * Show default list of operators in the database
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $conf, $misc;
 		global $lang;
@@ -243,4 +246,4 @@
 
 	$misc->printFooter();
 
-?>
+

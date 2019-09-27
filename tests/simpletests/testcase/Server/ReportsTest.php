@@ -22,7 +22,7 @@ class ReportsTest extends PreconditionSet
     // Declare the member variable for report name.
     private $_reportName = "testReport";
     
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -34,7 +34,7 @@ class ReportsTest extends PreconditionSet
     }
     
     
-    function tearDown()
+    public function tearDown()
     {
         $this->logout();
         
@@ -46,7 +46,7 @@ class ReportsTest extends PreconditionSet
      * TestCaseID: SCR01
      * Test to create report.
      */
-    function testCreate() 
+    public function testCreate()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -74,7 +74,7 @@ class ReportsTest extends PreconditionSet
      * TestCaseID: SRR01
      * Test to run existing report.
      */
-    function testRun() 
+    public function testRun()
     {
         global $webUrl;
         global $lang, $SERVER;
@@ -108,7 +108,7 @@ class ReportsTest extends PreconditionSet
      * TestCaseID: SER01
      * Test to edit existing report. 
      */
-    function testEdit() 
+    public function testEdit()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -137,7 +137,7 @@ class ReportsTest extends PreconditionSet
      * TestCaseID: SDR01
      * Test to drop existing report.
      */
-    function testDrop() 
+    public function testDrop()
     {
         global $webUrl;
         global $lang, $SERVER;
@@ -153,4 +153,4 @@ class ReportsTest extends PreconditionSet
         return TRUE;
     }
 }
-?>
+

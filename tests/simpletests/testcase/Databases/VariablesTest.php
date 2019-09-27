@@ -21,7 +21,7 @@ class VariablesTest extends PreconditionSet
     /**
      * Set up the preconditon.
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -37,7 +37,7 @@ class VariablesTest extends PreconditionSet
     /**
      * Release the relational resource.
      */
-    function tearDown()
+    public function tearDown()
     {
         // Logout this system.
         $this->logout();
@@ -50,7 +50,7 @@ class VariablesTest extends PreconditionSet
      * TestCaseId: DVA001
      * This test is used to display the list of Prcesses.
      */
-    function testVariablesList()
+    public function testVariablesList()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -69,4 +69,4 @@ class VariablesTest extends PreconditionSet
     }
 }
 
-?>
+

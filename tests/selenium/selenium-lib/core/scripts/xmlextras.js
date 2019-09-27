@@ -19,9 +19,9 @@ function getDomDocumentPrefix() {
 			// try to create the objects
 			o = new ActiveXObject(prefixes[i] + ".DomDocument");
 			return getDomDocumentPrefix.prefix = prefixes[i];
-		}
-		catch (ex) {};
-	}
+		} catch (ex) {
+        }
+    }
 	
 	throw new Error("Could not find an installed XML parser");
 }
@@ -37,9 +37,9 @@ function getXmlHttpPrefix() {
 			// try to create the objects
 			o = new ActiveXObject(prefixes[i] + ".XmlHttp");
 			return getXmlHttpPrefix.prefix = prefixes[i];
-		}
-		catch (ex) {};
-	}
+		} catch (ex) {
+        }
+    }
 	
 	throw new Error("Could not find an installed XML parser");
 }

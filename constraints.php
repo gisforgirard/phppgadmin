@@ -12,9 +12,11 @@
 
 	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
 
-	/**
-	 * Confirm and then actually add a FOREIGN KEY constraint
-	 */
+/**
+ * Confirm and then actually add a FOREIGN KEY constraint
+ * @param $stage
+ * @param string $msg
+ */
 	function addForeignKey($stage, $msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -212,9 +214,12 @@
 
 	}
 
-	/**
-	 * Confirm and then actually add a PRIMARY KEY or UNIQUE constraint
-	 */
+/**
+ * Confirm and then actually add a PRIMARY KEY or UNIQUE constraint
+ * @param $type
+ * @param $confirm
+ * @param string $msg
+ */
 	function addPrimaryOrUniqueKey($type, $confirm, $msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -338,9 +343,11 @@
 		}
 	}
 
-	/**
-	 * Confirm and then actually add a CHECK constraint
-	 */
+/**
+ * Confirm and then actually add a CHECK constraint
+ * @param $confirm
+ * @param string $msg
+ */
 	function addCheck($confirm, $msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -387,9 +394,10 @@
 		}
 	}
 
-	/**
-	 * Show confirmation of drop and perform actual drop
-	 */
+/**
+ * Show confirmation of drop and perform actual drop
+ * @param $confirm
+ */
 	function doDrop($confirm) {
 		global $data, $misc;
 		global $lang;
@@ -421,9 +429,10 @@
 		}
 	}
 
-	/**
-	 * List all the constraints on the table
-	 */
+/**
+ * List all the constraints on the table
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $misc, $lang;
 
@@ -637,4 +646,4 @@
 
 	$misc->printFooter();
 
-?>
+

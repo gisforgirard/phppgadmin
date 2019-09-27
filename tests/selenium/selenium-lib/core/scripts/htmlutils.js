@@ -58,7 +58,7 @@ function fnBind() {
   var args = sel$A(arguments), __method = args.shift(), object = args.shift();
   var retval = function() {
     return __method.apply(object, args.concat(sel$A(arguments)));
-  }
+  };
   retval.__method = __method;
   return retval;
 }
@@ -379,7 +379,7 @@ function addLoadListener(element, command) {
     LOG.debug('Adding loadListenter for ' + element + ', ' + command);
     var augmentedCommand = function() {
         command.call(this, element);
-    }
+    };
     if (window.addEventListener && !browserVersion.isOpera)
         element.addEventListener("load", augmentedCommand, true);
     else if (window.attachEvent)
@@ -420,12 +420,12 @@ function selArrayToString(a) {
         var retval = [];
         for (var i = 0; i < a.length; i++) {
             var item = a[i];
-            var replaced = new String(item).replace(/([,\\])/g, '\\$1');
+            var replaced = String(item).replace(/([,\\])/g, '\\$1');
             retval[i] = replaced;
         }
         return retval;
     }
-    return new String(a);
+    return String(a);
 }
 
 
@@ -510,7 +510,7 @@ function parseUrl(url) {
     if (!result) {
         throw new SeleniumError("Invalid URL: " + url);
     }
-    var loc = new Object();
+    var loc = {};
     for (var i = 0; i < fields.length; i++) {
         var field = fields[i];
         if (field == null) {
@@ -565,7 +565,7 @@ function canonicalize(url) {
     }
     var tempLink = window.document.createElement("link");
     tempLink.href = url; // this will canonicalize the href on most browsers
-    var loc = parseUrl(tempLink.href)
+    var loc = parseUrl(tempLink.href);
     if (!/\/\.\.\//.test(loc.pathname)) {
     	return tempLink.href;
     }
@@ -593,7 +593,7 @@ function extractExceptionMessage(ex) {
     
 
 function describe(object, delimiter) {
-    var props = new Array();
+    var props = [];
     for (var prop in object) {
         try {
             props.push(prop + " -> " + object[prop]);
@@ -766,7 +766,7 @@ Assert.matches = function() {
     Assert.fail(args.comment +
                 "Actual value '" + args.actual +
                 "' did not match '" + args.expected + "'");
-}
+};
 
 /*
 * Assert.notMtches(comment?, pattern, actual)
@@ -779,7 +779,7 @@ Assert.notMatches = function() {
     Assert.fail(args.comment +
                 "Actual value '" + args.actual +
                 "' did match '" + args.expected + "'");
-}
+};
 
 
 // Preprocess the arguments to allow for an optional comment.
@@ -858,7 +858,7 @@ function openSeparateApplicationWindow(url, suppressMozillaWarning) {
 
     var appWindow = window.open(url + '?start=true', 'selenium_main_app_window');
     if (appWindow == null) {
-        var errorMessage = "Couldn't open app window; is the pop-up blocker enabled?"
+        var errorMessage = "Couldn't open app window; is the pop-up blocker enabled?";
         LOG.error(errorMessage);
         throw new Error("Couldn't open app window; is the pop-up blocker enabled?");
     }
@@ -902,7 +902,7 @@ objectExtend(URLConfiguration.prototype, {
     },
 
     _getQueryParameter: function(searchKey) {
-        var str = this.queryString
+        var str = this.queryString;
         if (str == null) return null;
         var clauses = str.split('&');
         for (var i = 0; i < clauses.length; i++) {
@@ -917,7 +917,7 @@ objectExtend(URLConfiguration.prototype, {
 
     _extractArgs: function() {
         var str = SeleniumHTARunner.commandLine;
-        if (str == null || str == "") return new Array();
+        if (str == null || str == "") return [];
         var matches = str.match(/(?:\"([^\"]+)\"|(?!\"([^\"]+)\")(\S+))/g);
         // We either want non quote stuff ([^"]+) surrounded by quotes
         // or we want to look-ahead, see that the next character isn't
@@ -926,7 +926,7 @@ objectExtend(URLConfiguration.prototype, {
         // the results "\"foo\"" and "bar"
 
         // So, let's unquote the quoted arguments:
-        var args = new Array;
+        var args = [];
         for (var i = 0; i < matches.length; i++) {
             args[i] = matches[i];
             args[i] = args[i].replace(/^"(.*)"$/, "$1");
@@ -948,7 +948,7 @@ objectExtend(URLConfiguration.prototype, {
 function safeScrollIntoView(element) {
     if (element.scrollIntoView) {
         element.scrollIntoView(false);
-        return;
+
     }
     // TODO: work out how to scroll browsers that don't support
     // scrollIntoView (like Konqueror)
@@ -1396,7 +1396,7 @@ function print_r(object, maxDepth, indent)
         maxDepth--;
     }
     if (arguments.length < 3) {
-        parentIndent = ''
+        parentIndent = '';
         var indent = '    ';
     } else {
         parentIndent = indent;
@@ -1505,7 +1505,7 @@ function range(start, end)
  */
 function parse_kwargs(kwargs)
 {
-    var args = new Object();
+    var args = {};
     var pairs = kwargs.split(/,/);
     for (var i = 0; i < pairs.length;) {
         if (i > 0 && pairs[i].indexOf('=') == -1) {
@@ -1606,8 +1606,7 @@ function parseUri (str) {
     });
 
     return uri;
-};
-
+}
 parseUri.options = {
     strictMode: false,
     key: ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],

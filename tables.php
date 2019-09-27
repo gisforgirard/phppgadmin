@@ -11,9 +11,10 @@
 
 	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
 
-	/**
-	 * Displays a screen where they can enter a new table
-	 */
+/**
+ * Displays a screen where they can enter a new table
+ * @param string $msg
+ */
 	function doCreate($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -234,11 +235,13 @@
 		}
 	}
 
-	/**
-	 * Dsiplay a screen where user can create a table from an existing one.
-	 * We don't have to check if pg supports schema cause create table like
-	 * is available under pg 7.4+ which has schema.
-	 */
+/**
+ * Dsiplay a screen where user can create a table from an existing one.
+ * We don't have to check if pg supports schema cause create table like
+ * is available under pg 7.4+ which has schema.
+ * @param $confirm
+ * @param string $msg
+ */
 	function doCreateLike($confirm, $msg = '') {
 		global $data, $misc, $lang;
 
@@ -274,7 +277,7 @@
 			echo "\t\t<td class=\"data\"><input name=\"name\" size=\"32\" maxlength=\"{$data->_maxNameLen}\" value=\"", htmlspecialchars($_REQUEST['name']), "\" /></td>\n\t</tr>\n";
 			echo "\t<tr>\n\t\t<th class=\"data left required\">{$lang['strcreatetablelikeparent']}</th>\n";
 			echo "\t\t<td class=\"data\">";
-			echo GUI::printCombo($tables, 'like', true, $tblsel, false);
+			echo (new GUI)->printCombo($tables, 'like', true, $tblsel, false);
 			echo "</td>\n\t</tr>\n";
 			if ($data->hasTablespaces()) {
 				$tblsp_ = $data->getTablespaces();
@@ -285,7 +288,7 @@
 
 					echo "\t<tr>\n\t\t<th class=\"data left\">{$lang['strtablespace']}</th>\n";
 					echo "\t\t<td class=\"data\">";
-					echo GUI::printCombo($tblsp, 'tablespace', true, $_REQUEST['tablespace'], false);
+					echo (new GUI)->printCombo($tblsp, 'tablespace', true, $_REQUEST['tablespace'], false);
 					echo "</td>\n\t</tr>\n";
 				}
 			}
@@ -340,9 +343,11 @@
 		}
 	}
 
-	/**
-	 * Ask for select parameters and perform select
-	 */
+/**
+ * Ask for select parameters and perform select
+ * @param $confirm
+ * @param string $msg
+ */
 	function doSelectRows($confirm, $msg = '') {
 		global $data, $misc, $_no_output;
 		global $lang;
@@ -447,9 +452,11 @@
 		}
 	}
 
-	/**
-	 * Ask for insert parameters and then actually insert row
-	 */
+/**
+ * Ask for insert parameters and then actually insert row
+ * @param $confirm
+ * @param string $msg
+ */
 	function doInsertRow($confirm, $msg = '') {
 		global $data, $misc, $conf;
 		global $lang;
@@ -581,9 +588,10 @@
 
 	}
 
-	/**
-	 * Show confirmation of empty and perform actual empty
-	 */
+/**
+ * Show confirmation of empty and perform actual empty
+ * @param $confirm
+ */
 	function doEmpty($confirm) {
 		global $data, $misc;
 		global $lang;
@@ -644,9 +652,10 @@
 		} // END do Empty
 	}
 
-	/**
-	 * Show confirmation of drop and perform actual drop
-	 */
+/**
+ * Show confirmation of drop and perform actual drop
+ * @param $confirm
+ */
 	function doDrop($confirm) {
 		global $data, $misc;
 		global $lang, $_reload_browser;
@@ -722,9 +731,10 @@
 		} // END DROP
 	}// END Function
 
-	/**
-	 * Show default list of tables in the database
-	 */
+/**
+ * Show default list of tables in the database
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $conf, $misc, $data;
 		global $lang;
@@ -1049,4 +1059,4 @@
 
 	$misc->printFooter();
 
-?>
+

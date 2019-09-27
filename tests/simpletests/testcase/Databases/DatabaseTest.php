@@ -21,7 +21,7 @@ class DatabaseTest extends PreconditionSet
     /**
      * Set up the preconditon.
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -37,7 +37,7 @@ class DatabaseTest extends PreconditionSet
     /**
      * Release the relational resource.
      */
-    function tearDown()
+    public function tearDown()
     {
         // Logout this system.
         $this->logout();
@@ -55,7 +55,7 @@ class DatabaseTest extends PreconditionSet
      * can be run only one time.  It needs to change name of database for 
      * next time.
      */
-    function testCreateLATIN1DBInSPT()
+    public function testCreateLATIN1DBInSPT()
     {
         global $webUrl;
         global $lang, $SERVER;
@@ -101,7 +101,7 @@ class DatabaseTest extends PreconditionSet
      * can be run only one time.  It needs to change name of database for 
      * next time.
      */
-    function testCreateUNICODEDBInTester()
+    public function testCreateUNICODEDBInTester()
     {
         global $webUrl;
         global $lang, $SERVER;
@@ -147,7 +147,7 @@ class DatabaseTest extends PreconditionSet
      * This test is faild, because the PostgreSQL cannot support deleteing
      * an open database currently.
      */
-    function testDropDatabase()
+    public function testDropDatabase()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -176,4 +176,4 @@ class DatabaseTest extends PreconditionSet
     }
 }
 
-?>
+

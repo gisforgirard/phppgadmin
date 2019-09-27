@@ -11,10 +11,11 @@
 
 	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
 	if (!isset($msg)) $msg = '';
-	
-	/**
-	 * Displays a screen for create a new role
-	 */
+
+/**
+ * Displays a screen for create a new role
+ * @param string $msg
+ */
 	function doCreate($msg = '') {
 		global $data, $misc, $username;
 		global $lang;
@@ -134,11 +135,12 @@
 			else
 				doCreate($lang['strrolecreatedbad']);
 		}
-	}	
+	}
 
-	/**
-	 * Function to allow alter a role
-	 */
+/**
+ * Function to allow alter a role
+ * @param string $msg
+ */
 	function doAlter($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -321,9 +323,10 @@
 		}
 	}
 
-	/**
-	 * Show confirmation of drop a role and perform actual drop
-	 */
+/**
+ * Show confirmation of drop a role and perform actual drop
+ * @param $confirm
+ */
 	function doDrop($confirm) {
 		global $data, $misc;
 		global $lang;
@@ -350,10 +353,11 @@
 				doDefault($lang['strroledroppedbad']);
 		}		
 	}
-	
-	/**
-	 * Show the properties of a role
-	 */
+
+/**
+ * Show the properties of a role
+ * @param string $msg
+ */
 	function doProperties($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -468,12 +472,13 @@
 		$misc->printNavLinks($navlinks, 'roles-properties', get_defined_vars());
 	}
 
-	/**
-	 * If a role is not a superuser role, then we have an 'account management'
-	 * page for change his password, etc.  We don't prevent them from
-	 * messing with the URL to gain access to other role admin stuff, because
-	 * the PostgreSQL permissions will prevent them changing anything anyway.
-	 */
+/**
+ * If a role is not a superuser role, then we have an 'account management'
+ * page for change his password, etc.  We don't prevent them from
+ * messing with the URL to gain access to other role admin stuff, because
+ * the PostgreSQL permissions will prevent them changing anything anyway.
+ * @param string $msg
+ */
 	function doAccount($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -527,10 +532,12 @@
 				'content' => $lang['strchangepassword']
 			)), 'roles-account', get_defined_vars());
 	}
-	
-	/**
-	 * Show confirmation of change password and actually change password
-	 */
+
+/**
+ * Show confirmation of change password and actually change password
+ * @param $confirm
+ * @param string $msg
+ */
 	function doChangePassword($confirm, $msg = '') {
 		global $data, $misc;
 		global $lang, $conf;
@@ -578,9 +585,10 @@
 	}
 
 
-	/**
-	 * Show default list of roles in the database
-	 */
+/**
+ * Show default list of roles in the database
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -740,4 +748,4 @@
 
 	$misc->printFooter();
 
-?>
+

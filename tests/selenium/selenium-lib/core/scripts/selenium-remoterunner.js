@@ -130,9 +130,9 @@ function buildDriverUrl() {
     if (driverUrl != null) {
         return driverUrl;
     }
-    var s = window.location.href
-    var slashPairOffset = s.indexOf("//") + "//".length
-    var pathSlashOffset = s.substring(slashPairOffset).indexOf("/")
+    var s = window.location.href;
+    var slashPairOffset = s.indexOf("//") + "//".length;
+    var pathSlashOffset = s.substring(slashPairOffset).indexOf("/");
     return s.substring(0, slashPairOffset + pathSlashOffset) + "/selenium-server/driver/";
     //return "http://localhost" + uniqueId + "/selenium-server/driver/";
 }
@@ -277,7 +277,7 @@ objectExtend(RemoteRunner.prototype, {
     },
 
     testComplete : function() {
-        window.status = "Selenium Tests Complete, for this Test"
+        window.status = "Selenium Tests Complete, for this Test";
         // Continue checking for new results
         this.continueTest();
         postResult = "START";
@@ -364,7 +364,7 @@ objectExtend(RemoteRunner.prototype, {
         // strip trailing spaces
         var processed = processed.replace(/\s+$/, "");
         var vars = processed.split("&");
-        var cmdArgs = new Object();
+        var cmdArgs = {};
         for (var i = 0; i < vars.length; i++) {
             var pair = vars[i].split("=");
             cmdArgs[pair[0]] = pair[1];
@@ -382,7 +382,7 @@ objectExtend(RemoteRunner.prototype, {
         return new SeleniumCommand(cmd, arg1, arg2);
     }
 
-})
+});
 
 
 function sendToRC(dataToBePosted, urlParms, callback, xmlHttpObject, async) {
@@ -392,7 +392,7 @@ function sendToRC(dataToBePosted, urlParms, callback, xmlHttpObject, async) {
     if (xmlHttpObject == null) {
         xmlHttpObject = XmlHttp.create();
     }
-    var url = buildDriverUrl() + "?"
+    var url = buildDriverUrl() + "?";
     if (urlParms) {
         url += urlParms;
     }

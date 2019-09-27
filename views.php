@@ -13,9 +13,11 @@
 	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
 	if (!isset($msg)) $msg = '';
 
-	/**
-	 * Ask for select parameters and perform select
-	 */
+/**
+ * Ask for select parameters and perform select
+ * @param $confirm
+ * @param string $msg
+ */
 	function doSelectRows($confirm, $msg = '') {
 		global $data, $misc, $_no_output;  
 		global $lang;
@@ -119,10 +121,11 @@
 		}
 
 	}
-	
-	/**
-	 * Show confirmation of drop and perform actual drop
-	 */
+
+/**
+ * Show confirmation of drop and perform actual drop
+ * @param $confirm
+ */
 	function doDrop($confirm) {
 		global $data, $misc;
 		global $lang, $_reload_browser;
@@ -194,10 +197,11 @@
 		}
 		
 	}
-	
-	/**
-	 * Sets up choices for table linkage, and which fields to select for the view we're creating
-	 */
+
+/**
+ * Sets up choices for table linkage, and which fields to select for the view we're creating
+ * @param string $msg
+ */
 	function doSetParamsCreate($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -268,7 +272,7 @@
 			echo "<table>\n";
 			echo "<tr><th class=\"data\">{$lang['strcolumns']}</th></tr>";
 			echo "<tr>\n<td class=\"data1\">\n";
-			echo GUI::printCombo($arrFields, 'formFields[]', false, '', true);
+			echo (new GUI)->printCombo($arrFields, 'formFields[]', false, '', true);
 			echo "</td>\n</tr>";
 			echo "<tr><td><input type=\"radio\" name=\"dblFldMeth\" id=\"dblFldMeth1\" value=\"rename\" /><label for=\"dblFldMeth1\">{$lang['strrenamedupfields']}</label>";
 			echo "<br /><input type=\"radio\" name=\"dblFldMeth\" id=\"dblFldMeth2\" value=\"drop\" /><label for=\"dblFldMeth2\">{$lang['strdropdupfields']}</label>";
@@ -293,9 +297,9 @@
 					$curRightLink = '';
 				}
 				
-				echo GUI::printCombo($arrFields, "formLink[$i][leftlink]", true, $curLeftLink, false );
-				echo GUI::printCombo($data->joinOps, "formLink[$i][operator]", true, $formLink[$i]['operator']);
-				echo GUI::printCombo($arrFields, "formLink[$i][rightlink]", true, $curRightLink, false );
+				echo (new GUI)->printCombo($arrFields, "formLink[$i][leftlink]", true, $curLeftLink, false );
+				echo (new GUI)->printCombo($data->joinOps, "formLink[$i][operator]", true, $formLink[$i]['operator']);
+				echo (new GUI)->printCombo($arrFields, "formLink[$i][rightlink]", true, $curRightLink, false );
 				echo "</td>\n</tr>\n";
 				$rowClass = $rowClass == 'data1' ? 'data2' : 'data1';
 			}
@@ -314,8 +318,8 @@
 			$rowClass = 'data1';
 			for ($i = 0; $i < $linkCount; $i++) {
 				echo "<tr>\n<td class=\"$rowClass\">\n";
-				echo GUI::printCombo($arrFields, "formCondition[$i][field]");
-				echo GUI::printCombo($arrOperators, "formCondition[$i][operator]", false, false);
+				echo (new GUI)->printCombo($arrFields, "formCondition[$i][field]");
+				echo (new GUI)->printCombo($arrOperators, "formCondition[$i][operator]", false, false);
 				echo "<input type=\"text\" name=\"formCondition[$i][txt]\" />\n";
 				echo "</td>\n</tr>\n";
 				$rowClass = $rowClass == 'data1' ? 'data2' : 'data1';
@@ -333,10 +337,11 @@
 			echo "</form>\n";
 		}
 	}
-	
-	/**
-	 * Display a wizard where they can enter a new view
-	 */
+
+/**
+ * Display a wizard where they can enter a new view
+ * @param string $msg
+ */
 	function doWizardCreate($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -360,7 +365,7 @@
 			$arrTables[$tables->fields['nspname'] . '.' . $tables->fields['relname']] = serialize($arrTmp);
 			$tables->moveNext();
 		}		
-		echo GUI::printCombo($arrTables, 'formTables[]', false, '', true);			
+		echo (new GUI)->printCombo($arrTables, 'formTables[]', false, '', true);
 		
 		echo "</td>\n</tr>\n";		
 		echo "</table>\n";		
@@ -370,10 +375,11 @@
 		echo "<input type=\"submit\" name=\"cancel\" value=\"{$lang['strcancel']}\" /></p>\n";
 		echo "</form>\n";
 	}
-	
-	/**
-	 * Displays a screen where they can enter a new view
-	 */
+
+/**
+ * Displays a screen where they can enter a new view
+ * @param string $msg
+ */
 	function doCreate($msg = '') {
 		global $data, $misc, $conf;
 		global $lang;
@@ -549,10 +555,11 @@
 				doSetParamsCreate($lang['strviewcreatedbad']);
 		}
 	}
-	
-	/**
-	 * Show default list of views in the database
-	 */
+
+/**
+ * Show default list of views in the database
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $misc, $conf;
 		global $lang;
@@ -784,4 +791,4 @@
 
 	$misc->printFooter();
 	
-?>
+

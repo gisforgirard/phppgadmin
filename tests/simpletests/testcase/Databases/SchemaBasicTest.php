@@ -23,7 +23,7 @@ class SchemaBasicTest extends PreconditionSet
     /**
      * Set up the preconditon.
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -39,7 +39,7 @@ class SchemaBasicTest extends PreconditionSet
     /**
      * Release the relational resource.
      */
-    function tearDown()
+    public function tearDown()
     {
         // Logout this system.
         $this->logout();
@@ -52,7 +52,7 @@ class SchemaBasicTest extends PreconditionSet
      * TestCaseId: DCS001
      * This test is used to create one new schema for super user.
      */
-    function testCreateBasSchema()
+    public function testCreateBasSchema()
     {
         global $webUrl, $SUPER_USER_NAME;
         global $lang, $SERVER, $DATABASE;
@@ -85,7 +85,7 @@ class SchemaBasicTest extends PreconditionSet
      * TestCaseId: DAS001
      * This test is used to modify one existent schema for super user.
      */
-    function testAlterBasSchema()
+    public function testAlterBasSchema()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -126,7 +126,7 @@ class SchemaBasicTest extends PreconditionSet
      * TestCaseId: DDS001
      * This test is used to drop one existent schema for super user.
      */
-    function testDropBasSchema()
+    public function testDropBasSchema()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -157,4 +157,4 @@ class SchemaBasicTest extends PreconditionSet
     }
 }
 
-?>
+

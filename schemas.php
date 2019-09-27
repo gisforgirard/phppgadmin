@@ -12,9 +12,10 @@
 	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
 	if (!isset($msg)) $msg = '';
 
-	/**
-	 * Show default list of schemas in the database
-	 */
+/**
+ * Show default list of schemas in the database
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $misc, $conf;
 		global $lang;
@@ -109,9 +110,10 @@
 			)), 'schemas-schemas', get_defined_vars());
 	}
 
-	/**
-	 * Displays a screen where they can enter a new schema
-	 */
+/**
+ * Displays a screen where they can enter a new schema
+ * @param string $msg
+ */
 	function doCreate($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -179,10 +181,11 @@
 		}
 	}
 
-	/**
-	 * Display a form to permit editing schema properies.
-	 * TODO: permit changing owner
-	 */
+/**
+ * Display a form to permit editing schema properies.
+ * TODO: permit changing owner
+ * @param string $msg
+ */
 	function doAlter($msg = '') {
 		global $data, $misc, $lang;
 
@@ -239,9 +242,10 @@
 		}
 	}
 
-	/**
-	 * Save the form submission containing changes to a schema
-	 */
+/**
+ * Save the form submission containing changes to a schema
+ * @param string $msg
+ */
 	function doSaveAlter($msg = '') {
 		global $data, $misc, $lang, $_reload_browser;
 
@@ -254,9 +258,10 @@
 			doAlter($lang['strschemaalteredbad']);
 	}
 
-	/**
-	 * Show confirmation of drop and perform actual drop
-	 */
+/**
+ * Show confirmation of drop and perform actual drop
+ * @param $confirm
+ */
 	function doDrop($confirm) {
 		global $data, $misc;
 		global $lang, $_reload_browser;
@@ -327,9 +332,10 @@
 		}
 	}
 
-	/**
-	 * Displays options for database download
-	 */
+/**
+ * Displays options for database download
+ * @param string $msg
+ */
 	function doExport($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -477,4 +483,4 @@
 
 	$misc->printFooter();
 
-?>
+

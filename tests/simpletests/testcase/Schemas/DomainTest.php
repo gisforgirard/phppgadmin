@@ -21,7 +21,7 @@ class DomainTest extends PreconditionSet
     /**
      * Set up the precondition. 
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;        
         global $SUPER_USER_NAME;
@@ -37,7 +37,7 @@ class DomainTest extends PreconditionSet
     /**
      * Cleans up all the result. 
      */
-    function tearDown()
+    public function tearDown()
     {
         // Logout from the system.
         $this->logout(); 
@@ -49,7 +49,7 @@ class DomainTest extends PreconditionSet
      * TestCaseID: HCD01
      * Create a domain.
      */
-    function testCreateDomain()
+    public function testCreateDomain()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -81,7 +81,7 @@ class DomainTest extends PreconditionSet
      * TestCaseID: HAD01
      * Alter the definition of a domain.
      */
-    function testAlterDomain()
+    public function testAlterDomain()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -110,7 +110,7 @@ class DomainTest extends PreconditionSet
      * TestCaseID: HAC01
      * Add check to an existing domain.
      */
-    function testAddCheck()
+    public function testAddCheck()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -144,7 +144,7 @@ class DomainTest extends PreconditionSet
      * TestCaseID: HDC01
      * Drops an existing constraint of a domain.
      */
-    function testDropConstraint()
+    public function testDropConstraint()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -184,7 +184,7 @@ class DomainTest extends PreconditionSet
      * TestCaseID: HDD01
      * Drop an existing domain.
      */
-    function testDropDomain()
+    public function testDropDomain()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -214,4 +214,4 @@ class DomainTest extends PreconditionSet
         return TRUE;
     } 
 } 
-?>
+

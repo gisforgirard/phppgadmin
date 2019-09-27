@@ -19,20 +19,21 @@
 class PreconditionSet extends WebTestCase
 {
     /**
-     * Logoin phpPgAdmin use the specify user name, password 
+     * Logoin phpPgAdmin use the specify user name, password
      * and login home page.
-     * 
+     *
      * The user name and password can be replaced.
      * But the param $loginPageUrl always equals
      * http://localhost:8080/phpPgAdmin/index.php
-     * 
-     * @param string $userName  user name of the admin. 
-     * @param string $password  password of the admin.
-     * @param string $loginPageUrl  the login home page url.
-     * 
+     *
+     * @param string $userName user name of the admin.
+     * @param string $password password of the admin.
+     * @param string $loginPageUrl the login home page url.
+     *
      * @access public
+     * @return bool
      */
-    function login($userName, $password, $loginPageUrl)
+    public function login($userName, $password, $loginPageUrl)
     {
     	global $lang, $SERVER;
 
@@ -43,17 +44,18 @@ class PreconditionSet extends WebTestCase
 		$this->submitFormByid('login_form');
 		return TRUE;
     }
-     
-     
+
+
     /**
      * Create a new database by the giving database name and encoding.
-     * 
+     *
      * @param string $databaseName The name of the new database.
      * @param string $enCoding The encoding mode.
-     * 
+     *
      * @access public
+     * @return bool
      */
-    function createDatabase($databaseName, $enCoding) 
+    public function createDatabase($databaseName, $enCoding)
     {
         global $webUrl;
         global $lang, $SERVER;
@@ -73,17 +75,18 @@ class PreconditionSet extends WebTestCase
         $this->clickSubmit($lang['strcreate']);
         
         return TRUE;
-    }   
-     
+    }
+
 
     /**
      * Drop a exist database by the specify database name.
      *
      * @param string $databaseName The specify database name which be droped.
-     * 
+     *
      * @access public
+     * @return bool
      */
-    function dropDatabase($databaseName)
+    public function dropDatabase($databaseName)
     {
         global $webUrl;
         global $lang, $SERVER;
@@ -105,22 +108,23 @@ class PreconditionSet extends WebTestCase
         
         return TRUE;		
     }
-    
-    
+
+
     /**
      * Create a new table by the specified conditions.
-     * 
-     * Notice: 
+     *
+     * Notice:
      * If the value of $fieldNumber equals 3, it would be create a
-     * table with 3 field like(field name, field type):(field0, text), 
-     * (field1, text), (field2, text). 
-     * 
+     * table with 3 field like(field name, field type):(field0, text),
+     * (field1, text), (field2, text).
+     *
      * @param string $databaseName Owner of the new table. paramname.
      * @param string $schema the Schema which the new table belong to.
-     * @param string $tablename The name of the new table.
+     * @param $tableName
      * @param string $fieldNumber The field number of the new table.
+     * @return bool
      */
-    function createTable($databaseName, $schema, $tableName, $fieldNumber)
+    public function createTable($databaseName, $schema, $tableName, $fieldNumber)
     {
         global $webUrl;
         global $lang, $SERVER;
@@ -166,18 +170,19 @@ class PreconditionSet extends WebTestCase
 
         return TRUE;
     }
-    
-    
+
+
     /**
      * Drop a exist table by the specified table name in a database.
-     * 
+     *
      * @param string $databaseName the database which the table content.
      * @param string $tableName the table name which wants to delete.
      * @param string $schema the schema the table belong.
-     * 
+     *
      * @access public
+     * @return bool
      */
-    function dropTable($databaseName, $tableName, $schema)
+    public function dropTable($databaseName, $tableName, $schema)
     {
         // Import the global variable.
         global $webUrl;
@@ -208,7 +213,7 @@ class PreconditionSet extends WebTestCase
     /**
      * Logout the system.
      */
-    function logout()
+    public function logout()
     {
         global $webUrl;
         global $lang;
@@ -221,4 +226,4 @@ class PreconditionSet extends WebTestCase
         return TRUE;
     }
 }
-?>
+

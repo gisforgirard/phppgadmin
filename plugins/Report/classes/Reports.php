@@ -10,11 +10,11 @@
 	class Reports {
 
 		// A database driver
-		var $driver;
-		var $conf;
+		public $driver;
+		public $conf;
 
 		/* Constructor */
-		function __construct(&$conf, &$status) {
+		public function __construct(&$conf, &$status) {
 			global $misc, $data;
 
 			$this->conf = $conf;
@@ -35,7 +35,7 @@
 		 * Finds all reports
 		 * @return A recordset
 		 */
-		function getReports() {
+		public function getReports() {
 			global $misc;
 			// Filter for owned reports if necessary
 			if ($this->conf['owned_reports_only']) {
@@ -57,7 +57,7 @@
 		 * @param $report_id The ID of the report to find
 		 * @return A recordset
 		 */
-		function getReport($report_id) {
+		public function getReport($report_id) {
 			$sql = $this->driver->getSelectSQL($this->conf['reports_table'],
 				array('report_id', 'report_name', 'db_name', 'date_created', 'created_by', 'descr', 'report_sql', 'paginate'),
 				array('report_id' => $report_id), array('report_id' => '='), array());
@@ -65,16 +65,16 @@
 			return $this->driver->selectSet($sql);
 		}
 
-		/**
-		 * Creates a report
-		 * @param $report_name The name of the report
-		 * @param $db_name The name of the database
-		 * @param $descr The comment on the report
-		 * @param $report_sql The SQL for the report
-		 * @param $paginate The report should be paginated
-		 * @return 0 success
-		 */
-		function createReport($report_name, $db_name, $descr, $report_sql, $paginate) {
+        /**
+         * Creates a report
+         * @param $report_name The name of the report
+         * @param $db_name The name of the database
+         * @param $descr The comment on the report
+         * @param $report_sql The SQL for the report
+         * @param $paginate The report should be paginated
+         * @return  0 success
+         */
+		public function createReport($report_name, $db_name, $descr, $report_sql, $paginate) {
 			global $misc;
 			$server_info = $misc->getServerInfo();
 			$temp = array(
@@ -89,17 +89,17 @@
 			return $this->driver->insert($this->conf['reports_table'], $temp);
 		}
 
-		/**
-		 * Alters a report
-		 * @param $report_id The ID of the report
-		 * @param $report_name The name of the report
-		 * @param $db_name The name of the database
-		 * @param $descr The comment on the report
-		 * @param $report_sql The SQL for the report
-		 * @param $paginate The report should be paginated
-		 * @return 0 success
-		 */
-		function alterReport($report_id, $report_name, $db_name, $descr, $report_sql, $paginate) {
+        /**
+         * Alters a report
+         * @param $report_id The ID of the report
+         * @param $report_name The name of the report
+         * @param $db_name The name of the database
+         * @param $descr The comment on the report
+         * @param $report_sql The SQL for the report
+         * @param $paginate The report should be paginated
+         * @return  0 success
+         */
+		public function alterReport($report_id, $report_name, $db_name, $descr, $report_sql, $paginate) {
 			global $misc;
 			$server_info = $misc->getServerInfo();
 			$temp = array(
@@ -115,14 +115,14 @@
 							array('report_id' => $report_id));
 		}
 
-		/**
-		 * Drops a report
-		 * @param $report_id The ID of the report to drop
-		 * @return 0 success
-		 */
-		function dropReport($report_id) {
+        /**
+         * Drops a report
+         * @param $report_id The ID of the report to drop
+         * @return  0 success
+         */
+		public function dropReport($report_id) {
 			return $this->driver->delete($this->conf['reports_table'], array('report_id' => $report_id));
 		}
 
 	}
-?>
+

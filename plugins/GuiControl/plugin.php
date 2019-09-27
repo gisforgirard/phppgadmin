@@ -15,25 +15,25 @@ class GuiControl extends Plugin {
 	 * Call parent constructor, passing the language that will be used.
 	 * @param $language Current phpPgAdmin language. If it was not found in the plugin, English will be used.
 	 */
-	function __construct($language) {
+	public function __construct($language) {
 		parent::__construct($language);
 	}
 
-	/**
-	 * This method returns the functions that will hook in the phpPgAdmin core.
-	 * To do include a function just put in the $hooks array the follwing code:
-	 * 'hook' => array('function1', 'function2').
-	 *
-	 * Example:
-	 * $hooks = array(
-	 *	'toplinks' => array('add_plugin_toplinks'),
-	 *	'tabs' => array('add_tab_entry'),
-	 *  'action_buttons' => array('add_more_an_entry')
-	 * );
-	 *
-	 * @return $hooks
-	 */
-	function get_hooks() {
+    /**
+     * This method returns the functions that will hook in the phpPgAdmin core.
+     * To do include a function just put in the $hooks array the follwing code:
+     * 'hook' => array('function1', 'function2').
+     *
+     * Example:
+     * $hooks = array(
+     *    'toplinks' => array('add_plugin_toplinks'),
+     *    'tabs' => array('add_tab_entry'),
+     *  'action_buttons' => array('add_more_an_entry')
+     * );
+     *
+     * @return array $hooks
+     */
+	public function get_hooks() {
 		$hooks = array(
 			'toplinks' => array('filer_toplinks'),
 			'tabs' => array('filter_tabs'),
@@ -45,18 +45,18 @@ class GuiControl extends Plugin {
 		return $hooks;
 	}
 
-	/**
-	 * This method returns the functions that will be used as actions.
-	 * To do include a function that will be used as action, just put in the $actions array the follwing code:
-	 *
-	 * $actions = array(
-	 *	'show_page',
-	 *	'show_error',
-	 * );
-	 *
-	 * @return $actions
-	 */
-	function get_actions() {
+    /**
+     * This method returns the functions that will be used as actions.
+     * To do include a function that will be used as action, just put in the $actions array the follwing code:
+     *
+     * $actions = array(
+     *    'show_page',
+     *    'show_error',
+     * );
+     *
+     * @return array $actions
+     */
+	public function get_actions() {
 		$actions = array(
 			'filer_toplinks',
 			'filter_tabs',
@@ -68,7 +68,7 @@ class GuiControl extends Plugin {
 		return $actions;
 	}
 
-    function filer_toplinks(&$f_params) {
+    public function filer_toplinks(&$f_params) {
         if (!isset($this->conf['top_links']))
             return;
 
@@ -83,7 +83,7 @@ class GuiControl extends Plugin {
         return;
     }
 
-	function filter_tabs(&$f_params) {
+	public function filter_tabs(&$f_params) {
         $section = $f_params['section'];
         $tabs = &$f_params['tabs'];
 
@@ -98,7 +98,7 @@ class GuiControl extends Plugin {
         return;
     }
    
-	function filter_trail(&$f_params) {
+	public function filter_trail(&$f_params) {
         if (!isset($this->conf['trail_links']))
             return;
 
@@ -108,7 +108,7 @@ class GuiControl extends Plugin {
         return;
     }
    
-	function filter_navlinks(&$f_params) {
+	public function filter_navlinks(&$f_params) {
         $place = $f_params['place'];
         $navlinks = &$f_params['navlinks'];
 
@@ -123,7 +123,7 @@ class GuiControl extends Plugin {
         return;
     }
    
-	function filter_actionbuttons(&$f_params) {
+	public function filter_actionbuttons(&$f_params) {
         $place = $f_params['place'];
         $actions = &$f_params['actionbuttons'];
 
@@ -138,8 +138,7 @@ class GuiControl extends Plugin {
         return;
     }
 
-	function filter_tree() {
+	public function filter_tree() {
         return;
     }
 }
-?>

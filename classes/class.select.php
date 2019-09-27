@@ -11,10 +11,10 @@
 * 
 */
 class XHtmlSimpleElement {
-	var $_element;
-	var $_siblings = array();
-	var $_htmlcode;	
-	var $_attributes = array();
+	public $_element;
+	public $_siblings = array();
+	public $_htmlcode;
+	public $_attributes = array();
 
 	
 	/**
@@ -24,22 +24,22 @@ class XHtmlSimpleElement {
 	* derived class
 	* 
 	*/
-	function __construct($element = null) {
+	public function __construct($element = null) {
 
 		$this->_element = $this->is_element();
 		
 	}
 
-	function set_style($style) {
+	public function set_style($style) {
 		$this->set_attribute('style', $style);
 	}
 	
-	function set_class($class) {
+	public function set_class($class) {
 		$this->set_attribute('class', $class);
 	}
 
 	
-	function is_element() {
+	public function is_element() {
 		return 
 			str_replace('xhtml_', '', strtolower(get_class($this)));
 	}
@@ -48,7 +48,7 @@ class XHtmlSimpleElement {
 	* Private function generates xhtml
 	* @access private	
 	*/
-	function _html() {
+	public function _html() {
 		$this->_htmlcode = "<";
 		foreach ($this->_attributeCollection as $attribute => $value) {
 			if (!empty($value)) $this->_htmlcode .= " {$attribute}=\"{$value}\"";
@@ -62,18 +62,18 @@ class XHtmlSimpleElement {
     * Returns xhtml code
     *  
     */
-	function fetch() {
+	public function fetch() {
 		return $this->_html();
 	}
 	/**
 	* Echoes xhtml
 	* 
 	*/	
-	function show()  {
+	public function show()  {
 		echo $this->fetch();
 	}
 
-	function set_attribute($attr, $value) {
+	public function set_attribute($attr, $value) {
 		$this->_attributes[$attr] = $value;
 	}
 
@@ -89,12 +89,12 @@ class XHtmlSimpleElement {
 * 
 */
 class XHtmlElement extends XHtmlSimpleElement {
-	var $_text     = null;	
-	var $_htmlcode = "";
-	var $_siblings = array();
+	public $_text     = null;
+	public $_htmlcode = "";
+	public $_siblings = array();
 
-	function __construct($text = null) {
-		parent::__construct();
+	public function __construct($text = null) {
+		XHtmlSimpleElement::__construct();
 		
 		if ($text) $this->set_text($text);
 	}
@@ -104,7 +104,7 @@ class XHtmlElement extends XHtmlSimpleElement {
 	* 
 	* @param	XHtmlElement 	The element to become a child of element
 	*/
-	function add(&$object) {
+	public function add(&$object) {
 		array_push($this->_siblings, $object);
 	}
 
@@ -114,16 +114,16 @@ class XHtmlElement extends XHtmlSimpleElement {
 	* 
 	* @param	string	Text
 	*/
-	function set_text($text) {
+	public function set_text($text) {
 		if ($text) $this->_text = htmlspecialchars($text);	
 	}
 
-	function fetch() {
+	public function fetch() {
 		return $this->_html();
 	}
 
 
-	function _html() {
+	public function _html() {
 
 		$this->_htmlcode = "<{$this->_element}";
 		foreach ($this->_attributes as $attribute =>$value) {
@@ -149,17 +149,17 @@ class XHtmlElement extends XHtmlSimpleElement {
 	* Returns siblings of Element
 	* 
 	*/
-	function get_siblings() {
+	public function get_siblings() {
 		return $this->_siblings;
 	}
 	
-	function has_siblings() {
+	public function has_siblings() {
 		return (count($this->_siblings) != 0);
 	}
 }
 
 class XHTML_Button extends XHtmlElement {
-	function __construct($name, $text = null) {
+	public function __construct($name, $text = null) {
 		parent::__construct();
 		
 		$this->set_attribute("name", $name);
@@ -170,18 +170,18 @@ class XHTML_Button extends XHtmlElement {
 
 
 class XHTML_Option extends XHtmlElement {
-	function __construct($text, $value = null) {
-		parent::__construct(null);			
+	public function __construct($text, $value = null) {
+		XHtmlElement::__construct(null);
 		$this->set_text($text);
 	}
 }
 
 
 class XHTML_Select extends XHTMLElement {
-	var $_data;
+	public $_data;
 
-	function __construct($name, $multiple = false, $size = null) {
-		parent::__construct();					
+	public function __construct($name, $multiple = false, $size = null) {
+		XHtmlElement::__construct();
 
 		$this->set_attribute("name", $name);
 		if ($multiple) $this->set_attribute("multiple","multiple");
@@ -190,7 +190,7 @@ class XHTML_Select extends XHTMLElement {
 		
 	}
 	
-	function set_data(&$data, $delim = ",") {
+	public function set_data(&$data, $delim = ",") {
 		switch (gettype($data)) {
 			case "string":
 				$this->_data = explode($delim, $data);
@@ -204,7 +204,7 @@ class XHTML_Select extends XHTMLElement {
 		}
 	}
 	
-	function fetch() {
+	public function fetch() {
 		if (isset($this->_data) && $this->_data) {
 			foreach ($this->_data as $value) { $this->add(new XHTML_Option($value)); }
 		}
@@ -214,4 +214,4 @@ class XHTML_Select extends XHTMLElement {
 }
 
 
-?>
+

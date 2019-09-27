@@ -368,7 +368,7 @@ AssertResult.prototype.setFailed = function(message) {
     this.passed = null;
     this.failed = true;
     this.failureMessage = message;
-}
+};
 
 function SeleniumCommand(command, target, value, isBreakpoint) {
     this.command = command;

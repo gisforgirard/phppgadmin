@@ -12,9 +12,10 @@
 		
 	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
 
-	/**
-	 * Show confirmation of cluster index and perform actual cluster
-	 */
+/**
+ * Show confirmation of cluster index and perform actual cluster
+ * @param $confirm
+ */
 	function doClusterIndex($confirm) {
 		global $data, $misc, $action;
 		global $lang;
@@ -65,9 +66,10 @@
 			doDefault($lang['strreindexbad']);
 	}
 
-	/**
-	 * Displays a screen where they can enter a new index
-	 */
+/**
+ * Displays a screen where they can enter a new index
+ * @param string $msg
+ */
 	function doCreateIndex($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -91,8 +93,7 @@
 
 		if ($attrs->recordCount() > 0) {
 			while (!$attrs->EOF) {
-                $XHTML_Option = new XHTML_Option($attrs->fields['attname']);
-                $selColumns->add($XHTML_Option);
+				$selColumns->add(new XHTML_Option($attrs->fields['attname']));
 				$attrs->moveNext();
 			}
 		}
@@ -203,9 +204,10 @@
 		}
 	}
 
-	/**
-	 * Show confirmation of drop index and perform actual drop
-	 */
+/**
+ * Show confirmation of drop index and perform actual drop
+ * @param $confirm
+ */
 	function doDropIndex($confirm) {
 		global $data, $misc;
 		global $lang;
@@ -420,4 +422,4 @@
 
 	$misc->printFooter();
 
-?>
+

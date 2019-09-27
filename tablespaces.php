@@ -12,9 +12,10 @@
 	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
 	if (!isset($msg)) $msg = '';
 
-	/**
-	 * Function to allow altering of a tablespace
-	 */
+/**
+ * Function to allow altering of a tablespace
+ * @param string $msg
+ */
 	function doAlter($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -92,9 +93,10 @@
 		}
 	}
 
-	/**
-	 * Show confirmation of drop and perform actual drop
-	 */
+/**
+ * Show confirmation of drop and perform actual drop
+ * @param $confirm
+ */
 	function doDrop($confirm) {
 		global $data, $misc;
 		global $lang;
@@ -121,10 +123,11 @@
 				doDefault($lang['strtablespacedroppedbad']);
 		}		
 	}
-	
-	/**
-	 * Displays a screen where they can enter a new tablespace
-	 */
+
+/**
+ * Displays a screen where they can enter a new tablespace
+ * @param string $msg
+ */
 	function doCreate($msg = '') {
 		global $data, $misc, $spcname;
 		global $lang;
@@ -194,11 +197,12 @@
 			else
 				doCreate($lang['strtablespacecreatedbad']);
 		}
-	}	
+	}
 
-	/**
-	 * Show default list of tablespaces in the cluster
-	 */
+/**
+ * Show default list of tablespaces in the cluster
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -323,4 +327,4 @@
 
 	$misc->printFooter();
 
-?>
+

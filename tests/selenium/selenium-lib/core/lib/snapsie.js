@@ -88,4 +88,4 @@ function Snapsie() {
         drawableElement.scrollLeft = drawableInfo.scrollLeft;
         drawableElement.scrollTop = drawableInfo.scrollTop;
     }
-};
+}

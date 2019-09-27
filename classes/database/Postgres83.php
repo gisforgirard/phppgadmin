@@ -10,11 +10,11 @@ include_once('./classes/database/Postgres84.php');
 
 class Postgres83 extends Postgres84 {
 
-	var $major_version = 8.3;
+	public $major_version = 8.3;
 
 	// List of all legal privileges that can be applied to different types
 	// of objects.
-	var $privlist = array(
+	public $privlist = array(
   		'table' => array('SELECT', 'INSERT', 'UPDATE', 'DELETE', 'REFERENCES', 'TRIGGER', 'ALL PRIVILEGES'),
   		'view' => array('SELECT', 'INSERT', 'UPDATE', 'DELETE', 'REFERENCES', 'TRIGGER', 'ALL PRIVILEGES'),
   		'sequence' => array('SELECT', 'UPDATE', 'ALL PRIVILEGES'),
@@ -26,7 +26,7 @@ class Postgres83 extends Postgres84 {
 	);
 	// List of characters in acl lists and the privileges they
 	// refer to.
-	var $privmap = array(
+	public $privmap = array(
 		'r' => 'SELECT',
 		'w' => 'UPDATE',
 		'a' => 'INSERT',
@@ -45,13 +45,13 @@ class Postgres83 extends Postgres84 {
 	 * Constructor
 	 * @param $conn The database connection
 	 */
-	function __construct($conn) {
-		parent::__construct($conn);
+	public function __construct($conn) {
+		Postgres::__construct($conn);
 	}
 
 	// Help functions
 
-	function getHelpPages() {
+	public function getHelpPages() {
 		include_once('./help/PostgresDoc83.php');
 		return $this->help_page;
 	}
@@ -64,7 +64,7 @@ class Postgres83 extends Postgres84 {
 	 * 
 	 * @return A list of databases, sorted alphabetically
 	 */
-	function getDatabases($currentdatabase = NULL) {
+	public function getDatabases($currentdatabase = NULL) {
 		global $conf, $misc;
 
 		$server_info = $misc->getServerInfo();
@@ -104,11 +104,12 @@ class Postgres83 extends Postgres84 {
 
 	// Administration functions
 
-	/**
-	 * Returns all available autovacuum per table information.
-	 * @return A recordset
-	 */
-	function getTableAutovacuum($table='') {
+    /**
+     * Returns all available autovacuum per table information.
+     * @param string $table
+     * @return A recordset
+     */
+	public function getTableAutovacuum($table='') {
 		$sql = '';
 
 		if ($table !== '') {
@@ -152,8 +153,8 @@ class Postgres83 extends Postgres84 {
 		return $this->selectSet($sql);
 	}
 	
-	function saveAutovacuum($table, $vacenabled, $vacthreshold, $vacscalefactor, $anathresold, 
-		$anascalefactor, $vaccostdelay, $vaccostlimit) 
+	public function saveAutovacuum($table, $vacenabled, $vacthreshold, $vacscalefactor, $anathresold,
+                                   $anascalefactor, $vaccostdelay, $vaccostlimit)
 	{
 		$defaults = $this->getAutovacuum();
 		$c_schema = $this->_schema;
@@ -251,7 +252,7 @@ class Postgres83 extends Postgres84 {
 		return $status;
 	}
 
-	function dropAutovacuum($table) {
+	public function dropAutovacuum($table) {
 		$c_schema = $this->_schema;
 		$this->clean($c_schema);
 		$this->clean($table);
@@ -268,21 +269,21 @@ class Postgres83 extends Postgres84 {
 	}
 	
 	// Sequence functions
-	
-	/**
-	 * Alter a sequence's properties
-	 * @param $seqrs The sequence RecordSet returned by getSequence()
-	 * @param $increment The sequence incremental value
-	 * @param $minvalue The sequence minimum value
-	 * @param $maxvalue The sequence maximum value
-	 * @param $restartvalue The sequence current value
-	 * @param $cachevalue The sequence cache value
-	 * @param $cycledvalue Sequence can cycle ?
-	 * @param $startvalue The sequence start value when issueing a restart (ignored)
-	 * @return 0 success
-	 */
-	function alterSequenceProps($seqrs, $increment,	$minvalue, $maxvalue,
-								$restartvalue, $cachevalue, $cycledvalue, $startvalue) {
+
+    /**
+     * Alter a sequence's properties
+     * @param $seqrs The sequence RecordSet returned by getSequence()
+     * @param $increment The sequence incremental value
+     * @param $minvalue The sequence minimum value
+     * @param $maxvalue The sequence maximum value
+     * @param $restartvalue The sequence current value
+     * @param $cachevalue The sequence cache value
+     * @param $cycledvalue Sequence can cycle ?
+     * @param $startvalue The sequence start value when issueing a restart (ignored)
+     * @return A|int 0 success
+     */
+	public function alterSequenceProps($seqrs, $increment, $minvalue, $maxvalue,
+                                       $restartvalue, $cachevalue, $cycledvalue, $startvalue) {
 
 		$sql = '';
 		/* vars are cleaned in _alterSequence */
@@ -302,13 +303,13 @@ class Postgres83 extends Postgres84 {
 		return 0;
 	}
 
-	/**
-	 * Alter a sequence's owner
-	 * @param $seqrs The sequence RecordSet returned by getSequence()
-	 * @param $name The new owner for the sequence
-	 * @return 0 success
-	 */
-	function alterSequenceOwner($seqrs, $owner) {
+    /**
+     * Alter a sequence's owner
+     * @param $seqrs The sequence RecordSet returned by getSequence()
+     * @param $owner
+     * @return A|int 0 success
+     */
+	public function alterSequenceOwner($seqrs, $owner) {
 		// If owner has been changed, then do the alteration.  We are
 		// careful to avoid this generally as changing owner is a
 		// superuser only function.
@@ -324,12 +325,12 @@ class Postgres83 extends Postgres84 {
 
 	// Function functions
 
-	/**
-	 * Returns all details for a particular function
-	 * @param $func The name of the function to retrieve
-	 * @return Function info
-	 */
-	function getFunction($function_oid) {
+    /**
+     * Returns all details for a particular function
+     * @param $function_oid
+     * @return A info
+     */
+	public function getFunction($function_oid) {
 		$this->clean($function_oid);
 
 		$sql = "
@@ -355,9 +356,9 @@ class Postgres83 extends Postgres84 {
 
 
 	// Capabilities
-	function hasQueryKill() { return false; }
-	function hasDatabaseCollation() { return false; }
-	function hasAlterSequenceStart() { return false; }
+	public function hasQueryKill() { return false; }
+	public function hasDatabaseCollation() { return false; }
+	public function hasAlterSequenceStart() { return false; }
 }
 
-?>
+

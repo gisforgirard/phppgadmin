@@ -10,10 +10,10 @@ include_once('./classes/database/Postgres82.php');
 
 class Postgres81 extends Postgres82 {
 
-	var $major_version = 8.1;
+	public $major_version = 8.1;
 	// List of all legal privileges that can be applied to different types
 	// of objects.
-	var $privlist = array(
+	public $privlist = array(
 		'table' => array('SELECT', 'INSERT', 'UPDATE', 'DELETE', 'RULE', 'REFERENCES', 'TRIGGER', 'ALL PRIVILEGES'),
 		'view' => array('SELECT', 'INSERT', 'UPDATE', 'DELETE', 'RULE', 'REFERENCES', 'TRIGGER', 'ALL PRIVILEGES'),
 		'sequence' => array('SELECT', 'UPDATE', 'ALL PRIVILEGES'),
@@ -25,7 +25,7 @@ class Postgres81 extends Postgres82 {
 	);
 	// List of characters in acl lists and the privileges they
 	// refer to.
-	var $privmap = array(
+	public $privmap = array(
 		'r' => 'SELECT',
 		'w' => 'UPDATE',
 		'a' => 'INSERT',
@@ -39,30 +39,31 @@ class Postgres81 extends Postgres82 {
 		'T' => 'TEMPORARY'
 	);
 	// Array of allowed index types
-	var $typIndexes = array('BTREE', 'RTREE', 'GIST', 'HASH');
+	public $typIndexes = array('BTREE', 'RTREE', 'GIST', 'HASH');
 
 	/**
 	 * Constructor
 	 * @param $conn The database connection
 	 */
-	function __construct($conn) {
-		parent::__construct($conn);
+	public function __construct($conn) {
+		Postgres82::__construct($conn);
 	}
 
 	// Help functions
 	
-	function getHelpPages() {
+	public function getHelpPages() {
 		include_once('./help/PostgresDoc81.php');
 		return $this->help_page;
 	}
 
 	// Database functions
 
-	/**
-	 * Returns all databases available on the server
-	 * @return A list of databases, sorted alphabetically
-	 */
-	function getDatabases($currentdatabase = NULL) {
+    /**
+     * Returns all databases available on the server
+     * @param null $currentdatabase
+     * @return A list of databases, sorted alphabetically
+     */
+	public function getDatabases($currentdatabase = NULL) {
 		global $conf, $misc;
 		
 		$server_info = $misc->getServerInfo();
@@ -99,18 +100,16 @@ class Postgres81 extends Postgres82 {
 		return $this->selectSet($sql);
 	}
 
-	/**
-	 * Alters a database
-	 * the multiple return vals are for postgres 8+ which support more functionality in alter database
-	 * @param $dbName The name of the database
-	 * @param $newName new name for the database
-	 * @param $newOwner The new owner for the database
-	 * @return 0 success
-	 * @return -1 transaction error
-	 * @return -2 owner error
-	 * @return -3 rename error
-	 */
-	function alterDatabase($dbName, $newName, $newOwner = '', $comment = '') {
+    /**
+     * Alters a database
+     * the multiple return vals are for postgres 8+ which support more functionality in alter database
+     * @param $dbName The name of the database
+     * @param $newName new name for the database
+     * @param string $newOwner The new owner for the database
+     * @param string $comment
+     * @return bool|int 0 success
+     */
+	public function alterDatabase($dbName, $newName, $newOwner = '', $comment = '') {
 		$this->clean($dbName);
 		$this->clean($newName);
 		$this->clean($newOwner);
@@ -140,8 +139,8 @@ class Postgres81 extends Postgres82 {
 
 	// Autovacuum functions
 
-	function saveAutovacuum($table, $vacenabled, $vacthreshold, $vacscalefactor,
-		$anathresold, $anascalefactor, $vaccostdelay, $vaccostlimit)
+	public function saveAutovacuum($table, $vacenabled, $vacthreshold, $vacscalefactor,
+                                   $anathresold, $anascalefactor, $vaccostdelay, $vaccostlimit)
 	{
 		$defaults = $this->getAutovacuum();
 		$c_schema = $this->_schema;
@@ -231,7 +230,7 @@ class Postgres81 extends Postgres82 {
 	 * @param $database (optional) Find only connections to specified database
 	 * @return A recordset
 	 */
-	function getProcesses($database = null) {
+	public function getProcesses($database = null) {
 		if ($database === null)
 			$sql = "SELECT datname, usename, procpid AS pid, current_query AS query, query_start, 
                   case when (select count(*) from pg_locks where pid=pg_stat_activity.procpid and granted is false) > 0 then 't' else 'f' end as waiting  
@@ -252,12 +251,13 @@ class Postgres81 extends Postgres82 {
 	}
 
 	// Tablespace functions
-	
-	/**
-	 * Retrieves a tablespace's information
-	 * @return A recordset
-	 */
-	function getTablespace($spcname) {
+
+    /**
+     * Retrieves a tablespace's information
+     * @param $spcname
+     * @return A recordset
+     */
+	public function getTablespace($spcname) {
 		$this->clean($spcname);
 
 		$sql = "SELECT spcname, pg_catalog.pg_get_userbyid(spcowner) AS spcowner, spclocation
@@ -265,13 +265,13 @@ class Postgres81 extends Postgres82 {
 
 		return $this->selectSet($sql);
 	}
-	
-	/**
-	 * Retrieves information for all tablespaces
-	 * @param $all Include all tablespaces (necessary when moving objects back to the default space)
-	 * @return A recordset
-	 */
-	function getTablespaces($all = false) {
+
+    /**
+     * Retrieves information for all tablespaces
+     * @param bool $all Include all tablespaces (necessary when moving objects back to the default space)
+     * @return A recordset
+     */
+	public function getTablespaces($all = false) {
 		global $conf;
 		
 		$sql = "SELECT spcname, pg_catalog.pg_get_userbyid(spcowner) AS spcowner, spclocation
@@ -288,9 +288,9 @@ class Postgres81 extends Postgres82 {
 
 	// Capabilities
 
-	function hasCreateTableLikeWithConstraints() {return false;}
-	function hasSharedComments() {return false;}
-	function hasConcurrentIndexBuild() {return false;}
+	public function hasCreateTableLikeWithConstraints() {return false;}
+	public function hasSharedComments() {return false;}
+	public function hasConcurrentIndexBuild() {return false;}
 }
 
-?>
+

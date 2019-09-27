@@ -125,9 +125,8 @@ function nthChild($element, $arguments, $traverse) {
 	function _checkIndex($index) {
 		var $index = ($traverse == nextElementSibling) ? $$children.length - $index : $index - 1;
 		return $$children[$index] == $element;
-	};
-
-	//	it was just a number (no "n")
+    }
+    //	it was just a number (no "n")
 	if (!isNaN($arguments)) return _checkIndex($arguments);
 
 	$arguments = $arguments.split("n");
@@ -145,6 +144,5 @@ function nthChild($element, $arguments, $traverse) {
 		return ($traverse == nextElementSibling) ? ($count <= $step) : ($step >= $count);
 
 	return ($count % $multiplier) == $step;
-};
-
+}
 }); // addModule

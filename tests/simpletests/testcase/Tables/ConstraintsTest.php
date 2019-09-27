@@ -22,7 +22,7 @@ class ConstraintsTest extends PreconditionSet{
     /**
      * Set up the preconditon. 
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -37,7 +37,7 @@ class ConstraintsTest extends PreconditionSet{
     /**
      * Clean up all the result. 
      */ 
-    function tearDown(){
+    public function tearDown(){
         $this->logout(); 
         
         return TRUE;
@@ -47,7 +47,7 @@ class ConstraintsTest extends PreconditionSet{
      * TestCaseID: TAC01
      * Test creating a check constraint in a table
      */
-    function testAddCheck(){
+    public function testAddCheck(){
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
         
@@ -77,7 +77,7 @@ class ConstraintsTest extends PreconditionSet{
      * TestCaseID: TDC02
      * Test dropping a check constraint in a table
      */
-    function testDropCheckKey()
+    public function testDropCheckKey()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -103,7 +103,7 @@ class ConstraintsTest extends PreconditionSet{
      * TestCaseID: TAC02
      * Test adding a unique key to a table
      */
-    function testAddUniqueKey(){
+    public function testAddUniqueKey(){
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
         
@@ -134,7 +134,7 @@ class ConstraintsTest extends PreconditionSet{
      * TestCaseID: TDC01
      * Test dropping a unique constraint in a table
      */
-    function testDropUniqueKey()
+    public function testDropUniqueKey()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -157,7 +157,7 @@ class ConstraintsTest extends PreconditionSet{
      * TestCaseID: TAC03
      * Test adding a primary key to a table
      */
-    function testAddPrimaryKey(){
+    public function testAddPrimaryKey(){
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
         
@@ -187,7 +187,7 @@ class ConstraintsTest extends PreconditionSet{
      * TestCaseID: TDC03
      * Test dropping a primary key constraint in a table
      */
-    function testDropPrimaryKey()
+    public function testDropPrimaryKey()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -209,7 +209,7 @@ class ConstraintsTest extends PreconditionSet{
      * TestCaseID: TAC03
      * Test adding a foreign key to a table
      */
-    function testAddForeignKey(){
+    public function testAddForeignKey(){
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
         
@@ -245,7 +245,7 @@ class ConstraintsTest extends PreconditionSet{
      * TestCaseID: TDC04
      * Test dropping a foreign key constraint in a table
      */
-    function testDropForeignKey()
+    public function testDropForeignKey()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -262,4 +262,4 @@ class ConstraintsTest extends PreconditionSet{
         return TRUE; 
     }
 }
-?>
+

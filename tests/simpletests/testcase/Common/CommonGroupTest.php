@@ -17,7 +17,7 @@ require_once('ImportTest.php');
  */
 class CommonGroupTest extends GroupTest
 {
-    function CommonGroupTest()
+    public function __construct()
     {
         $this->GroupTest('Common manipulation group test.');
         $this->addTestClass(new SecurityTest());
@@ -25,4 +25,4 @@ class CommonGroupTest extends GroupTest
         $this->addTestClass(new ImportTest());
     }
 }
-?>
+

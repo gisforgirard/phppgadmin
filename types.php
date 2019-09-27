@@ -12,9 +12,10 @@
 	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
 	if (!isset($msg)) $msg = '';
 
-	/**
-	 * Show read only properties for a type
-	 */
+/**
+ * Show read only properties for a type
+ * @param string $msg
+ */
 	function doProperties($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -101,10 +102,11 @@
 		} else
 			doDefault($lang['strinvalidparam']);
 	}
-	
-	/**
-	 * Show confirmation of drop and perform actual drop
-	 */
+
+/**
+ * Show confirmation of drop and perform actual drop
+ * @param $confirm
+ */
 	function doDrop($confirm) {
 		global $data, $misc;
 		global $lang;
@@ -134,9 +136,10 @@
 		
 	}
 
-	/**
-	 * Displays a screen where they can enter a new composite type
-	 */
+/**
+ * Displays a screen where they can enter a new composite type
+ * @param string $msg
+ */
 	function doCreateComposite($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -282,9 +285,10 @@
 		}
 	}
 
-	/**
-	 * Displays a screen where they can enter a new enum type
-	 */
+/**
+ * Displays a screen where they can enter a new enum type
+ * @param string $msg
+ */
 	function doCreateEnum($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -402,9 +406,10 @@
 		}
 	}
 
-	/**
-	 * Displays a screen where they can enter a new type
-	 */
+/**
+ * Displays a screen where they can enter a new type
+ * @param string $msg
+ */
 	function doCreate($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -525,11 +530,12 @@
 			else
 				doCreate($lang['strtypecreatedbad']);
 		}
-	}	
+	}
 
-	/**
-	 * Show default list of types in the database
-	 */
+/**
+ * Show default list of types in the database
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $conf, $misc;
 		global $lang;
@@ -711,4 +717,4 @@
 
 	$misc->printFooter();
 
-?>
+

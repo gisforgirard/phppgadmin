@@ -21,7 +21,7 @@ class AggregateTest extends PreconditionSet
     /**
      * Set up the precondition. 
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -37,7 +37,7 @@ class AggregateTest extends PreconditionSet
     /**
      * Clean up all the result. 
      */
-    function tearDown()
+    public function tearDown()
     {
         // Logout from the system.
         $this->logout(); 
@@ -49,7 +49,7 @@ class AggregateTest extends PreconditionSet
      * TestCaseID: HCA01
      * Creates a new aggregate.
      */
-    function testCreateAggregate()
+    public function testCreateAggregate()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -79,7 +79,7 @@ class AggregateTest extends PreconditionSet
      * TestCaseID: HBA01
      * Displays all the aggregates.
      */
-    function testBrowseAggregates()
+    public function testBrowseAggregates()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -100,7 +100,7 @@ class AggregateTest extends PreconditionSet
      * TestCaseID: HDA01
      * Drop a aggregate. 
      */
-    function testDropAggregate()
+    public function testDropAggregate()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -124,4 +124,4 @@ class AggregateTest extends PreconditionSet
         return TRUE;
     } 
 }
-?>
+

@@ -11,16 +11,16 @@ include_once('./libraries/adodb/adodb.inc.php');
 
 class ADODB_base {
 
-	var $conn;
+	public $conn;
 	
 	// The backend platform.  Set to UNKNOWN by default.
-	var $platform = 'UNKNOWN';
+	public $platform = 'UNKNOWN';
 
 	/**
 	 * Base constructor
 	 * @param &$conn The connection object
 	 */
-	function __construct(&$conn) {
+	public function __construct(&$conn) {
 		$this->conn = $conn;
 	}
 
@@ -28,7 +28,7 @@ class ADODB_base {
 	 * Turns on or off query debugging
 	 * @param $debug True to turn on debugging, false otherwise
 	 */
-	function setDebug($debug) {
+	public function setDebug($debug) {
 		$this->conn->debug = $debug;
 	}
 
@@ -37,7 +37,7 @@ class ADODB_base {
 	 * @param $str The string to clean, by reference
 	 * @return The cleaned string
 	 */
-	function clean(&$str) {
+	public function clean(&$str) {
 		$str = addslashes($str);
 		return $str;
 	}
@@ -47,7 +47,7 @@ class ADODB_base {
 	 * @param $str The string to clean, by reference
 	 * @return The cleaned string
 	 */
-	function fieldClean(&$str) {
+	public function fieldClean(&$str) {
 		$str = str_replace('"', '""', $str);
 		return $str;
 	}
@@ -57,8 +57,11 @@ class ADODB_base {
 	 * @param $arr The array to clean, by reference
 	 * @return The cleaned array
 	 */
-	function arrayClean(&$arr) {
-		return $arr = array_map('addslashes', $arr);
+	public function arrayClean(&$arr) {
+		reset($arr);
+		while(list($k, $v) = each($arr))
+			$arr[$k] = addslashes($v);
+		return $arr;
 	}
 	
 	/**
@@ -66,7 +69,7 @@ class ADODB_base {
 	 * @param $sql The SQL query to execute
 	 * @return A recordset
 	 */
-	function execute($sql) {
+	public function execute($sql) {
 		// Execute the statement
 		$rs = $this->conn->Execute($sql);
 
@@ -78,7 +81,7 @@ class ADODB_base {
 	 * Closes the connection the database class
 	 * relies on.
 	 */
-	function close() {
+	public function close() {
 		$this->conn->close();
 	}
 
@@ -87,7 +90,7 @@ class ADODB_base {
 	 * @param $sql The SQL statement to be executed
 	 * @return A recordset
 	 */
-	function selectSet($sql) {
+	public function selectSet($sql) {
 		// Execute the statement
 		$rs = $this->conn->Execute($sql);
 		
@@ -106,7 +109,7 @@ class ADODB_base {
 	 * @return A single field value
 	 * @return -1 No rows were found
 	 */
-	function selectField($sql, $field) {
+	public function selectField($sql, $field) {
 		// Execute the statement
 		$rs = $this->conn->Execute($sql);
 
@@ -117,17 +120,17 @@ class ADODB_base {
 		return $rs->fields[$field];
 	}
 
-	/**
-	 * Delete from the database
-	 * @param $table The name of the table
-	 * @param $conditions (array) A map of field names to conditions
-	 * @param $schema (optional) The table's schema
-	 * @return 0 success
-	 * @return -1 on referential integrity violation
-	 * @return -2 on no rows deleted
-	 */
-	function delete($table, $conditions, $schema = '') {
+    /**
+     * Delete from the database
+     * @param $table The name of the table
+     * @param $conditions (array) A map of field names to conditions
+     * @param string $schema (optional) The table's schema
+     * @return int 0 success
+     */
+	public function delete($table, $conditions, $schema = '') {
 		$this->fieldClean($table);
+
+		reset($conditions);
 
 		if (!empty($schema)) {
 			$this->fieldClean($schema);
@@ -136,7 +139,7 @@ class ADODB_base {
 
 		// Build clause
 		$sql = '';
-		foreach($conditions as $key => $value) {
+		while(list($key, $value) = each($conditions)) {
 			$this->clean($key);
 			$this->clean($value);
 			if ($sql) $sql .= " AND \"{$key}\"='{$value}'";
@@ -156,15 +159,13 @@ class ADODB_base {
 		return $this->conn->ErrorNo();
 	}
 
-	/**
-	 * Insert a set of values into the database
-	 * @param $table The table to insert into
-	 * @param $vars (array) A mapping of the field names to the values to be inserted
-	 * @return 0 success
-	 * @return -1 if a unique constraint is violated
-	 * @return -2 if a referential constraint is violated
-	 */
-	function insert($table, $vars) {
+    /**
+     * Insert a set of values into the database
+     * @param $table The table to insert into
+     * @param $vars (array) A mapping of the field names to the values to be inserted
+     * @return int 0 success
+     */
+	public function insert($table, $vars) {
 		$this->fieldClean($table);
 
 		// Build clause
@@ -197,38 +198,38 @@ class ADODB_base {
 		return $this->conn->ErrorNo();
 	}
 
-	/**
-	 * Update a row in the database
-	 * @param $table The table that is to be updated
-	 * @param $vars (array) A mapping of the field names to the values to be updated
-	 * @param $where (array) A mapping of field names to values for the where clause
-	 * @param $nulls (array, optional) An array of fields to be set null
-	 * @return 0 success
-	 * @return -1 if a unique constraint is violated
-	 * @return -2 if a referential constraint is violated
-	 * @return -3 on no rows deleted
-	 */
-	function update($table, $vars, $where, $nulls = array()) {
+    /**
+     * Update a row in the database
+     * @param $table The table that is to be updated
+     * @param $vars (array) A mapping of the field names to the values to be updated
+     * @param $where (array) A mapping of field names to values for the where clause
+     * @param array $nulls (array, optional) An array of fields to be set null
+     * @return int 0 success
+     */
+	public function update($table, $vars, $where, $nulls = array()) {
 		$this->fieldClean($table);
 
 		$setClause = '';
 		$whereClause = '';
 
 		// Populate the syntax arrays
-		foreach($vars as $key => $value) {
+		reset($vars);
+		while(list($key, $value) = each($vars)) {
 			$this->fieldClean($key);
 			$this->clean($value);
 			if ($setClause) $setClause .= ", \"{$key}\"='{$value}'";
 			else $setClause = "UPDATE \"{$table}\" SET \"{$key}\"='{$value}'";
 		}
 
-		foreach($nulls as $value) {
+		reset($nulls);
+		while(list(, $value) = each($nulls)) {
 			$this->fieldClean($value);
 			if ($setClause) $setClause .= ", \"{$value}\"=NULL";
 			else $setClause = "UPDATE \"{$table}\" SET \"{$value}\"=NULL";
 		}
 
-		foreach($where as $key => $value) {
+		reset($where);
+		while(list($key, $value) = each($where)) {
 			$this->fieldClean($key);
 			$this->clean($value);
 			if ($whereClause) $whereClause .= " AND \"{$key}\"='{$value}'";
@@ -251,27 +252,27 @@ class ADODB_base {
 		return $this->conn->ErrorNo();
 	}
 
-	/**
-	 * Begin a transaction
-	 * @return 0 success
-	 */
-	function beginTransaction() {
+    /**
+     * Begin a transaction
+     * @return bool 0 success
+     */
+	public function beginTransaction() {
 		return !$this->conn->BeginTrans();
 	}
 
-	/**
-	 * End a transaction
-	 * @return 0 success
-	 */
-	function endTransaction() {
+    /**
+     * End a transaction
+     * @return bool 0 success
+     */
+	public function endTransaction() {
 		return !$this->conn->CommitTrans();
 	}
 
-	/**
-	 * Roll back a transaction
-	 * @return 0 success
-	 */
-	function rollbackTransaction() {
+    /**
+     * Roll back a transaction
+     * @return bool 0 success
+     */
+	public function rollbackTransaction() {
 		return !$this->conn->RollbackTrans();
 	}
 
@@ -279,35 +280,37 @@ class ADODB_base {
 	 * Get the backend platform
 	 * @return The backend platform
 	 */
-	function getPlatform() {
+	public function getPlatform() {
 		//return $this->conn->platform;
 		return "UNKNOWN";
 	}
 
 	// Type conversion routines
 
-	/**
-	 * Change the value of a parameter to database representation depending on whether it evaluates to true or false
-	 * @param $parameter the parameter
-	 */
-	function dbBool(&$parameter) {
+    /**
+     * Change the value of a parameter to database representation depending on whether it evaluates to true or false
+     * @param $parameter the parameter
+     * @return the
+     */
+	public function dbBool(&$parameter) {
 		return $parameter;
 	}
 
-	/**
-	 * Change a parameter from database representation to a boolean, (others evaluate to false)
-	 * @param $parameter the parameter
-	 */
-	function phpBool($parameter) {
+    /**
+     * Change a parameter from database representation to a boolean, (others evaluate to false)
+     * @param $parameter the parameter
+     * @return the
+     */
+	public function phpBool($parameter) {
 		return $parameter;
 	}
 
-	/**
-	 * Change a db array into a PHP array
-	 * @param $arr String representing the DB array
-	 * @return A PHP array
-	 */
-	function phpArray($dbarr) {
+    /**
+     * Change a db array into a PHP array
+     * @param $dbarr
+     * @return array PHP array
+     */
+	public function phpArray($dbarr) {
 		// Take off the first and last characters (the braces)
 		$arr = substr($dbarr, 1, strlen($dbarr) - 2);
 
@@ -334,7 +337,7 @@ class ADODB_base {
 
 		// Do one further loop over the elements array to remote double quoting
 		// and escaping of double quotes and backslashes
-		for ($i = 0; $i < sizeof($elements); $i++) {
+		for ($i = 0, $iMax = sizeof($elements); $i < $iMax; $i++) {
 			$v = $elements[$i];
 			if (strpos($v, '"') === 0) {
 				$v = substr($v, 1, strlen($v) - 2);
@@ -348,4 +351,4 @@ class ADODB_base {
 	}
 }
 
-?>
+

@@ -12,9 +12,10 @@
 	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
 	if (!isset($msg)) $msg = '';
 
-	/**
-	 * Show default list of languages in the database
-	 */
+/**
+ * Show default list of languages in the database
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $misc, $database;
 		global $lang;
@@ -76,4 +77,4 @@
 
 	$misc->printFooter();
 
-?>
+

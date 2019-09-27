@@ -17,9 +17,10 @@
 	else 
 		die($lang['strnotableprovided']);
 
-	/**
-	 * Displays a screen where they can alter a column
-	 */
+/**
+ * Displays a screen where they can alter a column
+ * @param string $msg
+ */
 	function doAlter($msg = '') {
 		global $data, $misc, $_reload_browser;
 		global $lang;
@@ -171,9 +172,11 @@
 		}
 	}
 
-	/**
-	 * Show default list of columns in the table
-	 */
+/**
+ * Show default list of columns in the table
+ * @param string $msg
+ * @param bool $isTable
+ */
 	function doDefault($msg = '', $isTable = true) {
 		global $data, $conf, $misc, $tableName;
 		global $lang;
@@ -343,4 +346,4 @@
 	
 	$misc->printFooter();
 
-?>
+

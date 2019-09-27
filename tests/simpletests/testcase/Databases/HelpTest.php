@@ -22,7 +22,7 @@ class HelpTest extends PreconditionSet
     /**
      * Set up the preconditon.
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -38,7 +38,7 @@ class HelpTest extends PreconditionSet
     /**
      * Release the relational resource.
      */
-    function tearDown()
+    public function tearDown()
     {
         // Logout this system.
         $this->logout();
@@ -54,7 +54,7 @@ class HelpTest extends PreconditionSet
      * Note: It's strange here, because all the links are outside.
      *       So the Pattern cannot be invoked directly.
      */
-    function testHelpWithInnerSchema()
+    public function testHelpWithInnerSchema()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -84,7 +84,7 @@ class HelpTest extends PreconditionSet
      * TestCaseId:DCD002;
      * This test is used to test help links from the index links.
      */
-    function testHelpWithInrClk()
+    public function testHelpWithInrClk()
     {
         global $webUrl, $SERVER, $DATABASE;
 
@@ -106,4 +106,4 @@ class HelpTest extends PreconditionSet
     }
 }
 
-?>
+

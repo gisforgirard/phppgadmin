@@ -22,7 +22,7 @@ class TriggersTest extends PreconditionSet{
     /**
      * Set up the preconditon. 
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $POWER_USER_NAME;
@@ -37,7 +37,7 @@ class TriggersTest extends PreconditionSet{
     /**
      * Clean up all the result. 
      */ 
-    function tearDown(){
+    public function tearDown(){
         $this->logout(); 
         
         return TRUE;
@@ -47,7 +47,7 @@ class TriggersTest extends PreconditionSet{
      * TestCaseID: TCT01
      * Add a trigger to the table
      */ 
-    function testAddTrigger()
+    public function testAddTrigger()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -82,7 +82,7 @@ class TriggersTest extends PreconditionSet{
      * TestCaseID: TCT02
      * Cancel adding a trigger to the table
      */ 
-    function testCancelAddTrigger()
+    public function testCancelAddTrigger()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -114,7 +114,7 @@ class TriggersTest extends PreconditionSet{
      * TestCaseID: TAT02
      * Alter a trigger of the table
      */ 
-    function testAlterTrigger()
+    public function testAlterTrigger()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -141,7 +141,7 @@ class TriggersTest extends PreconditionSet{
      * TestCaseID: TAT01
      * Cancel altering a trigger of the table
      */ 
-    function testCancelAlterTrigger()
+    public function testCancelAlterTrigger()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -165,7 +165,7 @@ class TriggersTest extends PreconditionSet{
      * TestCaseID: TDT01
      * Cancel dropping a trigger from the table
      */ 
-    function testCancelDropTrigger()
+    public function testCancelDropTrigger()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -189,7 +189,7 @@ class TriggersTest extends PreconditionSet{
      * TestCaseID: TDT02
      * Drop a trigger from the table
      */ 
-    function testDropTrigger()
+    public function testDropTrigger()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -211,4 +211,4 @@ class TriggersTest extends PreconditionSet{
         return TRUE; 
     }                          
 }
-?>
+

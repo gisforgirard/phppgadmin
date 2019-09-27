@@ -11,9 +11,10 @@
 
 	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
 
-	/**
-	 * List all the information on the table
-	 */
+/**
+ * List all the information on the table
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -336,4 +337,4 @@
 	
 	$misc->printFooter();
 
-?>
+

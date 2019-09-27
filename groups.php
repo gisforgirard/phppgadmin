@@ -25,10 +25,11 @@
 		else
 			doProperties($lang['strmemberaddedbad']);
 	}
-	
-	/**
-	 * Show confirmation of drop user from group and perform actual drop
-	 */
+
+/**
+ * Show confirmation of drop user from group and perform actual drop
+ * @param $confirm
+ */
 	function doDropMember($confirm) {
 		global $data, $misc;
 		global $lang;
@@ -56,10 +57,11 @@
 				doDropMember(true, $lang['strmemberdroppedbad']);
 		}		
 	}
-	
-	/**
-	 * Show read only properties for a group
-	 */
+
+/**
+ * Show read only properties for a group
+ * @param string $msg
+ */
 	function doProperties($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -131,10 +133,11 @@
 				'content' => $lang['strshowallgroups']
 			)), 'groups-properties', get_defined_vars());
 	}
-	
-	/**
-	 * Show confirmation of drop and perform actual drop
-	 */
+
+/**
+ * Show confirmation of drop and perform actual drop
+ * @param $confirm
+ */
 	function doDrop($confirm) {
 		global $data, $misc;
 		global $lang;
@@ -161,10 +164,11 @@
 				doDefault($lang['strgroupdroppedbad']);
 		}		
 	}
-	
-	/**
-	 * Displays a screen where they can enter a new group
-	 */
+
+/**
+ * Displays a screen where they can enter a new group
+ * @param string $msg
+ */
 	function doCreate($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -224,11 +228,12 @@
 			else
 				doCreate($lang['strgroupcreatedbad']);
 		}
-	}	
+	}
 
-	/**
-	 * Show default list of groups in the database
-	 */
+/**
+ * Show default list of groups in the database
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -327,4 +332,4 @@
 
 	$misc->printFooter();
 
-?>
+

@@ -7,12 +7,12 @@
 
 	class Misc {
 		// Tracking string to include in HREFs
-		var $href;
+		public $href;
 		// Tracking string to include in forms
-		var $form;
+		public $form;
 
 		/* Constructor */
-		function __construct() { 
+		public function __construct() {
 		}
 
 		/**
@@ -20,7 +20,7 @@
 		 * @param $all (optional) True to check pg_dumpall, false to just check pg_dump
 		 * @return True, dumps are set up, false otherwise
 		 */
-		function isDumpEnabled($all = false) {
+		public function isDumpEnabled($all = false) {
 			$info = $this->getServerInfo();
 			return !empty($info[$all ? 'pg_dumpall_path' : 'pg_dump_path']);
 		}
@@ -28,14 +28,16 @@
 		/**
 		 * Sets the href tracking variable
 		 */
-		function setHREF() {
+		public function setHREF() {
 			$this->href = $this->getHREF();
 		}
 
-		/**
-		 * Get a href query string, excluding objects below the given object type (inclusive)
-		 */
-		function getHREF($exclude_from = null) {
+        /**
+         * Get a href query string, excluding objects below the given object type (inclusive)
+         * @param null $exclude_from
+         * @return string
+         */
+		public function getHREF($exclude_from = null) {
 			$href = '';
 			if (isset($_REQUEST['server']) && $exclude_from != 'server') {
 				$href .= 'server=' . urlencode($_REQUEST['server']);
@@ -49,7 +51,7 @@
 			return htmlentities($href);
 		}
 
-		function getSubjectParams($subject) {
+		public function getSubjectParams($subject) {
 			global $plugin_manager;
 
 			$vars = array();
@@ -195,7 +197,7 @@
 			return $vars;
 		}
 
-		function getHREFSubject($subject) {
+		public function getHREFSubject($subject) {
 			$vars = $this->getSubjectParams($subject);
 			return "{$vars['url']}?". http_build_query($vars['params'], '', '&amp;');
 		}
@@ -203,7 +205,7 @@
 		/**
 		 * Sets the form tracking variable
 		 */
-		function setForm() {
+		public function setForm() {
 			$this->form = '';
 			if (isset($_REQUEST['server'])) {
 				$this->form .= "<input type=\"hidden\" name=\"server\" value=\"" . htmlspecialchars($_REQUEST['server']) . "\" />\n";
@@ -216,37 +218,37 @@
 			}
 		}
 
-		/**
-		 * Render a value into HTML using formatting rules specified
-		 * by a type name and parameters.
-		 *
-		 * @param $str The string to change
-		 *
-		 * @param $type Field type (optional), this may be an internal PostgreSQL type, or:
-		 *			yesno    - same as bool, but renders as 'Yes' or 'No'.
-		 *			pre      - render in a <pre> block.
-		 *			nbsp     - replace all spaces with &nbsp;'s
-		 *			verbatim - render exactly as supplied, no escaping what-so-ever.
-		 *			callback - render using a callback function supplied in the 'function' param.
-		 *
-		 * @param $params Type parameters (optional), known parameters:
-		 *			null     - string to display if $str is null, or set to TRUE to use a default 'NULL' string,
-		 *			           otherwise nothing is rendered.
-		 *			clip     - if true, clip the value to a fixed length, and append an ellipsis...
-		 *			cliplen  - the maximum length when clip is enabled (defaults to $conf['max_chars'])
-		 *			ellipsis - the string to append to a clipped value (defaults to $lang['strellipsis'])
-		 *			tag      - an HTML element name to surround the value.
-		 *			class    - a class attribute to apply to any surrounding HTML element.
-		 *			align    - an align attribute ('left','right','center' etc.)
-		 *			true     - (type='bool') the representation of true.
-		 *			false    - (type='bool') the representation of false.
-		 *			function - (type='callback') a function name, accepts args ($str, $params) and returns a rendering.
-		 *			lineno   - prefix each line with a line number.
-		 *			map      - an associative array.
-		 *
-		 * @return The HTML rendered value
-		 */
-		function printVal($str, $type = null, $params = array()) {
+        /**
+         * Render a value into HTML using formatting rules specified
+         * by a type name and parameters.
+         *
+         * @param $str The string to change
+         *
+         * @param $type Field type (optional), this may be an internal PostgreSQL type, or:
+         *            yesno    - same as bool, but renders as 'Yes' or 'No'.
+         *            pre      - render in a <pre> block.
+         *            nbsp     - replace all spaces with &nbsp;'s
+         *            verbatim - render exactly as supplied, no escaping what-so-ever.
+         *            callback - render using a callback function supplied in the 'function' param.
+         *
+         * @param array $params Type parameters (optional), known parameters:
+         *            null     - string to display if $str is null, or set to TRUE to use a default 'NULL' string,
+         *                       otherwise nothing is rendered.
+         *            clip     - if true, clip the value to a fixed length, and append an ellipsis...
+         *            cliplen  - the maximum length when clip is enabled (defaults to $conf['max_chars'])
+         *            ellipsis - the string to append to a clipped value (defaults to $lang['strellipsis'])
+         *            tag      - an HTML element name to surround the value.
+         *            class    - a class attribute to apply to any surrounding HTML element.
+         *            align    - an align attribute ('left','right','center' etc.)
+         *            true     - (type='bool') the representation of true.
+         *            false    - (type='bool') the representation of false.
+         *            function - (type='callback') a function name, accepts args ($str, $params) and returns a rendering.
+         *            lineno   - prefix each line with a line number.
+         *            map      - an associative array.
+         *
+         * @return The HTML rendered value
+         */
+		public function printVal($str, $type = null, $params = array()) {
 			global $lang, $conf, $data;
 
 			// Shortcircuit for a NULL value
@@ -412,7 +414,7 @@
 		 * enforce magic_quotes_gpc being off.
 		 * @param &var The variable to strip
 		 */
-		function stripVar(&$var) {
+		public function stripVar(&$var) {
 			if (is_array($var)) {
 				foreach($var as $k => $v) {
 					$this->stripVar($var[$k]);
@@ -436,7 +438,7 @@
 		 * @param $title Title, already escaped
 		 * @param $help (optional) The identifier for the help link
 		 */
-		function printTitle($title, $help = null) {
+		public function printTitle($title, $help = null) {
 			global $data, $lang;
 
 			echo "<h2>";
@@ -448,14 +450,17 @@
 		 * Print out a message
 		 * @param $msg The message to print
 		 */
-		function printMsg($msg) {
+		public function printMsg($msg) {
 			if ($msg != '') echo "<p class=\"message\">{$msg}</p>\n";
 		}
 
-		/**
-		 * Creates a database accessor
-		 */
-		function getDatabaseAccessor($database, $server_id = null) {
+        /**
+         * Creates a database accessor
+         * @param $database
+         * @param null $server_id
+         * @return mixed
+         */
+        public function getDatabaseAccessor($database, $server_id = null) {
 			global $lang, $conf, $misc, $_connection;
 
 			$server_info = $this->getServerInfo($server_id);
@@ -513,13 +518,14 @@
 		}
 
 
-		/**
-		 * Prints the page header.  If global variable $_no_output is
-		 * set then no header is drawn.
-		 * @param $title The title of the page
-		 * @param $script script tag
-		 */
-		function printHeader($title = '', $script = null, $frameset = false) {
+        /**
+         * Prints the page header.  If global variable $_no_output is
+         * set then no header is drawn.
+         * @param string $title The title of the page
+         * @param $script script tag
+         * @param bool $frameset
+         */
+        public function printHeader($title = '', $script = null, $frameset = false) {
 			global $appName, $lang, $_no_output, $conf, $plugin_manager;
 
 			if (!isset($_no_output)) {
@@ -572,7 +578,7 @@
 		 * Prints the page footer
 		 * @param $doBody True to output body tag, false otherwise
 		 */
-		function printFooter($doBody = true) {
+		public function printFooter($doBody = true) {
 			global $_reload_browser, $_reload_drop_database;
 			global $lang, $_no_bottom_link;
 
@@ -592,7 +598,7 @@
 		 * @param $doBody True to output body tag, false otherwise
 		 * @param $bodyClass - name of body class
 		 */
-		function printBody($bodyClass = '', $doBody = true ) {
+		public function printBody($bodyClass = '', $doBody = true ) {
 			global $_no_output;
 
 			if (!isset($_no_output)) {
@@ -608,7 +614,7 @@
 		 * Outputs JavaScript code that will reload the browser
 		 * @param $database True if dropping a database, false otherwise
 		 */
-		function printReload($database) {
+		public function printReload($database) {
 			echo "<script type=\"text/javascript\">\n";
 			if ($database)
 				echo "\tparent.frames.browser.location.href=\"browser.php\";\n";
@@ -631,7 +637,7 @@
 		 *   the special attribute 'href' might be a string or an array. If href is an array it
 		 *   will be generated by getActionUrl. See getActionUrl comment for array format.
 		 */
-		function printLink($link) {
+		public function printLink($link) {
 
 			if (! isset($link['fields']))
 				$link['fields'] = $_REQUEST;
@@ -649,14 +655,14 @@
 			echo $tag;
 		}
 
-		/**
-		 * Display a list of links
-		 * @param $links An associative array of links to print. See printLink function for
-		 *               the links array format.
-		 * @param $class An optional class or list of classes seprated by a space
-		 *   WARNING: This field is NOT escaped! No user should be able to inject something here, use with care.
-		 */
-		function printLinksList($links, $class='') {
+        /**
+         * Display a list of links
+         * @param $links An associative array of links to print. See printLink function for
+         *               the links array format.
+         * @param string $class An optional class or list of classes seprated by a space
+         *   WARNING: This field is NOT escaped! No user should be able to inject something here, use with care.
+         */
+        public function printLinksList($links, $class='') {
 			echo "<ul class=\"{$class}\">\n";
 			foreach ($links as $link) {
 				echo "\t<li>";
@@ -671,7 +677,7 @@
 		 * @param $tabs The name of current section (Ex: intro, server, ...), or an array with tabs (Ex: sqledit.php doFind function)
 		 * @param $activetab The name of the tab to be highlighted.
 		 */
-		function printTabs($tabs, $activetab) {
+		public function printTabs($tabs, $activetab) {
 			global $misc, $conf, $data, $lang;
 
 			if (is_string($tabs)) {
@@ -716,11 +722,12 @@
 			#echo "</div>\n";
 		}
 
-		/**
-		 * Retrieve the tab info for a specific tab bar.
-		 * @param $section The name of the tab bar.
-		 */
-		function getNavTabs($section) {
+        /**
+         * Retrieve the tab info for a specific tab bar.
+         * @param $section The name of the tab bar.
+         * @return array
+         */
+		public function getNavTabs($section) {
 			global $data, $lang, $conf, $plugin_manager;
 
 			$hide_advanced = ($conf['show_advanced'] === false);
@@ -1314,9 +1321,11 @@
 		}
 
 		/**
-		 * Get the URL for the last active tab of a particular tab bar.
-		 */
-		function getLastTabURL($section) {
+         * Get the URL for the last active tab of a particular tab bar.
+         * @param $section
+         * @return mixed|null
+         */
+        public function getLastTabURL($section) {
 			global $data;
 
 			$tabs = $this->getNavTabs($section);
@@ -1329,7 +1338,7 @@
 			return isset($tab['url']) ? $tab : null;
 		}
 
-		function printTopbar() {
+		public function printTopbar() {
 			global $lang, $conf, $plugin_manager, $appName, $appVersion, $appLangFiles;
 
 			$server_info = $this->getServerInfo();
@@ -1471,9 +1480,10 @@
 		}
 
 		/**
-		 * Display a bread crumb trail.
-		 */
-		function printTrail($trail = array()) {
+         * Display a bread crumb trail.
+         * @param array $trail
+         */
+        public function printTrail($trail = array()) {
 			global $lang;
 
 			$this->printTopbar();
@@ -1518,11 +1528,12 @@
 			echo "</tr></table></div>\n";
 		}
 
-		/**
-		 * Create a bread crumb trail of the object hierarchy.
-		 * @param $object The type of object at the end of the trail.
-		 */
-		function getTrail($subject = null) {
+        /**
+         * Create a bread crumb trail of the object hierarchy.
+         * @param null $subject
+         * @return array
+         */
+        public function getTrail($subject = null) {
 			global $lang, $conf, $data, $appName, $plugin_manager;
 
 			$trail = array();
@@ -1673,7 +1684,7 @@
 		*               Allows to give some environnement details to plugins.
 		* and 'browse' is the place inside that code (doBrowse).
 		*/
-		function printNavLinks($navlinks, $place, $env = array()) {
+		public function printNavLinks($navlinks, $place, $env = array()) {
 			global $plugin_manager;
 
 			// Navlinks hook's place
@@ -1697,7 +1708,7 @@
 		 * @param $gets -  the parameters to include in the link to the wanted page
 		 * @param $max_width - the number of pages to make available at any one time (default = 20)
 		 */
-		function printPages($page, $pages, $gets, $max_width = 20) {
+		public function printPages($page, $pages, $gets, $max_width = 20) {
 			global $lang;
 
 			$window = 10;
@@ -1754,7 +1765,7 @@
 		 * @param $str   - the string that the context help is related to (already escaped)
 		 * @param $help  - help section identifier
 		 */
-		function printHelp($str, $help) {
+		public function printHelp($str, $help) {
 			global $lang, $data;
 
 			echo $str;
@@ -1769,19 +1780,19 @@
 		 * Outputs JavaScript to set default focus
 		 * @param $object eg. forms[0].username
 		 */
-		function setFocus($object) {
+		public function setFocus($object) {
 			echo "<script type=\"text/javascript\">\n";
 			echo "   document.{$object}.focus();\n";
 			echo "</script>\n";
 		}
 
 		/**
-		 * Outputs JavaScript to set the name of the browser window.
-		 * @param $name the window name
-		 * @param $addServer if true (default) then the server id is
-		 *        attached to the name.
-		 */
-		function setWindowName($name, $addServer = true) {
+         * Outputs JavaScript to set the name of the browser window.
+         * @param $name the window name
+         * @param bool $addServer if true (default) then the server id is
+         *        attached to the name.
+         */
+        public function setWindowName($name, $addServer = true) {
 			echo "<script type=\"text/javascript\">\n";
 			echo "//<![CDATA[\n";
 			echo "   window.name = '{$name}", ($addServer ? ':'.htmlspecialchars($_REQUEST['server']) : ''), "';\n";
@@ -1790,12 +1801,12 @@
 		}
 
 		/**
-		 * Converts a PHP.INI size variable to bytes.  Taken from publically available
-		 * function by Chris DeRose, here: http://www.php.net/manual/en/configuration.directives.php#ini.file-uploads
-		 * @param $strIniSize The PHP.INI variable
-		 * @return size in bytes, false on failure
-		 */
-		function inisizeToBytes($strIniSize) {
+         * Converts a PHP.INI size variable to bytes.  Taken from publically available
+         * function by Chris DeRose, here: http://www.php.net/manual/en/configuration.directives.php#ini.file-uploads
+         * @param $strIniSize The PHP.INI variable
+         * @return bool|float|int in bytes, false on failure
+         */
+        public function inisizeToBytes($strIniSize) {
 			// This function will take the string value of an ini 'size' parameter,
 			// and return a double (64-bit float) representing the number of bytes
 			// that the parameter represents. Or false if $strIniSize is unparseable.
@@ -1821,16 +1832,17 @@
 			}
 		}
 
-		/**
-		 * Returns URL given an action associative array.
-		 * NOTE: this function does not html-escape, only url-escape
-		 * @param $action An associative array of the follow properties:
-		 *			'url'  => The first part of the URL (before the ?)
-		 *			'urlvars' => Associative array of (URL variable => field name)
-		 *						these are appended to the URL
-		 * @param $fields Field data from which 'urlfield' and 'vars' are obtained.
-		 */
-		function getActionUrl(&$action, &$fields) {
+        /**
+         * Returns URL given an action associative array.
+         * NOTE: this function does not html-escape, only url-escape
+         * @param $action An associative array of the follow properties:
+         *            'url'  => The first part of the URL (before the ?)
+         *            'urlvars' => Associative array of (URL variable => field name)
+         *                        these are appended to the URL
+         * @param $fields Field data from which 'urlfield' and 'vars' are obtained.
+         * @return string
+         */
+		public function getActionUrl(&$action, &$fields) {
 			$url = value($action['url'], $fields);
 
 			if ($url === false) return '';
@@ -1866,7 +1878,7 @@
 			return $url;
 		}
 
-		function getRequestVars($subject = '') {
+		public function getRequestVars($subject = '') {
 			$v = array();
 			if (!empty($subject))
 				$v['subject'] = $subject;
@@ -1882,57 +1894,58 @@
 			return $v;
 		}
 
-		function printUrlVars(&$vars, &$fields) {
+		public function printUrlVars(&$vars, &$fields) {
 			foreach ($vars as $var => $varfield) {
 				echo "{$var}=", urlencode($fields[$varfield]), "&amp;";
 			}
 		}
 
-		/**
-		 * Display a table of data.
-		 * @param $tabledata A set of data to be formatted, as returned by $data->getDatabases() etc.
-		 * @param $columns   An associative array of columns to be displayed:
-		 *			$columns = array(
-		 *				column_id => array(
-		 *					'title' => Column heading,
-		 * 					'class' => The class to apply on the column cells,
-		 *					'field' => Field name for $tabledata->fields[...],
-		 *					'help'  => Help page for this column,
-		 *				), ...
-		 *			);
-		 * @param $actions   Actions that can be performed on each object:
-		 *			$actions = array(
-		 *				* multi action support
-		 *				* parameters are serialized for each entries and given in $_REQUEST['ma']
-		 *				'multiactions' => array(
-		 *					'keycols' => Associative array of (URL variable => field name), // fields included in the form
-		 *					'url' => URL submission,
-		 *					'default' => Default selected action in the form.
-		 *									if null, an empty action is added & selected
-		 *				),
-		 *				* actions *
-		 *				action_id => array(
-		 *					'title' => Action heading,
-		 *					'url'   => Static part of URL.  Often we rely
-		 *							   relative urls, usually the page itself (not '' !), or just a query string,
-		 *					'vars'  => Associative array of (URL variable => field name),
-		 *					'multiaction' => Name of the action to execute.
-		 *										Add this action to the multi action form
-		 *				), ...
-		 *			);
-		 * @param $place     Place where the $actions are displayed. Like 'display-browse', where 'display' is the file (display.php)
-		 *                   and 'browse' is the place inside that code (doBrowse).
-		 * @param $nodata    (optional) Message to display if data set is empty.
-		 * @param $pre_fn    (optional) Name of a function to call for each row,
-		 *					 it will be passed two params: $rowdata and $actions,
-		 *					 it may be used to derive new fields or modify actions.
-		 *					 It can return an array of actions specific to the row,
-		 *					 or if nothing is returned then the standard actions are used.
-		 *					 (see tblproperties.php and constraints.php for examples)
-		 *					 The function must not must not store urls because
-		 *					 they are relative and won't work out of context.
-		 */
-		function printTable(&$tabledata, &$columns, &$actions, $place, $nodata = null, $pre_fn = null) {
+        /**
+         * Display a table of data.
+         * @param $tabledata A set of data to be formatted, as returned by $data->getDatabases() etc.
+         * @param $columns   An associative array of columns to be displayed:
+         *            $columns = array(
+         *                column_id => array(
+         *                    'title' => Column heading,
+         *                    'class' => The class to apply on the column cells,
+         *                    'field' => Field name for $tabledata->fields[...],
+         *                    'help'  => Help page for this column,
+         *                ), ...
+         *            );
+         * @param $actions   Actions that can be performed on each object:
+         *            $actions = array(
+         *                * multi action support
+         *                * parameters are serialized for each entries and given in $_REQUEST['ma']
+         *                'multiactions' => array(
+         *                    'keycols' => Associative array of (URL variable => field name), // fields included in the form
+         *                    'url' => URL submission,
+         *                    'default' => Default selected action in the form.
+         *                                    if null, an empty action is added & selected
+         *                ),
+         *                * actions *
+         *                action_id => array(
+         *                    'title' => Action heading,
+         *                    'url'   => Static part of URL.  Often we rely
+         *                               relative urls, usually the page itself (not '' !), or just a query string,
+         *                    'vars'  => Associative array of (URL variable => field name),
+         *                    'multiaction' => Name of the action to execute.
+         *                                        Add this action to the multi action form
+         *                ), ...
+         *            );
+         * @param $place     Place where the $actions are displayed. Like 'display-browse', where 'display' is the file (display.php)
+         *                   and 'browse' is the place inside that code (doBrowse).
+         * @param $nodata (optional) Message to display if data set is empty.
+         * @param $pre_fn (optional) Name of a function to call for each row,
+         *                     it will be passed two params: $rowdata and $actions,
+         *                     it may be used to derive new fields or modify actions.
+         *                     It can return an array of actions specific to the row,
+         *                     or if nothing is returned then the standard actions are used.
+         *                     (see tblproperties.php and constraints.php for examples)
+         *                     The function must not must not store urls because
+         *                     they are relative and won't work out of context.
+         * @return bool
+         */
+		public function printTable(&$tabledata, &$columns, &$actions, $place, $nodata = null, $pre_fn = null) {
 			global $data, $conf, $misc, $lang, $plugin_manager;
 
 			// Action buttons hook's place
@@ -2078,8 +2091,8 @@
 					echo "</tr>\n";
 					echo "<tr class=\"row1\">\n";
 					echo "<td>";
-					echo "<a href=\"#\" onclick=\"javascript:checkAll(true);\">{$lang['strselectall']}</a> / ";
-					echo "<a href=\"#\" onclick=\"javascript:checkAll(false);\">{$lang['strunselectall']}</a></td>\n";
+					echo "<a href=\\";
+					echo "<a href=\\";
 					echo "<td>&nbsp;--->&nbsp;</td>\n";
 					echo "<td>\n";
 					echo "\t<select name=\"action\">\n";
@@ -2107,20 +2120,20 @@
 		}
 
 		/** Produce XML data for the browser tree
-		 * @param $treedata A set of records to populate the tree.
-		 * @param $attrs Attributes for tree items
-		 *        'text' - the text for the tree node
-		 *        'icon' - an icon for node
-		 *        'openIcon' - an alternative icon when the node is expanded
-		 *        'toolTip' - tool tip text for the node
-		 *        'action' - URL to visit when single clicking the node
-		 *        'iconAction' - URL to visit when single clicking the icon node
-		 *        'branch' - URL for child nodes (tree XML)
-		 *        'expand' - the action to return XML for the subtree
-		 *        'nodata' - message to display when node has no children
-		 * @param $section The section where the branch is linked in the tree
-		 */
-		function printTree(&$_treedata, &$attrs, $section) {
+         * @param $_treedata
+         * @param $attrs Attributes for tree items
+         *        'text' - the text for the tree node
+         *        'icon' - an icon for node
+         *        'openIcon' - an alternative icon when the node is expanded
+         *        'toolTip' - tool tip text for the node
+         *        'action' - URL to visit when single clicking the node
+         *        'iconAction' - URL to visit when single clicking the icon node
+         *        'branch' - URL for child nodes (tree XML)
+         *        'expand' - the action to return XML for the subtree
+         *        'nodata' - message to display when node has no children
+         * @param $section The section where the branch is linked in the tree
+         */
+        public function printTree(&$_treedata, &$attrs, $section) {
 			global $plugin_manager;
 
 			$treedata = array();
@@ -2156,7 +2169,7 @@
 		 *        'expand' - the action to return XML for the subtree
 		 *        'nodata' - message to display when node has no children
 		 */
-		function printTreeXML(&$treedata, &$attrs) {
+		public function printTreeXML(&$treedata, &$attrs) {
 			global $conf, $lang;
 
 			header("Content-Type: text/xml; charset=UTF-8");
@@ -2195,7 +2208,7 @@
 			echo "</tree>\n";
 		}
 
-		function adjustTabsForTree(&$tabs) {
+		public function adjustTabsForTree(&$tabs) {
 			include_once('./classes/ArrayRecordSet.php');
 
 			foreach ($tabs as $i => $tab) {
@@ -2206,7 +2219,7 @@
 			return new ArrayRecordSet($tabs);
 		}
 
-		function icon($icon) {
+		public function icon($icon) {
 			if (is_string($icon)) {
 				global $conf;
 				$path = "images/themes/{$conf['theme']}/{$icon}";
@@ -2230,7 +2243,7 @@
 		 * @param $str The string to escape
 		 * @return The escaped string
 		 */
-		function escapeShellArg($str) {
+		public function escapeShellArg($str) {
 			global $data, $lang;
 
 			if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
@@ -2253,7 +2266,7 @@
 		 * @param $str The string to escape
 		 * @return The escaped string
 		 */
-		function escapeShellCmd($str) {
+		public function escapeShellCmd($str) {
 			global $data;
 
 			if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
@@ -2265,10 +2278,12 @@
 		}
 
 		/**
-		 * Get list of servers' groups if existing in the conf
-		 * @return a recordset of servers' groups
-		 */
-		function getServersGroups($recordset = false, $group_id = false) {
+         * Get list of servers' groups if existing in the conf
+         * @param bool $recordset
+         * @param bool $group_id
+         * @return array|ArrayRecordSet recordset of servers' groups
+         */
+        public function getServersGroups($recordset = false, $group_id = false) {
 			global $conf, $lang;
 			$grps = array();
 
@@ -2328,15 +2343,16 @@
 
 			return $grps;
 		}
-		
 
-		/**
-		 * Get list of servers
-		 * @param $recordset return as RecordSet suitable for printTable if true,
-		 *                   otherwise just return an array.
-		 * @param $group a group name to filter the returned servers using $conf[srv_groups]
-		 */
-		function getServers($recordset = false, $group = false) {
+
+        /**
+         * Get list of servers
+         * @param bool $recordset return as RecordSet suitable for printTable if true,
+         *                   otherwise just return an array.
+         * @param bool $group a group name to filter the returned servers using $conf[srv_groups]
+         * @return array|ArrayRecordSet
+         */
+        public function getServers($recordset = false, $group = false) {
 			global $conf;
 
 			$logins = isset($_SESSION['webdbLogin']) && is_array($_SESSION['webdbLogin']) ? $_SESSION['webdbLogin'] : array();
@@ -2403,7 +2419,7 @@
 		 * @param $server_id A server identifier (host:port)
 		 * @return An associative array of server properties
 		 */
-		function getServerInfo($server_id = null) {
+		public function getServerInfo($server_id = null) {
 			global $conf, $_reload_browser, $lang;
 
 			if ($server_id === null && isset($_REQUEST['server']))
@@ -2445,7 +2461,7 @@
 		 * @param $server_id the server identifier, or null for current
 		 *                   server.
 		 */
-		function setServerInfo($key, $value, $server_id = null)
+		public function setServerInfo($key, $value, $server_id = null)
 		{
 			if ($server_id === null && isset($_REQUEST['server']))
 				$server_id = $_REQUEST['server'];
@@ -2465,11 +2481,10 @@
 		
 		/**
 		 * Set the current schema
-		 * @param $schema The schema name
-		 * @return 0 on success
-		 * @return $data->seSchema() on error
-		 */
-		function setCurrentSchema($schema) {
+         * @param $schema The schema name
+         * @return int 0 on success
+         */
+        public function setCurrentSchema($schema) {
 			global $data;
 			
 			$status = $data->setSchema($schema);
@@ -2486,7 +2501,7 @@
 		 * of the database and server.
 		 * @param $script the SQL script to save.
 		 */
-		function saveScriptHistory($script) {
+		public function saveScriptHistory($script) {
 			list($usec, $sec) = explode(' ', microtime());
 			$time = ((float)$usec + (float)$sec);
 			$_SESSION['history'][$_REQUEST['server']][$_REQUEST['database']]["$time"] = array(
@@ -2501,7 +2516,7 @@
 		 * databases form the popups windows.
 		 * @param $onchange Javascript action to take when selections change.
 		 */	
-		function printConnection($onchange) {
+		public function printConnection($onchange) {
 			global $data, $lang, $misc;
 
 			echo "<table style=\"width: 100%\"><tr><td>\n";
@@ -2550,29 +2565,31 @@
 			echo "</td></tr></table>\n";
 		}
 
-		/**
-		 * returns an array representing FKs definition for a table, sorted by fields
-		 * or by constraint.
-		 * @param $table The table to retrieve FK contraints from
-		 * @returns the array of FK definition:
-		 *   array(
-		 *     'byconstr' => array(
-		 *       constrain id => array(
-		 *         confrelid => foreign relation oid
-		 *         f_schema => foreign schema name
-		 *         f_table => foreign table name
-		 *         pattnums => array of parent's fields nums
-		 *         pattnames => array of parent's fields names
-		 *         fattnames => array of foreign attributes names
-		 *       )
-		 *     ),
-		 *     'byfield' => array(
-		 *       attribute num => array (constraint id, ...)
-		 *     ),
-		 *     'code' => HTML/js code to include in the page for auto-completion
-		 *   )
-		 **/
-		function getAutocompleteFKProperties($table) {
+        /**
+         * returns an array representing FKs definition for a table, sorted by fields
+         * or by constraint.
+         * @param $table The table to retrieve FK contraints from
+         * @returns the array of FK definition:
+         *   array(
+         *     'byconstr' => array(
+         *       constrain id => array(
+         *         confrelid => foreign relation oid
+         *         f_schema => foreign schema name
+         *         f_table => foreign table name
+         *         pattnums => array of parent's fields nums
+         *         pattnames => array of parent's fields names
+         *         fattnames => array of foreign attributes names
+         *       )
+         *     ),
+         *     'byfield' => array(
+         *       attribute num => array (constraint id, ...)
+         *     ),
+         *     'code' => HTML/js code to include in the page for auto-completion
+         *   )
+         *
+         * @return array|bool
+         */
+		public function getAutocompleteFKProperties($table) {
 			global $data;
 
 			$fksprops = array(
@@ -2652,4 +2669,4 @@
 			return $fksprops;
 		}
 	}
-?>
+

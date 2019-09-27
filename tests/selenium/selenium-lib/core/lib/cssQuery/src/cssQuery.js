@@ -81,7 +81,7 @@ var modules = {};
 var loaded = false;
 cssQuery.addModule = function($name, $script) {
 	if (loaded) eval("$script=" + String($script));
-	modules[$name] = new $script();;
+    modules[$name] = new $script();
 };
 
 // hackery
@@ -173,13 +173,13 @@ var thisElement = function($element) {
 // return the previous element to the supplied element
 //  previousSibling is not good enough as it might return a text or comment node
 var previousElementSibling = function($element) {
-	while ($element && ($element = $element.previousSibling) && !thisElement($element)) continue;
+	while ($element && ($element = $element.previousSibling) && !thisElement($element))
 	return $element;
 };
 
 // return the next element to the supplied element
 var nextElementSibling = function($element) {
-	while ($element && ($element = $element.nextSibling) && !thisElement($element)) continue;
+	while ($element && ($element = $element.nextSibling) && !thisElement($element))
 	return $element;
 };
 
@@ -259,8 +259,7 @@ function _msie_selectById($results, $from, id) {
 		}
 	}
 	return $results;
-};
-
+}
 // for IE5.0
 if (![].push) Array.prototype.push = function() {
 	for (var i = 0; i < arguments.length; i++) {
@@ -291,8 +290,7 @@ function select($$from, $token, $filter, $arguments) {
 		selectors[$token]($results, $$from, $filter, $arguments);
 	}
 	return $results;
-};
-
+}
 // -----------------------------------------------------------------------
 // parsing
 // -----------------------------------------------------------------------
@@ -304,9 +302,8 @@ var $$STREAM = /[\s#.:>+~()@]|[^\s#.:>+~()@]+/g;
 function _toStream($selector) {
 	if ($STANDARD_SELECT.test($selector)) $selector = " " + $selector;
 	return $selector.match($$STREAM) || [];
-};
-
-var $WHITESPACE = /\s*([\s>+~(),]|^|$)\s*/g;
+}
+    var $WHITESPACE = /\s*([\s>+~(),]|^|$)\s*/g;
 var $IMPLIED_ALL = /([\s>+~,]|[^(]\+|^)([#.:@])/g;
 var parseSelector = function($selector) {
 	return $selector
@@ -337,8 +334,7 @@ var getText = function($text) {
 var $ESCAPE = /([\/()[\]?{}|*+-])/g;
 function regEscape($string) {
 	return $string.replace($ESCAPE, "\\$1");
-};
-
+}
 // -----------------------------------------------------------------------
 // modules
 // -----------------------------------------------------------------------

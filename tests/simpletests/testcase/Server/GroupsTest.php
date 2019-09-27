@@ -22,7 +22,7 @@ class GroupsTest extends PreconditionSet
     // Declare the member variable for group name.
     private $_groupName = "testgroup";
         
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -33,7 +33,7 @@ class GroupsTest extends PreconditionSet
         return TRUE;
     }
 
-    function tearDown()
+    public function tearDown()
     {
         $this->logout();
 
@@ -44,7 +44,7 @@ class GroupsTest extends PreconditionSet
      * TestCaseID: SCG01
      * Test to create group. 
      */
-    function testCreate() 
+    public function testCreate()
     {
         global $webUrl;
         global $POWER_USER_NAME;
@@ -72,7 +72,7 @@ class GroupsTest extends PreconditionSet
      * TestCaseID: SAG01
      * Test to add users to the gruop.
      */
-    function testAddUser() 
+    public function testAddUser()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -107,7 +107,7 @@ class GroupsTest extends PreconditionSet
      * TestCaseID: SRG01
      * Test to Remove users from the group.
      */
-    function testRemoveUser() 
+    public function testRemoveUser()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -136,7 +136,7 @@ class GroupsTest extends PreconditionSet
      * TestCaseID: SDG01
      * Test to drop the group. 
      */
-    function testDrop() 
+    public function testDrop()
     {
         global $webUrl;
         global $lang, $SERVER;
@@ -157,4 +157,4 @@ class GroupsTest extends PreconditionSet
         return TRUE;
     }
 }
-?>
+

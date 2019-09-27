@@ -124,7 +124,7 @@
 				echo " FROM stdin;\n";
 				while (!$rs->EOF) {
 					$first = true;
-					foreach ($rs->fields as $k => $v) {
+					while(list($k, $v) = each($rs->fields)) {
 						// Escape value
 						$v = $data->escapeBytea($v);
 						
@@ -342,4 +342,4 @@
 		$misc->printFooter();
 	}
 
-?>
+

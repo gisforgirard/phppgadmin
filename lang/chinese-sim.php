@@ -89,7 +89,7 @@ $lang['strconfemptytable'] = '真的要清空"%s"数据表？';
 $lang['strtableemptied'] = '数据表清空完成。';
 $lang['strtableemptiedbad'] = '数据表清空失败。';
 $lang['strconfdroptable'] = '真的要删除除"%s"数据表？';
-$lang['strtabledropped'] = '删除数据表完成。';
+$lang['strtabledropped'] = '善除数据表完成。';
 $lang['strtabledroppedbad'] = '删除数据表失败。';
 
 // Users
@@ -356,4 +356,4 @@ $lang['strschemaname'] = '模式名称';
 $lang['strtopbar'] = '%s 架于 %s：%s － 您是 "%s"';
 $lang['strtimefmt'] = 'jS M, Y g:iA';
 
-?>
+

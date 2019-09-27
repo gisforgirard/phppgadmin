@@ -25,9 +25,10 @@
 			doAlter($lang['strtriggeralteredbad']);
 	}
 
-	/**
-	 * Function to allow altering of a trigger
-	 */
+/**
+ * Function to allow altering of a trigger
+ * @param string $msg
+ */
 	function doAlter($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -59,10 +60,11 @@
 		}
 		else echo "<p>{$lang['strnodata']}</p>\n";
 	}
-	
-	/**
-	 * Show confirmation of drop and perform actual drop
-	 */
+
+/**
+ * Show confirmation of drop and perform actual drop
+ * @param $confirm
+ */
 	function doDrop($confirm) {
 		global $data, $misc;
 		global $lang;
@@ -94,9 +96,10 @@
 
 	}
 
-	/**
-	 * Show confirmation of enable trigger and perform enabling the trigger
-	 */
+/**
+ * Show confirmation of enable trigger and perform enabling the trigger
+ * @param $confirm
+ */
 	function doEnable($confirm) {
 		global $data, $misc;
 		global $lang;
@@ -127,9 +130,10 @@
 
 	}
 
-	/**
-	 * Show confirmation of disable trigger and perform disabling the trigger
-	 */
+/**
+ * Show confirmation of disable trigger and perform disabling the trigger
+ * @param $confirm
+ */
 	function doDisable($confirm) {
 		global $data, $misc;
 		global $lang;
@@ -160,9 +164,10 @@
 
 	}
 
-	/**
-	 * Let them create s.th.
-	 */
+/**
+ * Let them create s.th.
+ * @param string $msg
+ */
 	function doCreate($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -252,11 +257,12 @@
 			else
 				doCreate($lang['strtriggercreatedbad']);
 		}
-	}	
+	}
 
-	/**
-	 * List all the triggers on the table
-	 */
+/**
+ * List all the triggers on the table
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $misc, $database;
 		global $lang;
@@ -445,4 +451,4 @@
 	
 	$misc->printFooter();
 
-?>
+

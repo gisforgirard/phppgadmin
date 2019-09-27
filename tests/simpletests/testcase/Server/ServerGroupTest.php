@@ -18,7 +18,7 @@ require_once('TableSpacesTest.php');
  */
 class ServerGroupTest extends GroupTest
 {
-    function ServerGroupTest() 
+    public function __construct()
     {
         $this->GroupTest('Server management group test.');
         $this->addTestClass(new UsersTest());
@@ -28,4 +28,4 @@ class ServerGroupTest extends GroupTest
 
     }
 }
-?>
+

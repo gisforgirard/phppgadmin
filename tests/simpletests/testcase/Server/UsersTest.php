@@ -20,7 +20,7 @@ class UsersTest extends PreconditionSet
     private $_superUserName = "superuser";
     private $_powerUserName = "poweruser";
 
-    function setUp()
+    public function setUp()
     {
         global $webUrl, $SUPER_USER_NAME, $SUPER_USER_PASSWORD, $SERVER;
 
@@ -29,7 +29,7 @@ class UsersTest extends PreconditionSet
         return TRUE;
     }
 
-    function tearDown()
+    public function tearDown()
     {
         $this->logout();
         
@@ -40,7 +40,7 @@ class UsersTest extends PreconditionSet
      * TestCaseID: SCU01
      * Test to create super user.
      */
-    function testCreateSuper() 
+    public function testCreateSuper()
     {
         global $webUrl;
         global $lang, $SERVER;
@@ -68,7 +68,7 @@ class UsersTest extends PreconditionSet
      * TestCaseID: SCU02
      * Test to create power user.
      */
-    function testCreatePower() 
+    public function testCreatePower()
     {
         global $webUrl;
         global $lang, $SERVER;
@@ -94,7 +94,7 @@ class UsersTest extends PreconditionSet
      * TestCaseID: SLU01
      * Test to list all the users.
      */ 
-    function testListUsers() 
+    public function testListUsers()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -116,7 +116,7 @@ class UsersTest extends PreconditionSet
      * TestCaseID: SAU01
      * Test to alter existing user's properties.
      */
-    function testAlter() 
+    public function testAlter()
     {
         global $webUrl;
         global $lang, $SERVER;
@@ -147,7 +147,7 @@ class UsersTest extends PreconditionSet
      * TestCaseID: SDU01
      * Test to drop existing user.
      */
-    function testDrop() 
+    public function testDrop()
     {
         global $webUrl;
         global $lang, $SERVER;
@@ -171,7 +171,7 @@ class UsersTest extends PreconditionSet
      * TestCaseID: SDU02
      * Test to drop existing user when the user is login.
      */
-    function testDropLogin() 
+    public function testDropLogin()
     {
         global $webUrl;
         global $lang, $SERVER;
@@ -209,7 +209,7 @@ class UsersTest extends PreconditionSet
      * TestCaseID: SDU03
      * Test to drop the user self.
      */
-    function testDropSelf() 
+    public function testDropSelf()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -231,4 +231,4 @@ class UsersTest extends PreconditionSet
         return TRUE;
     }
 }
-?>
+

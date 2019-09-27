@@ -12,9 +12,10 @@
 	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
 	if (!isset($msg)) $msg = '';
 
-	/**
-	 * Display a form for alter and perform actual alter
-	 */
+/**
+ * Display a form for alter and perform actual alter
+ * @param $confirm
+ */
 	function doAlter($confirm) {
 		global $data, $misc, $_reload_browser;
 		global $lang;
@@ -76,9 +77,10 @@
 		}
 	}
 
-	/**
-	 * Show confirmation of drop and perform actual drop
-	 */
+/**
+ * Show confirmation of drop and perform actual drop
+ * @param $confirm
+ */
 	function doDrop($confirm) {
 		global $data, $misc;
 		global $lang, $_reload_drop_database;
@@ -142,9 +144,10 @@
     }// END FUNCTION
 
 
-	/**
-	 * Displays a screen where they can enter a new database
-	 */
+/**
+ * Displays a screen where they can enter a new database
+ * @param string $msg
+ */
 	function doCreate($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -288,9 +291,10 @@
 		}
 	}
 
-	/**
-	 * Displays options for cluster download
-	 */
+/**
+ * Displays options for cluster download
+ * @param string $msg
+ */
 	function doExport($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -337,9 +341,10 @@
 		echo "</form>\n";
 	}
 
-	/**
-	 * Show default list of databases in the server
-	 */
+/**
+ * Show default list of databases in the server
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $conf, $misc;
 		global $lang;
@@ -529,4 +534,4 @@
 
 	$misc->printFooter();
 
-?>
+

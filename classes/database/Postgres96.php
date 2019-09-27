@@ -9,19 +9,19 @@ include_once('./classes/database/Postgres10.php');
 
 class Postgres96 extends Postgres10 {
 
-	var $major_version = 9.6;
+	public $major_version = 9.6;
 
 	/**
 	 * Constructor
 	 * @param $conn The database connection
 	 */
-    function __construct($conn) {
-        parent::__construct($conn);
-    }
+	public function __construct($conn) {
+		Postgres::__construct($conn);
+	}
 
 	// Help functions
 
-	function getHelpPages() {
+	public function getHelpPages() {
 		include_once('./help/PostgresDoc96.php');
 		return $this->help_page;
 	}
@@ -33,7 +33,7 @@ class Postgres96 extends Postgres10 {
 	 * @param $sequence Sequence name
 	 * @return A recordset
 	 */
-	function getSequence($sequence) {
+	public function getSequence($sequence) {
 		$c_schema = $this->_schema;
 		$this->clean($c_schema);
 		$c_sequence = $sequence;
@@ -54,4 +54,4 @@ class Postgres96 extends Postgres10 {
 
 
 }
-?>
+

@@ -158,9 +158,10 @@
 
 	}
 
-	/**
-	 * Displays a screen where one can enter a new FTS configuration
-	 */
+/**
+ * Displays a screen where one can enter a new FTS configuration
+ * @param string $msg
+ */
 	function doCreateConfig($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -210,7 +211,7 @@
 			}
 			$ftscfgs->moveNext();
 		}
-		echo GUI::printCombo($tpls, 'formTemplate', true, $tplsel, false);
+		echo (new GUI)->printCombo($tpls, 'formTemplate', true, $tplsel, false);
 		echo "\n\t\t</td>\n\t</tr>\n";
 
 		// Parser
@@ -232,7 +233,7 @@
 			}
 			$ftsparsers->moveNext();
 		}
-		echo GUI::printCombo($ftsparsers_, 'formParser', true, $ftsparsel, false);
+		echo (new GUI)->printCombo($ftsparsers_, 'formParser', true, $ftsparsel, false);
 		echo "\n\t\t</td>\n\t</tr>\n";
 
 		// Comment
@@ -278,9 +279,10 @@
 			doCreateConfig($lang['strftsconfigcreatedbad']);
 	}
 
-	/**
-	 * Display a form to permit editing FTS configuration properies.
-	 */
+/**
+ * Display a form to permit editing FTS configuration properies.
+ * @param string $msg
+ */
 	function doAlterConfig($msg = '') {
 		global $data, $misc, $lang;
 
@@ -339,9 +341,10 @@
 			doAlterConfig($lang['strftsconfigalteredbad']);
 	}
 
-	/**
-	 * View list of FTS parsers
-	 */
+/**
+ * View list of FTS parsers
+ * @param string $msg
+ */
 	function doViewParsers($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -376,9 +379,10 @@
 	}
 
 
-	/**
-	 * View list of FTS dictionaries
-	 */
+/**
+ * View list of FTS dictionaries
+ * @param string $msg
+ */
 	function doViewDicts($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -458,9 +462,11 @@
 	}
 
 
-	/**
-	 * View details of FTS configuration given
-	 */
+/**
+ * View details of FTS configuration given
+ * @param $ftscfg
+ * @param string $msg
+ */
 	function doViewConfig($ftscfg, $msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -552,9 +558,10 @@
 		$misc->printNavLinks($navlinks, 'fulltext-viewconfig', get_defined_vars());
 	}
 
-	/**
-	 * Displays a screen where one can enter a details of a new FTS dictionary
-	 */
+/**
+ * Displays a screen where one can enter a details of a new FTS dictionary
+ * @param string $msg
+ */
 	function doCreateDict($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -605,7 +612,7 @@
 			}
 			$ftstpls->moveNext();
 		}
-		echo GUI::printCombo($tpls, 'formTemplate', true, $tplsel, false);
+		echo (new GUI)->printCombo($tpls, 'formTemplate', true, $tplsel, false);
 		echo "\n\t\t</td>\n\t</tr>\n";
 
 		// TODO: what about maxlengths?
@@ -688,9 +695,10 @@
 		}
 	}
 
-	/**
-	 * Display a form to permit editing FTS dictionary properies.
-	 */
+/**
+ * Display a form to permit editing FTS dictionary properies.
+ * @param string $msg
+ */
 	function doAlterDict($msg = '') {
 		global $data, $misc, $lang;
 
@@ -746,9 +754,10 @@
 			doAlterDict($lang['strftsdictalteredbad']);
 	}
 
-	/**
-	 * Show confirmation of drop and perform actual drop of FTS mapping
-	 */
+/**
+ * Show confirmation of drop and perform actual drop of FTS mapping
+ * @param $confirm
+ */
 	function doDropMapping($confirm) {
 		global $data, $misc;
 		global $lang, $_reload_drop_database;
@@ -894,9 +903,10 @@
 			doAlterMapping($lang['strftsmappingalteredbad']);
 	}
 
-	/**
-	 * Show the form to enter parameters of a new FTS mapping
-	 */
+/**
+ * Show the form to enter parameters of a new FTS mapping
+ * @param string $msg
+ */
 	function doAddMapping($msg = '') {
 		global $data, $misc, $lang;
 
@@ -1117,4 +1127,4 @@
 
 	$misc->printFooter();
 
-?>
+

@@ -9,19 +9,19 @@ include_once('./classes/database/Postgres96.php');
 
 class Postgres95 extends Postgres96 {
 
-	var $major_version = 9.5;
+	public $major_version = 9.5;
 
 	/**
 	 * Constructor
 	 * @param $conn The database connection
 	 */
-    function __construct($conn) {
-        parent::__construct($conn);
-    }
+	public function __construct($conn) {
+		Postgres::__construct($conn);
+	}
 
 	// Help functions
 
-	function getHelpPages() {
+	public function getHelpPages() {
 		include_once('./help/PostgresDoc95.php');
 		return $this->help_page;
 	}
@@ -32,7 +32,7 @@ class Postgres95 extends Postgres96 {
 	 * @param $database (optional) Find only connections to specified database
 	 * @return A recordset
 	 */
-	function getProcesses($database = null) {
+	public function getProcesses($database = null) {
 		if ($database === null)
 			$sql = "SELECT datname, usename, pid, waiting, state_change as query_start,
                   case when state='idle in transaction' then '<IDLE> in transaction' when state = 'idle' then '<IDLE>' else query end as query 
@@ -52,4 +52,4 @@ class Postgres95 extends Postgres96 {
 
 
 }
-?>
+

@@ -12,9 +12,10 @@
 	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
 	if (!isset($msg)) $msg = '';
 
-	/**
-	 * Display list of all sequences in the database/schema
-	 */
+/**
+ * Display list of all sequences in the database/schema
+ * @param string $msg
+ */
 	function doDefault($msg = '')	{
 		global $data, $conf, $misc;
 		global $lang;
@@ -136,9 +137,10 @@
 		exit;
 	}
 
-	/**
-	 * Display the properties of a sequence
-	 */
+/**
+ * Display the properties of a sequence
+ * @param string $msg
+ */
 	function doProperties($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -286,9 +288,11 @@
 		else echo "<p>{$lang['strnodata']}</p>\n";
 	}
 
-	/**
-	 * Drop a sequence
-	 */
+/**
+ * Drop a sequence
+ * @param $confirm
+ * @param string $msg
+ */
 	function doDrop($confirm, $msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -359,9 +363,10 @@
 		}
 	}
 
-	/**
-	 * Displays a screen where they can enter a new sequence
-	 */
+/**
+ * Displays a screen where they can enter a new sequence
+ * @param string $msg
+ */
 	function doCreateSequence($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -493,9 +498,10 @@
 			doProperties($lang['strsequencesetvalbad']);
 	}
 
-	/**
-	 * Function to allow 'setval'ing of a sequence
-	 */
+/**
+ * Function to allow 'setval'ing of a sequence
+ * @param string $msg
+ */
 	function doSetval($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -564,9 +570,10 @@
 			doProperties($lang['strsequencealteredbad']);
 	}
 
-	/**
-	 * Function to allow altering of a sequence
-	 */
+/**
+ * Function to allow altering of a sequence
+ * @param string $msg
+ */
 	function doAlter($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -725,4 +732,4 @@
 	// Print footer
 	$misc->printFooter();
 
-?>
+

@@ -639,7 +639,7 @@ UnionExpr.prototype.path = function(path) {
     if (path.needContextNode) {
         this.needContextNode = true;
     }
-}
+};
 UnionExpr.prototype.show = function(indent) {
     indent = indent || '';
     var t = '';
@@ -1252,7 +1252,7 @@ Step.axises = {
                 prevNodeset.reserveDelByNode(node, prevIndex, true);
             }
             if (test.match(node)) nodeset.unshift(node);
-        } while (node = node.parentNode)
+        } while (node = node.parentNode);
         return nodeset;
     }],
 
@@ -1750,7 +1750,7 @@ Number = function(digit) {
 
 
 Number.parse = function(lexer) {
-    return new Number(lexer.next());
+    return Number(lexer.next());
 };
 
 Number.prototype = new BaseExpr();
@@ -2066,7 +2066,7 @@ FunctionCall.funcs = {
         }
         for (var t = '', i = 0, l = s1.length; i < l; i ++) {
             var ch = s1.charAt(i);
-            var replace = map[ch]
+            var replace = map[ch];
             t += (replace != undefined) ? replace : ch;
         }
         return t;

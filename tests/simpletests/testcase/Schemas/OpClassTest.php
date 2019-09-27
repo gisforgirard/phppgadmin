@@ -22,7 +22,7 @@ class OpClassTest extends PreconditionSet
     /**
      * Set up the precondition. 
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -39,7 +39,7 @@ class OpClassTest extends PreconditionSet
     /**
      * Clean up all the result. 
      */
-    function tearDown()
+    public function tearDown()
     {
         // Logout from the system.
         $this->logout(); 
@@ -52,7 +52,7 @@ class OpClassTest extends PreconditionSet
      * TestCaseID: HBC01
      * Browse all the op classes.
      */
-    function testBrowseOpClass()
+    public function testBrowseOpClass()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -72,4 +72,4 @@ class OpClassTest extends PreconditionSet
     } 
 }    
 
-?>
+

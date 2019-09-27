@@ -24,7 +24,7 @@ class TableSpacesTest extends PreconditionSet
     private $_tableSpaceName = 'TestTableSpace';
     private $_location;
     
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -36,7 +36,7 @@ class TableSpacesTest extends PreconditionSet
         return TRUE;
     }
     
-    function tearDown()
+    public function tearDown()
     {
         $this->logout();
         
@@ -49,7 +49,7 @@ class TableSpacesTest extends PreconditionSet
 	 * Test to create tablespace.
 	 * XXX: Your PgSQL admin user must own data/TableSpace
      */
-    function testCreate() 
+    public function testCreate()
     {
         global $webUrl;
         global $POWER_USER_NAME;
@@ -77,7 +77,7 @@ class TableSpacesTest extends PreconditionSet
      * TestCaseID: SAT01
      * Test to alter existing tablespace's properties.
      */
-    function testAlter() 
+    public function testAlter()
     {
         global $webUrl;
         global $NORMAL_USER_NAME;
@@ -106,7 +106,7 @@ class TableSpacesTest extends PreconditionSet
      * TestCaseID: SPT01
      * Test to grant privileges for tablespace.
      */
-    function testGrantPrivilege() 
+    public function testGrantPrivilege()
     {
         global $webUrl;
         global $NORMAL_USER_NAME;
@@ -139,7 +139,7 @@ class TableSpacesTest extends PreconditionSet
      * TestCaseID: SPT02
      * Test to revoke privileges for tablespace.
      */
-    function testRevokePrivilege() 
+    public function testRevokePrivilege()
     {
         global $webUrl;
         global $NORMAL_USER_NAME;
@@ -171,7 +171,7 @@ class TableSpacesTest extends PreconditionSet
      * TestCaseID: SPT03
      * Test to grant privilege with no privilege selected for tablespace.
      */
-    function testGrantNoPrivilege() 
+    public function testGrantNoPrivilege()
     {
         global $webUrl;
         global $NORMAL_USER_NAME;
@@ -200,7 +200,7 @@ class TableSpacesTest extends PreconditionSet
      * TestCaseID: SPT04
      * Test to revoke privileges with no user selected for tablespace.
      */
-    function testRevokeNoUser() 
+    public function testRevokeNoUser()
     {
         global $webUrl;
         global $NORMAL_USER_NAME;
@@ -229,7 +229,7 @@ class TableSpacesTest extends PreconditionSet
      * TestCaseID: SDT01
      * Test to drop existing tablespace.
      */
-    function testDrop() 
+    public function testDrop()
     {
         global $webUrl;
         global $lang, $SERVER;
@@ -250,4 +250,4 @@ class TableSpacesTest extends PreconditionSet
         return TRUE;
     }
 }
-?>
+

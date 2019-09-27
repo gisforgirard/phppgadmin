@@ -16,7 +16,7 @@
 
 var Logger = function() {
     this.logWindow = null;
-}
+};
 Logger.prototype = {
 
     logLevels: {
@@ -27,13 +27,13 @@ Logger.prototype = {
         off: 999
     },
 
-    pendingMessages: new Array(),
+    pendingMessages: [],
     
     threshold: "info",
 
     setLogLevelThreshold: function(logLevel) {
         this.threshold = logLevel;
-        var logWindow = this.getLogWindow()
+        var logWindow = this.getLogWindow();
         if (logWindow && logWindow.setThresholdLevel) {
             logWindow.setThresholdLevel(logLevel);
         }
@@ -145,4 +145,4 @@ var LogMessage = function(type, msg) {
     this.type = type;
     this.msg = msg;
     this.timestamp = (new Date().getTime());
-}
+};

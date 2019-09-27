@@ -26,9 +26,10 @@
 			doAlter($lang['strdomainalteredbad']);
 	}
 
-	/**
-	 * Allow altering a domain
-	 */
+/**
+ * Allow altering a domain
+ * @param string $msg
+ */
 	function doAlter($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -82,10 +83,12 @@
 		}
 		else echo "<p>{$lang['strnodata']}</p>\n";
 	}
-	
-	/**
-	 * Confirm and then actually add a CHECK constraint
-	 */
+
+/**
+ * Confirm and then actually add a CHECK constraint
+ * @param $confirm
+ * @param string $msg
+ */
 	function addCheck($confirm, $msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -132,9 +135,11 @@
 		}
 	}
 
-	/**
-	 * Show confirmation of drop constraint and perform actual drop
-	 */
+/**
+ * Show confirmation of drop constraint and perform actual drop
+ * @param $confirm
+ * @param string $msg
+ */
 	function doDropConstraint($confirm, $msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -165,10 +170,11 @@
 		}
 		
 	}
-	
-	/**
-	 * Show properties for a domain.  Allow manipulating constraints as well.
-	 */
+
+/**
+ * Show properties for a domain.  Allow manipulating constraints as well.
+ * @param string $msg
+ */
 	function doProperties($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -292,10 +298,11 @@
 		
 		$misc->printNavLinks($navlinks, 'domains-properties', get_defined_vars());
 	}
-	
-	/**
-	 * Show confirmation of drop and perform actual drop
-	 */
+
+/**
+ * Show confirmation of drop and perform actual drop
+ * @param $confirm
+ */
 	function doDrop($confirm) {
 		global $data, $misc;
 		global $lang;
@@ -323,10 +330,11 @@
 		}
 		
 	}
-	
-	/**
-	 * Displays a screen where they can enter a new domain
-	 */
+
+/**
+ * Displays a screen where they can enter a new domain
+ * @param string $msg
+ */
 	function doCreate($msg = '') {
 		global $data, $misc;
 		global $lang;
@@ -407,11 +415,12 @@
 			else
 				doCreate($lang['strdomaincreatedbad']);
 		}
-	}	
+	}
 
-	/**
-	 * Show default list of domains in the database
-	 */
+/**
+ * Show default list of domains in the database
+ * @param string $msg
+ */
 	function doDefault($msg = '') {
 		global $data, $conf, $misc;
 		global $lang;
@@ -584,4 +593,4 @@
 
 	$misc->printFooter();
 	
-?>
+

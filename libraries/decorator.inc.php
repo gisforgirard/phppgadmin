@@ -91,37 +91,37 @@ function value_url(&$var, &$fields) {
 
 class Decorator
 {
-	function __construct($value) {
+	public function __construct($value) {
 		$this->v = $value;
 	}
 	
-	function value($fields) {
+	public function value($fields) {
 		return $this->v;
 	}
 }
 
 class FieldDecorator extends Decorator
 {
-	function __construct($fieldName, $default = null) {
+	public function __construct($fieldName, $default = null) {
 		$this->f = $fieldName;
 		if ($default !== null) $this->d = $default;
 	}
 	
-	function value($fields) {
+	public function value($fields) {
 		return isset($fields[$this->f]) ? value($fields[$this->f], $fields) : (isset($this->d) ? $this->d : null);
 	}
 }
 
 class ArrayMergeDecorator extends Decorator
 {
-	function __construct($arrays) {
+	public function __construct($arrays) {
 		$this->m = $arrays;
 	}
 	
-	function value($fields) {
+	public function value($fields) {
 		$accum = array();
 		foreach($this->m as $var) {
-			$accum = array_merge($accum, value($var, $fields));
+			$accum[] = value($var, $fields);
 		}
 		return $accum;
 	}
@@ -129,11 +129,11 @@ class ArrayMergeDecorator extends Decorator
 
 class ConcatDecorator extends Decorator
 {
-	function __construct($values) {
+	public function __construct($values) {
 		$this->c = $values;
 	}
 	
-	function value($fields) {
+	public function value($fields) {
 		$accum = '';
 		foreach($this->c as $var) {
 			$accum .= value($var, $fields);
@@ -144,25 +144,25 @@ class ConcatDecorator extends Decorator
 
 class CallbackDecorator extends Decorator
 {
-	function __construct($callback, $param = null) {
+	public function __construct($callback, $param = null) {
 		$this->fn = $callback;
 		$this->p = $param;
 	}
 	
-	function value($fields) {
+	public function value($fields) {
 		return call_user_func($this->fn, $fields, $this->p);
 	}
 }
 
 class IfEmptyDecorator extends Decorator
 {
-	function __construct($value, $empty, $full = null) {
+	public function __construct($value, $empty, $full = null) {
 		$this->v = $value;
 		$this->e = $empty;
 		if ($full !== null) $this->f = $full;
 	}
 	
-	function value($fields) {
+	public function value($fields) {
 		$val = value($this->v, $fields);
 		if (empty($val))
 			return value($this->e, $fields);
@@ -173,13 +173,13 @@ class IfEmptyDecorator extends Decorator
 
 class UrlDecorator extends Decorator
 {
-	function __construct($base, $queryVars = null) {
+	public function __construct($base, $queryVars = null) {
 		$this->b = $base;
 		if ($queryVars !== null)
 			$this->q = $queryVars;
 	}
 	
-	function value($fields) {
+	public function value($fields) {
 		$url = value($this->b, $fields);
 		
 		if ($url === false) return '';
@@ -199,12 +199,12 @@ class UrlDecorator extends Decorator
 
 class replaceDecorator extends Decorator
 {
-	function __construct($str, $params) {
+	public function __construct($str, $params) {
 		$this->s = $str;
 		$this->p = $params;
 	}
 
-	function value($fields) {
+	public function value($fields) {
 		$str = $this->s;
 		foreach ($this->p as $k => $v) {
 			$str = str_replace($k, value($v, $fields), $str);
@@ -212,4 +212,4 @@ class replaceDecorator extends Decorator
 		return $str;
 	}
 }
-?>
+

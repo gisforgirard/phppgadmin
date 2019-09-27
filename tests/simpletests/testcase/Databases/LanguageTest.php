@@ -22,7 +22,7 @@ class LanguageTest extends PreconditionSet
     /**
      * Set up the preconditon.
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -38,7 +38,7 @@ class LanguageTest extends PreconditionSet
     /**
      * Release the relational resource.
      */
-    function tearDown()
+    public function tearDown()
     {
         // Logout this system.
         $this->logout();
@@ -51,7 +51,7 @@ class LanguageTest extends PreconditionSet
      * TestCaseId: DLD001
      * This test is used to test Language Displayed page.
      */
-    function testLanguage()
+    public function testLanguage()
     {
 		global $webUrl, $SERVER, $DATABASE;
 
@@ -68,4 +68,4 @@ class LanguageTest extends PreconditionSet
     }
 }
 
-?>
+

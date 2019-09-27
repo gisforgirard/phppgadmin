@@ -136,7 +136,7 @@ function UIElement(uiElementShorthand)
             break;
         }
         return permutations;
-    }
+    };
     
     
     
@@ -146,7 +146,7 @@ function UIElement(uiElementShorthand)
     this.getTestcases = function()
     {
         return this.testcases;
-    }
+    };
     
     
     
@@ -162,7 +162,7 @@ function UIElement(uiElementShorthand)
     {
         var parser = new DOMParser();
         var testcases = this.getTestcases();
-        testcaseLoop: for (var i = 0; i < testcases.length; ++i) {
+        for (var i = 0; i < testcases.length; ++i) {
             var testcase = testcases[i];
             var xhtml = UI_GLOBAL.XHTML_DOCTYPE + '<html xmlns="'
                 + UI_GLOBAL.XHTML_XMLNS + '">' + testcase.xhtml + '</html>';
@@ -193,7 +193,7 @@ function UIElement(uiElementShorthand)
                 results = eval_locator(locator, doc);
             }
             if (results.length && results[0].hasAttribute('expected-result')) {
-                continue testcaseLoop;
+                continue;
             }
             
             // testcase failed
@@ -354,7 +354,7 @@ function UIElement(uiElementShorthand)
         }
         
         // create the arguments
-        this.args = []
+        this.args = [];
         this.argsOrder = [];
         if (uiElementShorthand.args) {
             for (var i = 0; i < uiElementShorthand.args.length; ++i) {
@@ -559,7 +559,7 @@ function UIArgument(uiArgumentShorthand, localVars)
         for (var name in localVars) {
             this[name] = localVars[name];
         }
-    }
+    };
     
     
     
@@ -685,7 +685,7 @@ function Pageset(pagesetShorthand)
         }
         
         return true;
-    }
+    };
     
     
     
@@ -724,7 +724,7 @@ function Pageset(pagesetShorthand)
             ]);
         }
         return stubs;
-    }
+    };
     
     
     
@@ -813,7 +813,7 @@ function UIMap()
         Editor.UI_PREFIX = UI_GLOBAL.UI_PREFIX;
     }
     
-    this.pagesets = new Object();
+    this.pagesets = {};
     
     
     
@@ -899,7 +899,7 @@ function UIMap()
         catch (e) {
             return null;
         }
-    }
+    };
     
     
     
@@ -1018,7 +1018,7 @@ function UIMap()
         catch (e) {
             return null;
         }
-    }
+    };
     
     
     
@@ -1145,7 +1145,7 @@ function UIMap()
 
 UIMap.getInstance = function() {
     return (UIMap.self == null) ? new UIMap() : UIMap.self;
-}
+};
 
 //******************************************************************************
 // Rollups
@@ -1623,5 +1623,5 @@ RollupManager.getInstance = function() {
     return (RollupManager.self == null)
         ? new RollupManager()
         : RollupManager.self;
-}
+};
 

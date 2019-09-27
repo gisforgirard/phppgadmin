@@ -21,7 +21,7 @@ class TypeTest extends PreconditionSet
     /**
      * Set up the precondition.
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -38,7 +38,7 @@ class TypeTest extends PreconditionSet
     /**
      * Clean up all the result. 
      */
-    function tearDown()
+    public function tearDown()
     {
         // Logout from the system.
         $this->logout(); 
@@ -51,7 +51,7 @@ class TypeTest extends PreconditionSet
      * TestCaseID: HCT01
      * Create a type.
      */
-    function testCreateType()
+    public function testCreateType()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -82,7 +82,7 @@ class TypeTest extends PreconditionSet
      * TestCaseID: HCT02
      * Create a composite type. 
      */
-    function testCreateCompositeType()
+    public function testCreateCompositeType()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -140,7 +140,7 @@ class TypeTest extends PreconditionSet
      * TestCaseID: HTP01
      * Show the properties of the specified type.
      */
-    function testShowProperty()
+    public function testShowProperty()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -180,7 +180,7 @@ class TypeTest extends PreconditionSet
      * TestCaseID: HDT01
      * Drop the type.
      */
-    function testDropType()
+    public function testDropType()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -204,4 +204,4 @@ class TypeTest extends PreconditionSet
         return TRUE;
     } 
 }    
-?>
+

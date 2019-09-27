@@ -22,7 +22,7 @@ class ColumnTest extends PreconditionSet{
     /**
      * Set up the preconditon. 
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $POWER_USER_NAME;
@@ -37,7 +37,7 @@ class ColumnTest extends PreconditionSet{
     /**
      * Clean up all the result. 
      */ 
-    function tearDown(){
+    public function tearDown(){
         $this->logout(); 
 
         return TRUE;
@@ -47,7 +47,7 @@ class ColumnTest extends PreconditionSet{
      * TestCaseID: TNC01
      * Add a column to the table
      */ 
-    function testAddColumn()
+    public function testAddColumn()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -77,7 +77,7 @@ class ColumnTest extends PreconditionSet{
      * TestCaseID: TNC02
      * Add a column with the same name as the existing one
      */ 
-    function testAddColumnWithExistingName()
+    public function testAddColumnWithExistingName()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -106,7 +106,7 @@ class ColumnTest extends PreconditionSet{
      * TestCaseID: TNC03
      * Cancel the add column operation
      */ 
-    function testCancelAddColumn()
+    public function testCancelAddColumn()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -133,7 +133,7 @@ class ColumnTest extends PreconditionSet{
      * TestCaseID: TAC01
      * Alter a column of the table
      */ 
-    function testAlterColumn()
+    public function testAlterColumn()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -165,7 +165,7 @@ class ColumnTest extends PreconditionSet{
      * TestCaseID: TAC02
      * Alter a column to be of negative length
      */ 
-    function testNegativeLengthColumn()
+    public function testNegativeLengthColumn()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -197,7 +197,7 @@ class ColumnTest extends PreconditionSet{
      * TestCaseID: TAC03
      * Cancel the alter column operation
      */ 
-    function testCancelAlterColumn()
+    public function testCancelAlterColumn()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -226,7 +226,7 @@ class ColumnTest extends PreconditionSet{
      * TestCaseID: TDC03
      * Cancel the drop column operation
      */ 
-    function testCancelDropColumn()
+    public function testCancelDropColumn()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -250,7 +250,7 @@ class ColumnTest extends PreconditionSet{
      * TestCaseID: TDC01
      * Drop a column from the table
      */ 
-    function testDropColumn()
+    public function testDropColumn()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -276,7 +276,7 @@ class ColumnTest extends PreconditionSet{
      * TestCaseID: TDC02
      * Drop a column wich "CASCADE" checked
      */ 
-    function testDropColumnWithCascade()
+    public function testDropColumnWithCascade()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -321,4 +321,4 @@ class ColumnTest extends PreconditionSet{
         return TRUE;  
     }                       
 }
-?>
+

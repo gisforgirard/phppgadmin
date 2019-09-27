@@ -21,7 +21,7 @@ class TableTest extends PreconditionSet
     /**
      * Set up the preconditon. 
      */
-    function setUp()
+    public function setUp()
     {
         global $webUrl;
         global $SUPER_USER_NAME;
@@ -37,7 +37,7 @@ class TableTest extends PreconditionSet
     /**
      * Clean up all the result. 
      */   
-    function tearDown()
+    public function tearDown()
     {        
         // Logout from the system.
         $this->logout(); 
@@ -50,7 +50,7 @@ class TableTest extends PreconditionSet
      * TestCaseID: HCT01
      * This testcase is used to create a table in an existing database.
      */
-    function testCreateTable()
+    public function testCreateTable()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -100,7 +100,7 @@ class TableTest extends PreconditionSet
      * TestCaseID: HCT02
      * Create a table with the wrong field number.
      */
-    function testCreateTableWithBadFieldNumber()
+    public function testCreateTableWithBadFieldNumber()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -148,7 +148,7 @@ class TableTest extends PreconditionSet
      *  TestCaseID: HCT03
       * Create a table with the wrong field information.
       */
-    function testCreateTableWithBadFieldData()
+    public function testCreateTableWithBadFieldData()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -197,7 +197,7 @@ class TableTest extends PreconditionSet
      * TestCaseID: HIT01
      * Insert a row into an existing table
      */
-    function testInsertOneRow()
+    public function testInsertOneRow()
     {
         global $webUrl;
         global $lang, $SERVER,$DATABASE;
@@ -232,7 +232,7 @@ class TableTest extends PreconditionSet
      * TestCaseID: HIT02
      * Insert two rows into an existing table
      */
-    function testInsertTwoRows()
+    public function testInsertTwoRows()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -276,7 +276,7 @@ class TableTest extends PreconditionSet
      * TestCaseID: HIT03
      * Insert one row with illegal data type into an existing table.
      */
-    function testInsertWithBadData()
+    public function testInsertWithBadData()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -314,7 +314,7 @@ class TableTest extends PreconditionSet
 	 * XXX Fail cause we have no index on viewtest, created by $this->createable
 	 * see Public/SetPrecondition.php
      */
-    function testEditRow()
+    public function testEditRow()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -351,7 +351,7 @@ class TableTest extends PreconditionSet
 	 * Delete a row.
 	 * XXX Fail, see comment on testEditRow
      */
-    function testDeleteRow()
+    public function testDeleteRow()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -380,7 +380,7 @@ class TableTest extends PreconditionSet
      * TestCaseID: HBT01
      * Browse an existing table.
      */
-    function testBrowseTable()
+    public function testBrowseTable()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -415,7 +415,7 @@ class TableTest extends PreconditionSet
      * TestCaseID: HST01
      * Select all the rows of the table.
      */
-    function testSelectAll()
+    public function testSelectAll()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -447,7 +447,7 @@ class TableTest extends PreconditionSet
      * TestCaseID: HST02
      * Select rows according to the query conditions.
      */
-    function testSelectByConditions()
+    public function testSelectByConditions()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -481,7 +481,7 @@ class TableTest extends PreconditionSet
      * TestCaseID: HST03
      * Select data from an existing table with no row display.
      */
-    function testSelectTableNoRowDisplay()
+    public function testSelectTableNoRowDisplay()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -513,7 +513,7 @@ class TableTest extends PreconditionSet
      * TestCaseID: HVT01
      * Vacuum an existing table with the check box "Full" and "Analyze" unchecked.
      */
-    function testVacuumUnchecked()
+    public function testVacuumUnchecked()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -540,7 +540,7 @@ class TableTest extends PreconditionSet
      * TestCaseID: HVT02
      * Vacuum an existing table with the check box "Full" and "Analyze" checked.
      */
-    function testVacuumChecked()
+    public function testVacuumChecked()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -571,7 +571,7 @@ class TableTest extends PreconditionSet
      * TestCaseID: HET01
      * Empty an existing table.
      */
-    function testEmptyTable()
+    public function testEmptyTable()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -606,7 +606,7 @@ class TableTest extends PreconditionSet
      * TestCaseID: HAT01
      * Alter the properties of an existing table.
      */
-    function testAlterTable()
+    public function testAlterTable()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -642,7 +642,7 @@ class TableTest extends PreconditionSet
      * TestCaseID: HDT01
      * Drop an existing table.
      */
-    function testDropTable()
+    public function testDropTable()
     {
         global $webUrl;
         global $lang, $SERVER, $DATABASE;
@@ -666,4 +666,4 @@ class TableTest extends PreconditionSet
         return TRUE;   
     } 
 }
-?>
+

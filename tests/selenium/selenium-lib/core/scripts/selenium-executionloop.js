@@ -172,4 +172,4 @@ TestLoop.prototype = {
         return 0;
     }
 
-}
+};

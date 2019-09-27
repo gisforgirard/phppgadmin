@@ -10,11 +10,11 @@ include_once('./classes/database/Postgres90.php');
 
 class Postgres84 extends Postgres90 {
 
-	var $major_version = 8.4;
+	public $major_version = 8.4;
 
 	// List of all legal privileges that can be applied to different types
 	// of objects.
-	var $privlist = array(
+	public $privlist = array(
   		'table' => array('SELECT', 'INSERT', 'UPDATE', 'DELETE', 'REFERENCES', 'TRIGGER', 'ALL PRIVILEGES'),
   		'view' => array('SELECT', 'INSERT', 'UPDATE', 'DELETE', 'REFERENCES', 'TRIGGER', 'ALL PRIVILEGES'),
   		'sequence' => array('SELECT', 'UPDATE', 'ALL PRIVILEGES'),
@@ -30,25 +30,25 @@ class Postgres84 extends Postgres90 {
 	 * Constructor
 	 * @param $conn The database connection
 	 */
-	function __construct($conn) {
-		parent::__construct($conn);
+	public function __construct($conn) {
+		Postgres::__construct($conn);
 	}
 
 	// Help functions
 
-	function getHelpPages() {
+	public function getHelpPages() {
 		include_once('./help/PostgresDoc84.php');
 		return $this->help_page;
 	}
 
 	// Database functions
 
-	/**
-	 * Grabs a list of triggers on a table
-	 * @param $table The name of a table whose triggers to retrieve
-	 * @return A recordset
-	 */
-	function getTriggers($table = '') {
+    /**
+     * Grabs a list of triggers on a table
+     * @param string $table The name of a table whose triggers to retrieve
+     * @return A recordset
+     */
+	public function getTriggers($table = '') {
 		$c_schema = $this->_schema;
 		$this->clean($c_schema);
 		$this->clean($table);
@@ -77,7 +77,7 @@ class Postgres84 extends Postgres90 {
 	 * @param $filter The object type to restrict to ('' means no restriction)
 	 * @return A recordset
 	 */
-	function findObject($term, $filter) {
+	public function findObject($term, $filter) {
 		global $conf;
 
 		/*about escaping:
@@ -224,8 +224,8 @@ class Postgres84 extends Postgres90 {
 
 	// Capabilities
 
-	function hasByteaHexDefault() { return false; } 
+	public function hasByteaHexDefault() { return false; }
 
 }
 
-?>
+
